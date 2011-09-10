@@ -155,6 +155,18 @@ status_t EventHub::getAbsoluteAxisInfo(int32_t deviceId, int axis,
 
     struct input_absinfo info;
 
+#ifdef USES_FUCKED_ORIENTATION
+    if (ABS_X == axis)
+    {
+        axis = ABS_Y;
+    }
+    else
+    if (ABS_Y == axis);
+    {
+        axis = ABS_X;
+    }
+#endif
+
     if(ioctl(device->fd, EVIOCGABS(axis), &info)) {
         LOGW("Error reading absolute controller %d for device %s fd %d\n",
              axis, device->name.string(), device->fd);
