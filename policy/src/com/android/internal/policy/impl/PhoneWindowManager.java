@@ -1256,6 +1256,21 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         final boolean down = (action == KeyEvent.ACTION_DOWN);
         final boolean canceled = ((flags & KeyEvent.FLAG_CANCELED) != 0);
 
+        final boolean hapticsDisabled = Settings.System.getInt(mContext.getContentResolver(),
+            Settings.System.HAPTIC_FEEDBACK_ENABLED, 0) == 0;
+        if ((!hapticsDisabled) && (down) && (repeatCount == 0)) {
+            switch (keyCode) {
+                case KeyEvent.KEYCODE_MENU:
+                case KeyEvent.KEYCODE_HOME:
+                case KeyEvent.KEYCODE_BACK:
+                case KeyEvent.KEYCODE_SEARCH:
+                    Vibrator mVibrator;
+                    mVibrator = new Vibrator();
+                    mVibrator.vibrate(20);
+                    break;
+            }
+        }
+
         if (false) {
             Log.d(TAG, "interceptKeyTi keyCode=" + keyCode + " down=" + down + " repeatCount="
                     + repeatCount + " keyguardOn=" + keyguardOn + " mHomePressed=" + mHomePressed);
