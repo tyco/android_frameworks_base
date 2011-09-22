@@ -1257,6 +1257,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         final boolean down = (action == KeyEvent.ACTION_DOWN);
         final boolean canceled = ((flags & KeyEvent.FLAG_CANCELED) != 0);
 
+        if ("vzwtab".equals(SystemProperties.get("ro.product.device"))) {
         final boolean hapticsDisabled = Settings.System.getInt(mContext.getContentResolver(),
             Settings.System.HAPTIC_FEEDBACK_ENABLED, 0) == 0;
         if ((!hapticsDisabled) && (down) && (repeatCount == 0)) {
@@ -1270,6 +1271,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     mVibrator.vibrate(20);
                     break;
             }
+        }
         }
 
         if (false) {
