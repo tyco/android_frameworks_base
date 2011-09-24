@@ -3263,7 +3263,7 @@ public class RIL extends BaseCommands implements CommandsInterface {
             case RIL_REQUEST_HANGUP_FOREGROUND_RESUME_BACKGROUND: return "HANGUP_FOREGROUND_RESUME_BACKGROUND";
             case RIL_REQUEST_SWITCH_WAITING_OR_HOLDING_AND_ACTIVE: return "REQUEST_SWITCH_WAITING_OR_HOLDING_AND_ACTIVE";
             case RIL_REQUEST_CONFERENCE: return "CONFERENCE";
-            case RIL_REQUEST_DEFLECT: return "DEFLECT";
+            case RIL_REQUEST_CALL_DEFLECTION: return "DEFLECT";
             case RIL_REQUEST_UDUB: return "UDUB";
             case RIL_REQUEST_LAST_CALL_FAIL_CAUSE: return "LAST_CALL_FAIL_CAUSE";
             case RIL_REQUEST_SIGNAL_STRENGTH: return "SIGNAL_STRENGTH";
@@ -3371,7 +3371,7 @@ public class RIL extends BaseCommands implements CommandsInterface {
             case RIL_REQUEST_OMADM_SERVER_START_SESSION: return "RIL_REQUEST_OMADM_SERVER_START_SESSION";
             case RIL_REQUEST_OMADM_CLIENT_START_SESSION: return "RIL_REQUEST_OMADM_CLIENT_START_SESSION";
             case RIL_REQUEST_OMADM_SEND_DATA: return "RIL_REQUEST_OMADM_SEND_DATA";
-            case RIL_REQUEST_UNSOL_DUN: return "RIL_UNSOL_DUN";
+            case RIL_UNSOL_DUN: return "RIL_UNSOL_DUN";
             case RIL_REQUEST_SEND_SMS_COUNT: return "RIL_REQUEST_SEND_SMS_COUNT";
             case RIL_REQUEST_SEND_SMS_MSG: return "RIL_REQUEST_SEND_SMS_MSG";
             case RIL_REQUEST_SEND_SMS_MSG_READ_STATUS: return "RIL_REQUEST_SEND_SMS_MSG_READ_STATUS";
