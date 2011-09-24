@@ -92,7 +92,7 @@ public interface Phone {
     };
 
     enum SuppService {
-      UNKNOWN, SWITCH, SEPARATE, TRANSFER, CONFERENCE, REJECT, HANGUP;
+      UNKNOWN, SWITCH, SEPARATE, TRANSFER, CONFERENCE, REJECT, HANGUP, DEFLECT;
     };
 
     static final String STATE_KEY = "state";
@@ -126,12 +126,21 @@ public interface Phone {
     static final String APN_TYPE_DUN = "dun";
     /** APN type for HiPri traffic */
     static final String APN_TYPE_HIPRI = "hipri";
+    /** Additional Samsung APNs */
+    public final String APN_TYPE_ADMIN = "admin";
+    public final String APN_TYPE_APP = "vzwapp";
+    public final String APN_TYPE_IMS = "ims";
 
     // "Features" accessible through the connectivity manager
     static final String FEATURE_ENABLE_MMS = "enableMMS";
     static final String FEATURE_ENABLE_SUPL = "enableSUPL";
     static final String FEATURE_ENABLE_DUN = "enableDUN";
     static final String FEATURE_ENABLE_HIPRI = "enableHIPRI";
+    /* samsung */
+    public final String FEATURE_ENABLE_ADMIN = "enableADMIN";
+    public final String FEATURE_ENABLE_DEFAULT = "enableDEFAULT";
+    public final String FEATURE_ENABLE_IMS = "enableIMS";
+    public final String FEATURE_ENABLE_VZWAPP = "enableVZWAPP";
 
     /**
      * Return codes for <code>enableApnType()</code>
@@ -156,6 +165,13 @@ public interface Phone {
     static final String REASON_APN_CHANGED = "apnChanged";
     static final String REASON_APN_SWITCHED = "apnSwitched";
     static final String REASON_APN_FAILED = "apnFailed";
+    public final String REASON_APN_DISABLED = "apnDisabled";
+    public final String REASON_APN_ENABLED = "apnEnabled";
+    public final String REASON_APN_FAILED_INSUFFICIENT_RESOURCES = "apnFailedInsufficientResources";
+    public final String REASON_APN_IPV6_ADDRESS_CONFIGURED = "ipv6addressconfigured";
+    public final String REASON_APN_IPV6_ADDRESS_REFRESH_FAILED = "ipv6addressrefreshfailed";
+    public final String REASON_APN_NON_IMS_ADDRS_FAIL = "nonImsAddressConfFail";
+    public final String REASON_APN_SETTING_VALUE_CHANGED = "apnSettingsChanged";
     static final String REASON_RESTORE_DEFAULT_APN = "restoreDefaultApn";
     static final String REASON_RADIO_TURNED_OFF = "radioTurnedOff";
     static final String REASON_PDP_RESET = "pdpReset";
@@ -164,6 +180,30 @@ public interface Phone {
     static final String REASON_PS_RESTRICT_ENABLED = "psRestrictEnabled";
     static final String REASON_PS_RESTRICT_DISABLED = "psRestrictDisabled";
     static final String REASON_SIM_LOADED = "simLoaded";
+    public final String REASON_EHRPD_CONNECTED = "ehrpdconnected";
+    public final String REASON_EHRPD_DISCONNECTED = "ehrpddisconncted";
+    public final int REASON_EHRPD_IMS_DISABLED = 6;
+    public final String REASON_EHRPD_SYNC_DONE = "ehrpdsyncdone";
+    public final String REASON_HANDOVER_DISCONNECTED = "handoverdisconncted";
+    public final String REASON_HRPD_ENABLED = "hrpdenabled";
+    public final String REASON_LTE_ATTACHED = "lteAttached";
+    public final int REASON_LTE_DETACH_DATA_RECOVERY = 3;
+    public final int REASON_LTE_DETACH_IMS_REG_FAILED = 2;
+    public final int REASON_LTE_DETACH_IPV6_CONF_FAILED = 1;
+    public final int REASON_LTE_DETACH_OTHER_REASON = 0;
+    public final String REASON_MIFI_CONNECT_DATA = "mifiConnectData";
+    public final String REASON_MIFI_DISCONNECT_DATA = "mifiDisconnectData";
+    public final String REASON_NETOWKR_INITIATED_DISCONNECT = "networkInitiatedDisconnect";
+    public final String REASON_NETWORK_SYNC_DETACH_ATTACH = "networkresyncdetachattach";
+    public final String REASON_NET_TYPE_CHANGED = "networkTypeChanged";
+    public final String REASON_PDN_DROPPED_INDICATION = "pdndroppedbyNetwork";
+    public final String REASON_PDP_DROPPED = "pdpDropped";
+    public final String REASON_PENDING_APN_ENABLED = "pendingApnEnabled";
+    public final String REASON_REGULAR_DEACTIVATION = "regulardisconncted";
+    public final String REASON_SET_PREFERRED_NETWORK = "setPreferredNetwork";
+    public final int REATTACH_NOT_REQUIRED = 0;
+    public final int REATTACH_REQUIRED = 1;
+
 
     // Used for band mode selection methods
     static final int BM_UNSPECIFIED = 0; // selected by baseband automatically
@@ -180,6 +220,15 @@ public interface Phone {
     static final int PHONE_TYPE_CDMA = RILConstants.CDMA_PHONE;
     static final int PHONE_TYPE_SIP = RILConstants.SIP_PHONE;
 
+    /* samsung */
+    public final int PHONE_CDMA_MODE_ONLY = 9;
+    public final int PHONE_DATA_TYPE_1XRTT = 4;
+    public final int PHONE_DATA_TYPE_EHRPD = 2;
+    public final int PHONE_DATA_TYPE_EVDO = 3;
+    public final int PHONE_DATA_TYPE_LTE = 4;
+    public final int PHONE_GLOBAL_MODE_ONLY = 7;
+    public final int PHONE_LTE_MODE_ONLY = 8;
+
     // Used for preferred network type
     // Note NT_* substitute RILConstants.NETWORK_MODE_* above the Phone
     int NT_MODE_WCDMA_PREF   = RILConstants.NETWORK_MODE_WCDMA_PREF;
@@ -193,13 +242,16 @@ public interface Phone {
     int NT_MODE_EVDO_NO_CDMA = RILConstants.NETWORK_MODE_EVDO_NO_CDMA;
     int NT_MODE_GLOBAL       = RILConstants.NETWORK_MODE_GLOBAL;
 
-    int PREFERRED_NT_MODE    = RILConstants.PREFERRED_NETWORK_MODE;
+    int PREFERRED_NT_MODE    = 4; //RILConstants.PREFERRED_NETWORK_MODE;
 
 
     // Used for CDMA roaming mode
     static final int CDMA_RM_HOME        = 0;  // Home Networks only, as defined in PRL
     static final int CDMA_RM_AFFILIATED  = 1;  // Roaming an Affiliated networks, as defined in PRL
     static final int CDMA_RM_ANY         = 2;  // Roaming on Any Network, as defined in PRL
+    /* samsung */
+    public final int CDMA_RM_AUTOMATIC_A = 3;
+    public final int CDMA_RM_AUTOMATIC_B = 4;
 
     // Used for CDMA subscription mode
     static final int CDMA_SUBSCRIPTION_RUIM_SIM = 0; // RUIM/SIM (default)
@@ -216,6 +268,7 @@ public interface Phone {
      * CDMA OTA PROVISION STATUS, the same as RIL_CDMA_OTA_Status in ril.h
      */
 
+/*
     public static final int CDMA_OTA_PROVISION_STATUS_SPL_UNLOCKED = 0;
     public static final int CDMA_OTA_PROVISION_STATUS_SPC_RETRIES_EXCEEDED = 1;
     public static final int CDMA_OTA_PROVISION_STATUS_A_KEY_EXCHANGED = 2;
@@ -228,6 +281,27 @@ public interface Phone {
     public static final int CDMA_OTA_PROVISION_STATUS_OTAPA_STARTED = 9;
     public static final int CDMA_OTA_PROVISION_STATUS_OTAPA_STOPPED = 10;
     public static final int CDMA_OTA_PROVISION_STATUS_OTAPA_ABORTED = 11;
+*/
+    /* taken from Samsung framework.jar */
+    public static final int CDMA_OTAPA_CALL_START_MODE = 16;
+    public static final int CDMA_OTAPA_CALL_STOP_MODE = 15;
+    public static final int CDMA_OTA_PROVISION_STATUS_A_KEY_EXCHANGED = 1;
+    public static final int CDMA_OTA_PROVISION_STATUS_COMMITTED = 7;
+    public static final int CDMA_OTA_PROVISION_STATUS_FAILURES_EXCESS_SPC = 13;
+    public static final int CDMA_OTA_PROVISION_STATUS_IMSI_DOWNLOADED = 5;
+    public static final int CDMA_OTA_PROVISION_STATUS_LOCK_CODE_PASSWORD_SET = 14;
+    public static final int CDMA_OTA_PROVISION_STATUS_MDN_DOWNLOADED = 4;
+    public static final int CDMA_OTA_PROVISION_STATUS_NAM_DOWNLOADED = 3;
+    public static final int CDMA_OTA_PROVISION_STATUS_OTAPA_STOPPED = 17;
+    public static final int CDMA_OTA_PROVISION_STATUS_OTAPA_VERIFY = 11;
+    public static final int CDMA_OTA_PROVISION_STATUS_PRL_DOWNLOADED = 6;
+    public static final int CDMA_OTA_PROVISION_STATUS_PROGRAMMING = 8;
+    public static final int CDMA_OTA_PROVISION_STATUS_PROGRESS = 12;
+    public static final int CDMA_OTA_PROVISION_STATUS_SPC_RETRIES_EXCEEDED = 18;
+    public static final int CDMA_OTA_PROVISION_STATUS_SPL_UNLOCKED = 0;
+    public static final int CDMA_OTA_PROVISION_STATUS_SSD_UPDATED = 2;
+    public static final int CDMA_OTA_PROVISION_STATUS_SUCCESSFUL = 9;
+    public static final int CDMA_OTA_PROVISION_STATUS_UNSUCCESSFUL = 10;
 
 
     /**
