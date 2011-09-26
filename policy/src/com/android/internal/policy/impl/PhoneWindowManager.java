@@ -1268,7 +1268,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 case KeyEvent.KEYCODE_SEARCH:
                     Vibrator mVibrator;
                     mVibrator = new Vibrator();
-                    mVibrator.vibrate(20);
+                    mVibrator.vibrate(30);
                     break;
             }
         }
