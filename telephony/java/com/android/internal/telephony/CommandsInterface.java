@@ -974,6 +974,11 @@ public interface CommandsInterface {
     void acknowledgeLastIncomingCdmaSms(boolean success, int cause, Message response);
 
     /**
+     * iccAUTH from DROID Charge
+     */
+    public abstract void iccAUTH(int i, String s, Message message);
+
+    /**
      * parameters equivilient to 27.007 AT+CRSM command
      * response.obj will be an AsyncResult
      * response.obj.userObj will be a IccIoResult on success

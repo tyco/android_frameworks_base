@@ -25,13 +25,59 @@ import java.util.ArrayList;
  */
 public abstract class IccFileHandler extends Handler implements IccConstants {
 
+
+    //protected static final int COMMAND_GET_RESPONSE = 192;
+    protected static final int COMMAND_READ_BINARY = 176;
+    protected static final int COMMAND_READ_RECORD = 178;
+    protected static final int COMMAND_SEEK = 162;
+    protected static final int COMMAND_UPDATE_BINARY = 214;
+    protected static final int COMMAND_UPDATE_RECORD = 220;
+    //protected static final int EF_TYPE_CYCLIC = 3;
+    //protected static final int EF_TYPE_LINEAR_FIXED = 1;
+    //protected static final int EF_TYPE_TRANSPARENT = 0;
+    //protected static final int EVENT_GET_BINARY_SIZE_DONE = 4;
+    //protected static final int EVENT_GET_EF_LINEAR_RECORD_SIZE_DONE = 8;
+
+    // NEW
+
+    //protected static final int EVENT_GET_RECORD_SIZE_DONE = 6;
+    //protected static final int EVENT_READ_BINARY_DONE = 5;
+    //protected static final int EVENT_READ_ICON_DONE = 10;
+    //protected static final int EVENT_READ_IMG_DONE = 9;
+    //protected static final int GET_RESPONSE_EF_IMG_SIZE_BYTES = 10;
+    //protected static final int GET_RESPONSE_EF_SIZE_BYTES = 15;
+    //protected static final int READ_RECORD_MODE_ABSOLUTE = 4;
+    //protected static final int RESPONSE_DATA_ACCESS_CONDITION_1 = 8;
+    //protected static final int RESPONSE_DATA_ACCESS_CONDITION_2 = 9;
+    //protected static final int RESPONSE_DATA_ACCESS_CONDITION_3 = 10;
+    //protected static final int RESPONSE_DATA_FILE_ID_1 = 4;
+    //protected static final int RESPONSE_DATA_FILE_ID_2 = 5;
+    //protected static final int RESPONSE_DATA_FILE_SIZE_1 = 2;
+    //protected static final int RESPONSE_DATA_FILE_SIZE_2 = 3;
+    //protected static final int RESPONSE_DATA_FILE_STATUS = 11;
+    //protected static final int RESPONSE_DATA_FILE_TYPE = 6;
+    //protected static final int RESPONSE_DATA_LENGTH = 12;
+    //protected static final int RESPONSE_DATA_RECORD_LENGTH = 14;
+    //protected static final int RESPONSE_DATA_RFU_1 = 0;
+    //protected static final int RESPONSE_DATA_RFU_2 = 1;
+    //protected static final int RESPONSE_DATA_RFU_3 = 7;
+    //protected static final int RESPONSE_DATA_STRUCTURE = 13;
+    //protected static final int TYPE_DF = 2;
+    //protected static final int TYPE_EF = 4;
+    //protected static final int TYPE_MF = 1;
+    //protected static final int TYPE_RFU;
+    
+
     //from TS 11.11 9.1 or elsewhere
-    static protected final int COMMAND_READ_BINARY = 0xb0;
-    static protected final int COMMAND_UPDATE_BINARY = 0xd6;
-    static protected final int COMMAND_READ_RECORD = 0xb2;
-    static protected final int COMMAND_UPDATE_RECORD = 0xdc;
-    static protected final int COMMAND_SEEK = 0xa2;
-    static protected final int COMMAND_GET_RESPONSE = 0xc0;
+    //static protected final int COMMAND_READ_BINARY = 0xb0;
+    //static protected final int COMMAND_UPDATE_BINARY = 0xd6;
+    //static protected final int COMMAND_READ_RECORD = 0xb2;
+    //static protected final int COMMAND_UPDATE_RECORD = 0xdc;
+    //static protected final int COMMAND_SEEK = 0xa2;
+    static protected final int COMMAND_GET_RESPONSE = 192;
+
+    // From DROID Charge
+    private static final int COMMAND_ISIM_AUTH = 136;
 
     // from TS 11.11 9.2.5
     static protected final int READ_RECORD_MODE_ABSOLUTE = 4;
@@ -88,6 +134,17 @@ public abstract class IccFileHandler extends Handler implements IccConstants {
     static protected final int EVENT_READ_IMG_DONE = 9;
     /** Finished retrieving icon data; post result. */
     static protected final int EVENT_READ_ICON_DONE = 10;
+
+    // From DROID Charge
+    protected static final int EVENT_GET_SIM_FILE_STATUS_DONE = 17;
+    protected static final int EVENT_GET_USIM_PB_CAPA_DONE = 15;
+    private static final int EVENT_ISIM_AUTHENTICATION_DONE = 19;
+    private static final int EVENT_READ_ADN_DONE = 12;
+    protected static final int EVENT_READ_IMG_RECORD_DONE = 14;
+    protected static final int EVENT_UPDATE_ADN_DONE = 18;
+    protected static final int EVENT_GET_IMG_RECORD_SIZE_DONE = 13;
+    private static final int EVENT_GET_ITEM_SIZE_DONE = 11;
+    private static final int EVENT_GET_RECORD_INFO_DONE = 16;
 
      // member variables
     protected PhoneBase phone;
@@ -505,6 +562,16 @@ public abstract class IccFileHandler extends Handler implements IccConstants {
                 loge("uncaught exception" + exc);
             }
         }
+    }
+
+    /**
+     * Hack from DROID Charge
+     */
+    public void requestIsimAuthentication(byte abyte[], Message msg)
+    {
+        logd("ISIM >>> IccFileHandler->requestIsimAuthentication");
+        Message msg1 = obtainMessage(EVENT_ISIM_AUTHENTICATION_DONE, message);
+        phone.mCM.iccAUTH(COMMAND_ISIM_AUTH, IccUtils.bytesToHexString(abyte), msg1);
     }
 
     /**

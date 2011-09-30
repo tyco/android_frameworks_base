@@ -1451,6 +1451,23 @@ public class RIL extends BaseCommands implements CommandsInterface {
         send(rr);
     }
 
+    public void
+    iccAUTH(int i, String s, Message msg)
+    {
+        RILRequest rilrequest = RILRequest.obtain(RIL_REQUEST_SIM_AUTH, message);
+        rilrequest.mp.writeInt(i);
+        rilrequest.mp.writeString(s);
+        StringBuilder stringbuilder = new StringBuilder();
+        String s1 = rilrequest.serialString();
+        StringBuilder stringbuilder1 = stringbuilder.append(s1).append("> iccAUTH: ");
+        String s2 = requestToString(rilrequest.mRequest);
+        StringBuilder stringbuilder2 = stringbuilder1.append(s2).append(" 0x");
+        String s3 = Integer.toHexString(i);
+        String s4 = stringbuilder2.append(s3).toString();
+        riljLog(s4);
+        send(rilrequest);
+    }
+
 
     public void
     iccIO (int command, int fileid, String path, int p1, int p2, int p3,

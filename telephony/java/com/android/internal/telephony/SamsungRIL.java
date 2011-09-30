@@ -89,8 +89,9 @@ public SamsungRIL(Context context, int networkMode, int cdmaSubscription) {
         //samsung crap for airplane mode
 		if (on)
 		{
+			rr.mp.writeInt(2);
 			rr.mp.writeInt(1);
-			rr.mp.writeInt(1);
+			rr.mp.writeInt(0);
 		} else {
 			rr.mp.writeInt(2);
 			rr.mp.writeInt(0);
