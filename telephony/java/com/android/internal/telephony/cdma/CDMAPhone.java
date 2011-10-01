@@ -1460,4 +1460,9 @@ public class CDMAPhone extends PhoneBase {
         }
         return false;
     }
+    /**
+     * HACK HACK HACK
+     */
+    public void requestIsimAuthentication(byte[] abyte, Message msg) {
+    }
 }

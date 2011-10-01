@@ -43,6 +43,7 @@ public class PhoneProxy extends Handler implements Phone {
     public final static Object lockForRadioTechnologyChange = new Object();
 
     private Phone mActivePhone;
+    private Phone mLtePhone;
     private String mOutgoingPhone;
     private CommandsInterface mCommandsInterface;
     private IccSmsInterfaceManagerProxy mIccSmsInterfaceManagerProxy;
@@ -671,6 +672,11 @@ public class PhoneProxy extends Handler implements Phone {
     public String getIpAddress(String apnType) {
         return mActivePhone.getIpAddress(apnType);
     }
+    
+    //public String getIsimDomain()
+    //{
+    //    return mLtePhone.getIsimDomain();
+    //}
 
     public String getGateway(String apnType) {
         return mActivePhone.getGateway(apnType);
@@ -843,6 +849,11 @@ public class PhoneProxy extends Handler implements Phone {
     public void unsetOnEcbModeExitResponse(Handler h){
         mActivePhone.unsetOnEcbModeExitResponse(h);
     }
+
+    public void requestIsimAuthentication(byte[] abyte, Message msg) {
+    }
+    //public void getMpsr(Message msg) {
+    //}
 
     public boolean isCspPlmnEnabled() {
         return mActivePhone.isCspPlmnEnabled();

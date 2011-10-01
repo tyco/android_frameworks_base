@@ -1454,7 +1454,7 @@ public class RIL extends BaseCommands implements CommandsInterface {
     public void
     iccAUTH(int i, String s, Message msg)
     {
-        RILRequest rilrequest = RILRequest.obtain(RIL_REQUEST_SIM_AUTH, message);
+        RILRequest rilrequest = RILRequest.obtain(RIL_REQUEST_SIM_AUTH, msg);
         rilrequest.mp.writeInt(i);
         rilrequest.mp.writeString(s);
         StringBuilder stringbuilder = new StringBuilder();

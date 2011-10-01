@@ -59,6 +59,9 @@ public final class SIMRecords extends IccRecords {
     // ***** Cached SIM State; cleared on channel close
 
     String imsi;
+    String isimDomain;
+    String isimIMPI;
+    String isimIMPU[];
     boolean callForwardingEnabled;
 
 

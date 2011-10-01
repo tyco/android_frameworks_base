@@ -84,6 +84,12 @@ public class SipPhone extends SipPhoneBase {
         return getSipUri().equals(phone.getSipUri());
     }
 
+    /**
+     * HACK from DROID Charge
+     */
+    public void requestIsimAuthentication(byte abyte[], Message msg) {
+    }
+
     public boolean canTake(Object incomingCall) {
         synchronized (SipPhone.class) {
             if (!(incomingCall instanceof SipAudioCall)) return false;

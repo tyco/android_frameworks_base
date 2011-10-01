@@ -1401,6 +1401,31 @@ public final class SimulatedCommands extends BaseCommands
         Log.w(LOG_TAG, "CDMA not implemented in SimulatedCommands");
         unimplemented(result);
     }
+    //public String getIsimDomain() {
+    //    Log.w(LOG_TAG, "getIsimDomain not implemented in SimulatedCommands");
+    //    return  "";
+    //}
+    //public String getIsimIMPI() {
+    //    Log.w(LOG_TAG, "getIsimIMPI not implemented in SimulatedCommands");
+    //    return "";
+    //}
+    //public String[] getIsimIMPU() {
+    //    Log.w(LOG_TAG, "getIsimIMPU not implemented in SimulatedCommands");
+    //    String[] tmp;
+    //    tmp[0] = "";
+    //    return tmp;
+    //}
+    //public void getMpsr(Message msg) {
+    //    Log.w(LOG_TAG, "getMpsr not implemented in SimulatedCommands");
+    //    unimplemented(msg);
+    //}
+    public void requestIsimAuthentication(byte abyte[], Message msg) {
+        Log.w(LOG_TAG, "requestIsimAuthentication not implemented in SimulatedCommands");
+        unimplemented(msg);
+    }
+    public void iccAUTH(int i,String s,Message msg) {
+	    unimplemented(msg);
+    }
 
     /**
      *  Set the TTY mode

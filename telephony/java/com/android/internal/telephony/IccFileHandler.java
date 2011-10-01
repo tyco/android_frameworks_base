@@ -570,7 +570,7 @@ public abstract class IccFileHandler extends Handler implements IccConstants {
     public void requestIsimAuthentication(byte abyte[], Message msg)
     {
         logd("ISIM >>> IccFileHandler->requestIsimAuthentication");
-        Message msg1 = obtainMessage(EVENT_ISIM_AUTHENTICATION_DONE, message);
+        Message msg1 = obtainMessage(EVENT_ISIM_AUTHENTICATION_DONE, msg);
         phone.mCM.iccAUTH(COMMAND_ISIM_AUTH, IccUtils.bytesToHexString(abyte), msg1);
     }
 

@@ -40,6 +40,9 @@ class SipCommandInterface extends BaseCommands implements CommandsInterface {
     public void getIccCardStatus(Message result) {
     }
 
+    public void iccAUTH(int i, String s, Message msg) {
+    }
+
     public void supplyIccPin(String pin, Message result) {
     }
 

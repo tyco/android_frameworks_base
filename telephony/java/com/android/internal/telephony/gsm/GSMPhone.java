@@ -129,6 +129,12 @@ public class GSMPhone extends PhoneBase {
         this(context,ci,notifier, false);
     }
 
+    public void requestIsimAuthentication(byte abyte[], Message msg) {
+    }
+
+    public void getMpsr(Message msg) {
+    }
+
     public
     GSMPhone (Context context, CommandsInterface ci, PhoneNotifier notifier, boolean unitTestMode) {
         super(notifier, context, ci, unitTestMode);
@@ -268,6 +274,11 @@ public class GSMPhone extends PhoneBase {
 
     public int getPhoneType() {
         return Phone.PHONE_TYPE_GSM;
+    }
+
+    public String getIsimDomain()
+    {
+        return mSIMRecords.isimDomain;
     }
 
     public SignalStrength getSignalStrength() {
