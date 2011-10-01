@@ -89,6 +89,23 @@ public class SipPhone extends SipPhoneBase {
      */
     public void requestIsimAuthentication(byte abyte[], Message msg) {
     }
+    public void getMpsr(Message msg) {
+    }
+    public String[] getIsimIMPU() {
+        String[] s;
+        s = null;
+        return s;
+    }
+    public String getIsimIMPI() {
+        String s;
+        s = null;
+        return s;
+    }
+    public String getIsimDomain() {
+        String s;
+        s = null;
+        return s;
+    }
 
     public boolean canTake(Object incomingCall) {
         synchronized (SipPhone.class) {

@@ -1465,4 +1465,21 @@ public class CDMAPhone extends PhoneBase {
      */
     public void requestIsimAuthentication(byte[] abyte, Message msg) {
     }
+    public void getMpsr(Message msg) {
+    }
+    public String getIsimDomain() {
+        String s;
+        s = null;
+        return s;
+    }
+    public String[] getIsimIMPU() {
+        String[] s;
+        s = null;
+        return s;
+    }
+    public String getIsimIMPI() {
+        String s;
+        s = null;
+        return s;
+    }
 }

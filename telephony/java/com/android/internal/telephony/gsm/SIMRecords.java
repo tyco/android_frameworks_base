@@ -147,6 +147,11 @@ public final class SIMRecords extends IccRecords {
     private static final int EVENT_GET_CFIS_DONE = 32;
     private static final int EVENT_GET_CSP_CPHS_DONE = 33;
 
+    private static final int EVENT_GET_ISIM_DOMAIN_DONE = 44;
+    private static final int EVENT_GET_ISIM_IMPI_DONE = 43;
+    private static final int EVENT_GET_ISIM_IMPU_DONE = 45;
+    
+
     // Lookup table for carriers known to produce SIMs which incorrectly indicate MNC length.
 
     private static final String[] MCCMNC_CODES_HAVING_3DIGITS_MNC = {
@@ -820,6 +825,72 @@ public final class SIMRecords extends IccRecords {
                     }
                 }
             break;
+            /**
+             * DROID Charge
+             */
+            case EVENT_GET_ISIM_IMPI_DONE:
+                Log.d(LOG_TAG, "ISIM >>> EVENT_GET_ISIM_IMPI_DONE");
+
+                ar = (AsyncResult)msg.obj;
+                data = (byte[])ar.result;
+                if (ar.exception != null) {
+                    Log.d(LOG_TAG, "Exception " + ar.exception.getMessage());
+                    ar.exception.printStackTrace();
+                } else {
+                    Log.d(LOG_TAG, "ISIM >>> Data length: " + data.length);
+                    isimIMPI = IccUtils.getISIMStringValue(data);
+                    if (isimIMPI == null) {
+                        Log.d(LOG_TAG, "ISIM >>> isimIMPI Parse error");
+                    } else {
+                        Log.d(LOG_TAG, "ISIM >>> isimIMPI: " + isimDomain);
+                    }
+                }
+            break;
+            case EVENT_GET_ISIM_DOMAIN_DONE:
+                Log.d(LOG_TAG, "ISIM >>> EVENT_GET_ISIM_DOMAIN_DONE");
+
+                ar = (AsyncResult)msg.obj;
+                data = (byte[])ar.result;
+                if (ar.exception != null) {
+                    Log.d(LOG_TAG, "Exception " + ar.exception.getMessage());
+                    ar.exception.printStackTrace();
+                } else {
+                    Log.d(LOG_TAG, "ISIM >>> Data length: " + data.length);
+                    isimDomain = IccUtils.getISIMStringValue(data);
+                    if (isimDomain == null) {
+                        Log.d(LOG_TAG, "ISIM >>> isimDomain Parse error");
+                    } else {
+                        Log.d(LOG_TAG, "ISIM >>> isimDomain: " + isimDomain);
+                    }
+                }
+            break;
+            case EVENT_GET_ISIM_IMPU_DONE:
+                Log.d(LOG_TAG, "ISIM >>> EVENT_GET_ISIM_IMPI_DONE");
+
+                ar = (AsyncResult)msg.obj;
+                ArrayList al = (ArrayList)ar.result;
+                if (ar.exception != null) {
+                    Log.d(LOG_TAG, "Exception " + ar.exception.getMessage());
+                    ar.exception.printStackTrace();
+                } else {
+                    Log.d(LOG_TAG, "ISIM >>> ISIM has: " + al.size() + " IMPU records");
+                    if (al.size() > 0) {
+                        isimIMPU = new String[al.size()];
+                        for (int i = 0; i < al.size(); i++) {
+                            data = (byte[])al.get(i);
+                            isimIMPU[i] = IccUtils.getISIMStringValue(data);
+                            if (isimIMPU[i] == null) {
+                                Log.d(LOG_TAG, "ISIM >>> IMPU Parse error");
+                            } else {
+                                Log.d(LOG_TAG, "IMPU[" + i + "]: " + isimIMPU[i]);
+                            }
+                        }
+                    }
+                }
+            break;
+            /**
+             * End DROID Charge Hacks
+             */
 
             case EVENT_GET_SPN_DONE:
                 isRecordLoadResponse = true;

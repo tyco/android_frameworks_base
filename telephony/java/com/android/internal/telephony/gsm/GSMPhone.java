@@ -272,6 +272,9 @@ public class GSMPhone extends PhoneBase {
         return "GSM";
     }
 
+    /**
+     * Hack for DROID Charge
+     */
     public int getPhoneType() {
         return Phone.PHONE_TYPE_GSM;
     }
@@ -280,6 +283,19 @@ public class GSMPhone extends PhoneBase {
     {
         return mSIMRecords.isimDomain;
     }
+
+    public String getIsimIMPI()
+    {
+        return mSIMRecords.isimIMPI;
+    }
+
+    public String[] getIsimIMPU()
+    {
+        return mSIMRecords.isimIMPU;
+    }
+    /**
+     * END DROID Charge Hack
+     */
 
     public SignalStrength getSignalStrength() {
         return mSST.mSignalStrength;

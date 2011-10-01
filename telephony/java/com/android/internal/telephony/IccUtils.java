@@ -114,6 +114,41 @@ public class IccUtils {
     }
 
     /**
+     * DROID Charge decompiled crap
+     */
+    public static String
+    getISIMStringValue(byte abyte0[]) {
+        StringBuffer stringbuffer = new StringBuffer();
+        if((abyte0[0] & 0xff) == 128) {
+            int j;
+            int k;
+            j = abyte0[1] & 0xff;
+            k = 2;
+            int l = j + 2;
+            while (k < l) {
+                StringBuilder stringbuilder = (new StringBuilder()).append("ISIM >>> ");
+                char c = (char)abyte0[k];
+                String s1 = stringbuilder.append(c).toString();
+                int i1 = Log.d("IccUtils", s1);
+                if(abyte0[k] == -1)
+                    break; /* Loop/switch isn't completed */
+                char c1 = (char)abyte0[k];
+                StringBuffer stringbuffer1 = stringbuffer.append(c1);
+                k++;
+            }
+            String s;
+            s = stringbuffer.toString();
+            return s;
+        } else {
+            String s;
+            int i = Log.d("IccUtils", "Invalid ISIM Parameter type");
+            s = null;
+            return s;
+        }
+    }
+        
+
+    /**
      * Decodes a string field that's formatted like the EF[ADN] alpha
      * identifier
      *

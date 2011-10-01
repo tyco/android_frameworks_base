@@ -673,10 +673,28 @@ public class PhoneProxy extends Handler implements Phone {
         return mActivePhone.getIpAddress(apnType);
     }
     
-    //public String getIsimDomain()
-    //{
-    //    return mLtePhone.getIsimDomain();
-    //}
+    /**
+     * DROID Charge Hacks
+     */
+    public String getIsimDomain()
+    {
+        return mLtePhone.getIsimDomain();
+    }
+    public void getMpsr(Message msg) {
+    }
+    public String[] getIsimIMPU() {
+        String[] s;
+        s = null;
+        return s;
+    }
+    public String getIsimIMPI() {
+        String s;
+        s = null;
+        return s;
+    }
+        
+    public void requestIsimAuthentication(byte[] abyte, Message msg) {
+    }
 
     public String getGateway(String apnType) {
         return mActivePhone.getGateway(apnType);
@@ -849,11 +867,6 @@ public class PhoneProxy extends Handler implements Phone {
     public void unsetOnEcbModeExitResponse(Handler h){
         mActivePhone.unsetOnEcbModeExitResponse(h);
     }
-
-    public void requestIsimAuthentication(byte[] abyte, Message msg) {
-    }
-    //public void getMpsr(Message msg) {
-    //}
 
     public boolean isCspPlmnEnabled() {
         return mActivePhone.isCspPlmnEnabled();

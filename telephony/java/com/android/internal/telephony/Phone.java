@@ -307,11 +307,12 @@ public interface Phone {
     /**
      * HACK from DROID Charge
      */
-    //public abstract String getIsimDomain();
-    //public abstract String getIsimIMPI();
-    //public abstract String[] getIsimIMPU();
-    //public abstract void getMpsr(Message msg);
+    public abstract String getIsimDomain();
+    public abstract String getIsimIMPI();
+    public abstract String[] getIsimIMPU();
+    public abstract void getMpsr(Message msg);
     public abstract void requestIsimAuthentication(byte abyte[], Message msg);
+
     /**
      * Get the current ServiceState. Use
      * <code>registerForServiceStateChanged</code> to be informed of
