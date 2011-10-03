@@ -92,19 +92,17 @@ public class SipPhone extends SipPhoneBase {
     public void getMpsr(Message msg) {
     }
     public String[] getIsimIMPU() {
-        String[] s;
-        s = null;
-        return s;
+        String[] s = new String[3];
+        s[0] = "";
+        s[1] = "";
+        s[2] = "";
+        return "";
     }
     public String getIsimIMPI() {
-        String s;
-        s = null;
-        return s;
+        return "";
     }
     public String getIsimDomain() {
-        String s;
-        s = null;
-        return s;
+        return "";
     }
 
     public boolean canTake(Object incomingCall) {

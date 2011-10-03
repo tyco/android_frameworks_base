@@ -1468,18 +1468,16 @@ public class CDMAPhone extends PhoneBase {
     public void getMpsr(Message msg) {
     }
     public String getIsimDomain() {
-        String s;
-        s = null;
-        return s;
+        return "";
     }
     public String[] getIsimIMPU() {
-        String[] s;
-        s = null;
+        String[] s = new String[3];
+	s[0] = "";
+	s[1] = "";
+	s[2] = ""
         return s;
     }
     public String getIsimIMPI() {
-        String s;
-        s = null;
-        return s;
+        return "";
     }
 }

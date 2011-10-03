@@ -683,14 +683,14 @@ public class PhoneProxy extends Handler implements Phone {
     public void getMpsr(Message msg) {
     }
     public String[] getIsimIMPU() {
-        String[] s;
-        s = null;
+        String[] s = new String[3];
+	s[0] = "";
+	s[1] = "";
+	s[2] = "";
         return s;
     }
     public String getIsimIMPI() {
-        String s;
-        s = null;
-        return s;
+        return "";
     }
         
     public void requestIsimAuthentication(byte[] abyte, Message msg) {
