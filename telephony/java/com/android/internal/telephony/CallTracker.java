@@ -29,7 +29,7 @@ import com.android.internal.telephony.CommandException;
  */
 public abstract class CallTracker extends Handler {
 
-    private static final boolean DBG_POLL = false;
+    private static final boolean DBG_POLL = true;
 
     //***** Constants
 

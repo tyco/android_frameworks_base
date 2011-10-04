@@ -133,7 +133,21 @@ public SamsungRIL(Context context, int networkMode, int cdmaSubscription) {
             | egrep "^ *{RIL_" \
             | sed -re 's/\{([^,]+),[^,]+,([^}]+).+/case \1: ret = \2(p); break;/'
              */
-            case RIL_REQUEST_GET_SIM_STATUS: ret =  responseIccCardStatus(p); break;
+            case RIL_REQUEST_GET_SIM_STATUS:
+                try {
+                    ret =  responseIccCardStatus(p);
+                } catch (Throwable tr) {
+                    Log.w(LOG_TAG, rr.serialString() + "< " + requestToString(rr.mRequest) + " exception, possible invalid RIL response");
+                    if (rr.mResult != null) {
+                        AsyncResult ar;
+                        ar = AsyncResult.forMessage(rr.mResult, null, tr);
+                        rr.mResult.sendToTarget();
+                    }
+                    rr.release();
+                    return;
+                }
+            break;
+            //case RIL_REQUEST_GET_SIM_STATUS: ret =  responseIccCardStatus(p); break;
             case RIL_REQUEST_ENTER_SIM_PIN: ret =  responseInts(p); break;
             case RIL_REQUEST_ENTER_SIM_PUK: ret =  responseInts(p); break;
             case RIL_REQUEST_ENTER_SIM_PIN2: ret =  responseInts(p); break;

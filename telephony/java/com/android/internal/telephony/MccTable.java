@@ -498,6 +498,7 @@ public final class MccTable
      * country code if available.  Returns "" if unavailable.
      */
     public static String countryCodeForMcc(int mcc) {
+        Log.d(LOG_TAG, "countryCodeForMcc: mcc=" + mcc);
         int index = Arrays.binarySearch(MCC_CODES, (short)mcc);
         if (index < 0) {
             return "";

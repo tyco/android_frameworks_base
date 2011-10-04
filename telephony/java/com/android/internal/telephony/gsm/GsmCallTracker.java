@@ -53,7 +53,7 @@ public final class GsmCallTracker extends CallTracker {
     static final String LOG_TAG = "GSM";
     private static final boolean REPEAT_POLLING = false;
 
-    private static final boolean DBG_POLL = false;
+    private static final boolean DBG_POLL = true;
 
     //***** Constants
 

@@ -26,5 +26,5 @@ package android.util;
      * to avoid breaking the API check when switching to and from
      * a debug build.
      */
-    /* package */ static boolean DEBUG = false;
+    /* package */ static boolean DEBUG = true;
 }

@@ -20,5 +20,5 @@ package android.util;
  * Static flags set by the build process.
  */
 /* package */ final class ConfigBuildFlags {
-    /* package */ static final boolean DEBUG = false;
+    /* package */ static final boolean DEBUG = true;
 }
