@@ -207,7 +207,7 @@ class RILRequest {
  */
 public class RIL extends BaseCommands implements CommandsInterface {
     protected static final String LOG_TAG = "RILJ";
-    private static final boolean DBG = false;
+    private static final boolean DBG = true;
     static final boolean RILJ_LOGD = Config.LOGD;
     static final boolean RILJ_LOGV = DBG ? Config.LOGD : Config.LOGV;
     private boolean rilNeedsNullPath = false;

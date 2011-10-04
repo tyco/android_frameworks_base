@@ -38,7 +38,7 @@ import android.util.Log;
 @Deprecated
 public final class PhoneStateIntentReceiver extends BroadcastReceiver {
     private static final String LOG_TAG = "PHONE";
-    private static final boolean DBG = false;
+    private static final boolean DBG = true;
 
     private static final int NOTIF_PHONE    = 1 << 0;
     private static final int NOTIF_SERVICE  = 1 << 1;
