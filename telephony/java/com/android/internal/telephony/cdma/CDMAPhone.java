@@ -1474,7 +1474,7 @@ public class CDMAPhone extends PhoneBase {
         String[] s = new String[3];
 	s[0] = "";
 	s[1] = "";
-	s[2] = ""
+	s[2] = "";
         return s;
     }
     public String getIsimIMPI() {

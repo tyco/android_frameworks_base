@@ -96,7 +96,7 @@ public class SipPhone extends SipPhoneBase {
         s[0] = "";
         s[1] = "";
         s[2] = "";
-        return "";
+        return s;
     }
     public String getIsimIMPI() {
         return "";
