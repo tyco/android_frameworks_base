@@ -38,7 +38,22 @@ public class PhoneFactory {
     //***** Class Variables
 
     static private Phone sProxyPhone = null;
-    static private CommandsInterface sCommandsInterface = null;
+    static private Phone mMultiModePhoneProxy;
+    static private Phone sGsmProxyPhone;
+    static private Phone sCdmaProxyPhone;
+    //static private CommandsInterface sCommandsInterface = null;
+    static private CommandsInterface[] sCommandsInterfaces = null;
+    static
+    {
+        mMultiModePhoneProxy = null;
+        sGsmProxyPhone = null;
+        sCdmaProxyPhone = null;
+        CommandsInterface[] arrayOfCommandsInterface = new CommandsInterface[2];
+        arrayOfCommandsInterface[0] = null;
+        arrayOfCommandsInterface[1] = null;
+        sCommandsInterfaces = arrayOfCommandsInterface;
+    }
+        
 
     static private boolean sMadeDefaults = false;
     static private PhoneNotifier sPhoneNotifier;
@@ -112,11 +127,15 @@ public class PhoneFactory {
                 String sRILClassname = SystemProperties.get("ro.telephony.ril_class");
                 Log.i(LOG_TAG, "RILClassname is " + sRILClassname);
 
-                if("samsung".equals(sRILClassname))
-                {
+                /**
+                 * Complete hack to see if things work
+                 */
+                //if("samsung".equals(sRILClassname))
+                //{
                     Log.i(LOG_TAG, "Using Samsung RIL");
-                    sCommandsInterface = new SamsungRIL(context, networkMode, cdmaSubscription);
-                } else if ("htc".equals(sRILClassname)) {
+                    sCommandsInterfaces[0] = new SamsungRIL(context, 3, 0);
+                    sCommandsInterfaces[1] = new SamsungRIL(context, 4, cdmaSubscription);
+                /*} else if ("htc".equals(sRILClassname)) {
                     Log.i(LOG_TAG, "Using HTC RIL");
                     sCommandsInterface = new HTCRIL(context, networkMode, cdmaSubscription);
                 } else if("lgestar".equals(sRILClassname)) {
@@ -127,8 +146,13 @@ public class PhoneFactory {
                     sCommandsInterface = new SemcRIL(context, networkMode, cdmaSubscription);
                 } else {
                     sCommandsInterface = new RIL(context, networkMode, cdmaSubscription);
-                }
+                }*/
+                sHandoverTracker = new HandoverTracker(sCommandsInterfaces[0], sCommandsInterfaces[1]);
+                sCdmaProxyPhone = new CDMAPhone(context, sCommandsInterfaces[1], sPhoneNotifier, sHandoverTracker);
+                sGsmProxyPhone = new GSMPhone(context, sCommandsInterfaces[0], sPhoneNotifier, sHandoverTracker);
+                mMultiModePhoneProxy = new MultiModePhoneProxy(sCdmaProxyPhone, sGsmProxyPhone, context);
 
+                /*
                 int phoneType = getPhoneType(networkMode);
                 if (phoneType == Phone.PHONE_TYPE_GSM) {
                     Log.i(LOG_TAG, "Creating GSMPhone");
@@ -139,6 +163,7 @@ public class PhoneFactory {
                     sProxyPhone = new PhoneProxy(new CDMAPhone(context,
                             sCommandsInterface, sPhoneNotifier));
                 }
+                */
 
                 sMadeDefaults = true;
             }
@@ -181,20 +206,22 @@ public class PhoneFactory {
         if (!sMadeDefaults) {
             throw new IllegalStateException("Default phones haven't been made yet!");
         }
-       return sProxyPhone;
+       return mMultiModePhoneProxy;
     }
 
     public static Phone getCdmaPhone() {
         synchronized(PhoneProxy.lockForRadioTechnologyChange) {
-            Phone phone = new CDMAPhone(sContext, sCommandsInterface, sPhoneNotifier);
-            return phone;
+            if (sCdmaProxyPhone == null)
+                sCdmaProxyPhone = new CDMAPhone(sCommandsInterface, sCommandsInterface[1], sPhoneNotifier);
+            return sCdmaProxyPhone;
         }
     }
 
     public static Phone getGsmPhone() {
         synchronized(PhoneProxy.lockForRadioTechnologyChange) {
-            Phone phone = new GSMPhone(sContext, sCommandsInterface, sPhoneNotifier);
-            return phone;
+            if (sGsmProxyPhone == null)
+                sGsmProxyPhone = new GSMPhone(sContext, sCommandsInterfaces[0], sPhoneNotifier);
+            return sGsmProxyPhone;
         }
     }
 

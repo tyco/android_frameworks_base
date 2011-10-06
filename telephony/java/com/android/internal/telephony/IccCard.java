@@ -501,17 +501,17 @@ public abstract class IccCard {
                     break;
                 case EVENT_ICC_READY:
                     //TODO: put facility read in SIM_READY now, maybe in REG_NW
-                    mPhone.mCM.getIccCardStatus(obtainMessage(EVENT_GET_ICC_STATUS_DONE));
-                    mPhone.mCM.queryFacilityLock (
+                    mLtePhone.mCM.getIccCardStatus(obtainMessage(EVENT_GET_ICC_STATUS_DONE));
+                    mLtePhone.mCM.queryFacilityLock (
                             CommandsInterface.CB_FACILITY_BA_SIM, "", serviceClassX,
                             obtainMessage(EVENT_QUERY_FACILITY_LOCK_DONE));
-                    mPhone.mCM.queryFacilityLock (
+                    mLtePhone.mCM.queryFacilityLock (
                             CommandsInterface.CB_FACILITY_BA_FD, "", serviceClassX,
                             obtainMessage(EVENT_QUERY_FACILITY_FDN_DONE));
                     break;
                 case EVENT_ICC_LOCKED_OR_ABSENT:
-                    mPhone.mCM.getIccCardStatus(obtainMessage(EVENT_GET_ICC_STATUS_DONE));
-                    mPhone.mCM.queryFacilityLock (
+                    mLtePhone.mCM.getIccCardStatus(obtainMessage(EVENT_GET_ICC_STATUS_DONE));
+                    mLtePhone.mCM.queryFacilityLock (
                             CommandsInterface.CB_FACILITY_BA_SIM, "", serviceClassX,
                             obtainMessage(EVENT_QUERY_FACILITY_LOCK_DONE));
                     break;
@@ -528,7 +528,7 @@ public abstract class IccCard {
                     // TODO should abstract these exceptions
                     AsyncResult.forMessage(((Message)ar.userObj)).exception
                                                         = ar.exception;
-                    mPhone.mCM.getIccCardStatus(
+                    mLtePhone.mCM.getIccCardStatus(
                         obtainMessage(EVENT_REPOLL_STATUS_DONE, ar.userObj));
                     break;
                 case EVENT_REPOLL_STATUS_DONE:

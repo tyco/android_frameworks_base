@@ -129,7 +129,7 @@ public class PhoneProxy extends Handler implements Phone {
             mIccSmsInterfaceManagerProxy.setmIccSmsInterfaceManager(
                     mActivePhone.getIccSmsInterfaceManager());
             mIccPhoneBookInterfaceManagerProxy.setmIccPhoneBookInterfaceManager(
-                    mActivePhone.getIccPhoneBookInterfaceManager());
+                    mLtePhone.getIccPhoneBookInterfaceManager());
             mPhoneSubInfoProxy.setmPhoneSubInfo(this.mActivePhone.getPhoneSubInfo());
             mCommandsInterface = ((PhoneBase)mActivePhone).mCM;
 
@@ -681,19 +681,33 @@ public class PhoneProxy extends Handler implements Phone {
         return mLtePhone.getIsimDomain();
     }
     public void getMpsr(Message msg) {
+        mLtePhone.getMpsr(msg);
     }
     public String[] getIsimIMPU() {
-        String[] s = new String[3];
-	s[0] = "";
-	s[1] = "";
-	s[2] = "";
-        return s;
+        return mLtePhone.getIsimIMPU();
     }
     public String getIsimIMPI() {
-        return "";
+        return mLtePhone.getIsimIMPI();
     }
+    public void setMpsr(int i, Message response) {
+        mLtePhone.setMpsr(i, response);
+    }
+    protected void setLtePhone(Phone phone)
+    {
+        mLtePhone = phone;
+        if (mIccPhoneBookInterfaceManagerProxy != null)
+        {
+            return;
+        } else {
+            mIccPhoneBookInterfaceManagerProxy = new IccPhoneBookInterfaceManagerProxy(mLtePhone.getIccPhoneBookInterfaceManager());
+            return;
+        }
+    }
+
         
     public void requestIsimAuthentication(byte[] abyte, Message msg) {
+        Log.d(LOG_TAG, "ISIM >>> Inside PhoneProxy->requestIsimAuthentication");
+        mLtePhone.requestIsimAuthentication(abyte, msg);
     }
 
     public String getGateway(String apnType) {

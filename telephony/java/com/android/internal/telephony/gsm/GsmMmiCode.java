@@ -99,6 +99,11 @@ public final class GsmMmiCode extends Handler implements MmiCode {
     static final int EVENT_SET_CFF_COMPLETE     = 6;
     static final int EVENT_USSD_CANCEL_COMPLETE = 7;
 
+    /**
+     * From DROID Charge framework.jar
+     */
+    static final int EVENT_GET_SIM_STATUS_DONE = 8;
+
     //***** Instance Variables
 
     GSMPhone phone;
@@ -850,6 +855,11 @@ public final class GsmMmiCode extends Handler implements MmiCode {
             case EVENT_QUERY_COMPLETE:
                 ar = (AsyncResult) (msg.obj);
                 onQueryComplete(ar);
+            break;
+
+            case EVENT_GET_SIM_STATUS_DONE:
+                ar = (AsyncResult) (msg.obj);
+                phone.mSimCard.handleSimState(ar);
             break;
 
             case EVENT_USSD_COMPLETE:

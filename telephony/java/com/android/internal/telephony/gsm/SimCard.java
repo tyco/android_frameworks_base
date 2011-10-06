@@ -47,4 +47,8 @@ public final class SimCard extends IccCard {
         return ((GSMPhone)mPhone).mSIMRecords.getServiceProviderName();
     }
 
+    public void handleSimState(AsyncResult ar)
+    {
+        getIccCardStatusDone(ar);
+    }
 }

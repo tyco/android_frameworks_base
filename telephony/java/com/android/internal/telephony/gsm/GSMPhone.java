@@ -126,17 +126,24 @@ public class GSMPhone extends PhoneBase {
 
     public
     GSMPhone (Context context, CommandsInterface ci, PhoneNotifier notifier) {
-        this(context,ci,notifier, false);
+        this(context,ci,notifier, HandoverTracker.defaultHandoverTracker(), false);
+    }
+
+    GSMPhone (Context context, CommandsInterface ci, PhoneNotifier notifier, boolean unitTestMode) {
+        this(context,ci,notifier, HandoverTracker.defaultHandoverTracker(), unitTestMode);
     }
 
     public void requestIsimAuthentication(byte abyte[], Message msg) {
+        Log.d(LOG_TAG, "ISIM >>> Inside GSM Phone->requestIsimAuthentication");
+        mSIMRecords.requestIsimAuthentication(abyte, msg);
     }
 
     public void getMpsr(Message msg) {
+        mCM.getMpsr(msg);
     }
 
     public
-    GSMPhone (Context context, CommandsInterface ci, PhoneNotifier notifier, boolean unitTestMode) {
+    GSMPhone (Context context, CommandsInterface ci, PhoneNotifier notifier, HandoverTracker handovertracker, boolean unitTestMode) {
         super(notifier, context, ci, unitTestMode);
 
         if (ci instanceof SimulatedRadioControl) {
