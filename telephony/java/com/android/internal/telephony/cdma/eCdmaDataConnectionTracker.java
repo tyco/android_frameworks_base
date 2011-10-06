@@ -413,457 +413,456 @@ label0:
     private ArrayList createApnList(Cursor cursor)
     {
         ArrayList arraylist = new ArrayList();
-        if(!cursor.moveToFirst()) goto _L2; else goto _L1
-_L1:
-        String as[];
-        ApnSetting apnsetting;
-        int k10;
-        int l10;
-        Cursor cursor1 = cursor;
-        String s = "type";
-        int i = cursor1.getColumnIndexOrThrow(s);
-        Cursor cursor2 = cursor;
-        int j = i;
-        String s1 = cursor2.getString(j);
-        eCdmaDataConnectionTracker ecdmadataconnectiontracker = this;
-        String s2 = s1;
-        as = ecdmadataconnectiontracker.parseTypes(s2);
-        Cursor cursor3 = cursor;
-        String s3 = "_id";
-        int k = cursor3.getColumnIndexOrThrow(s3);
-        Cursor cursor4 = cursor;
-        int l = k;
-        int i1 = cursor4.getInt(l);
-        Cursor cursor5 = cursor;
-        String s4 = "numeric";
-        int j1 = cursor5.getColumnIndexOrThrow(s4);
-        Cursor cursor6 = cursor;
-        int k1 = j1;
-        String s5 = cursor6.getString(k1);
-        Cursor cursor7 = cursor;
-        String s6 = "name";
-        int l1 = cursor7.getColumnIndexOrThrow(s6);
-        Cursor cursor8 = cursor;
-        int i2 = l1;
-        String s7 = cursor8.getString(i2);
-        Cursor cursor9 = cursor;
-        String s8 = "apn";
-        int j2 = cursor9.getColumnIndexOrThrow(s8);
-        Cursor cursor10 = cursor;
-        int k2 = j2;
-        String s9 = cursor10.getString(k2);
-        Cursor cursor11 = cursor;
-        String s10 = "proxy";
-        int l2 = cursor11.getColumnIndexOrThrow(s10);
-        Cursor cursor12 = cursor;
-        int i3 = l2;
-        String s11 = cursor12.getString(i3);
-        Cursor cursor13 = cursor;
-        String s12 = "port";
-        int j3 = cursor13.getColumnIndexOrThrow(s12);
-        Cursor cursor14 = cursor;
-        int k3 = j3;
-        String s13 = cursor14.getString(k3);
-        Cursor cursor15 = cursor;
-        String s14 = "mmsc";
-        int l3 = cursor15.getColumnIndexOrThrow(s14);
-        Cursor cursor16 = cursor;
-        int i4 = l3;
-        String s15 = cursor16.getString(i4);
-        Cursor cursor17 = cursor;
-        String s16 = "mmsproxy";
-        int j4 = cursor17.getColumnIndexOrThrow(s16);
-        Cursor cursor18 = cursor;
-        int k4 = j4;
-        String s17 = cursor18.getString(k4);
-        Cursor cursor19 = cursor;
-        String s18 = "mmsport";
-        int l4 = cursor19.getColumnIndexOrThrow(s18);
-        Cursor cursor20 = cursor;
-        int i5 = l4;
-        String s19 = cursor20.getString(i5);
-        Cursor cursor21 = cursor;
-        String s20 = "user";
-        int j5 = cursor21.getColumnIndexOrThrow(s20);
-        Cursor cursor22 = cursor;
-        int k5 = j5;
-        String s21 = cursor22.getString(k5);
-        Cursor cursor23 = cursor;
-        String s22 = "password";
-        int l5 = cursor23.getColumnIndexOrThrow(s22);
-        Cursor cursor24 = cursor;
-        int i6 = l5;
-        String s23 = cursor24.getString(i6);
-        Cursor cursor25 = cursor;
-        String s24 = "authtype";
-        int j6 = cursor25.getColumnIndexOrThrow(s24);
-        Cursor cursor26 = cursor;
-        int k6 = j6;
-        int l6 = cursor26.getInt(k6);
-        Cursor cursor27 = cursor;
-        String s25 = "ipversion";
-        int i7 = cursor27.getColumnIndexOrThrow(s25);
-        Cursor cursor28 = cursor;
-        int j7 = i7;
-        String s26 = cursor28.getString(j7);
-        Cursor cursor29 = cursor;
-        String s27 = "inactivity_timer";
-        int k7 = cursor29.getColumnIndexOrThrow(s27);
-        Cursor cursor30 = cursor;
-        int l7 = k7;
-        int i8 = cursor30.getInt(l7);
-        Cursor cursor31 = cursor;
-        String s28 = "statustype";
-        int j8 = cursor31.getColumnIndexOrThrow(s28);
-        Cursor cursor32 = cursor;
-        int k8 = j8;
-        int l8 = cursor32.getInt(k8);
-        apnsetting = new ApnSetting(i1, s5, s7, s9, s11, s13, s15, s17, s19, s21, s23, l6, s26, i8, l8, as);
-        Cursor cursor33 = cursor;
-        String s29 = "statustype";
-        int i9 = cursor33.getColumnIndexOrThrow(s29);
-        Cursor cursor34 = cursor;
-        int j9 = i9;
-        int k9 = cursor34.getInt(j9);
-        Cursor cursor35 = cursor;
-        String s30 = "inactivity_timer";
-        int l9 = cursor35.getColumnIndexOrThrow(s30);
-        Cursor cursor36 = cursor;
-        int i10 = l9;
-        int j10 = cursor36.getInt(i10);
-        k10 = k9;
-        l10 = 1;
-        if(k10 != l10) goto _L4; else goto _L3
-_L3:
-        String as1[] = as;
-        int i11 = as1.length;
-        int i12 = 0;
-        do
-        {
-            int i13 = i12;
-            int j13 = i11;
-            if(i13 >= j13)
-                break;
-            String s31 = as1[i12];
-            String s32 = s31;
-            String s33 = "ims";
-            if(s32.equals(s33))
-            {
-                boolean flag = false;
-                mIsImsEnabled = flag;
-            }
-            String s34 = s31;
-            String s35 = "admin";
-            if(s34.equals(s35))
-            {
-                boolean flag1 = false;
-                mIsAdminEnabled = flag1;
-            }
-            StringBuilder stringbuilder = (new StringBuilder()).append("mIsImsEnabled = ");
-            boolean flag2 = mIsImsEnabled;
-            StringBuilder stringbuilder1 = stringbuilder.append(flag2).append(" mIsAdminEnabled = ");
-            boolean flag3 = mIsAdminEnabled;
-            String s36 = stringbuilder1.append(flag3).toString();
-            int k13 = Log.d("eCDMA", s36);
-            eCdmaDataConnectionTracker ecdmadataconnectiontracker1 = this;
-            String s37 = s31;
-            if(ecdmadataconnectiontracker1.isApnTypeActive(s37) && mIsImsEnabled && mIsAdminEnabled)
-            {
-                String s38 = "eCDMA";
-                StringBuilder stringbuilder2 = (new StringBuilder()).append("eCDMADCT createApnList : isDisabled ");
-                boolean flag4;
-                StringBuilder stringbuilder3;
-                String s39;
-                StringBuilder stringbuilder4;
-                String s40;
-                String s41;
-                int l13;
-                eCdmaDataConnectionTracker ecdmadataconnectiontracker2;
-                String s42;
+        if (cursor.moveToFirst()) {
+            String as[];
+            ApnSetting apnsetting;
+            int k10;
+            int l10;
+            Cursor cursor1 = cursor;
+            String s = "type";
+            int i = cursor1.getColumnIndexOrThrow(s);
+            Cursor cursor2 = cursor;
+            int j = i;
+            String s1 = cursor2.getString(j);
+            eCdmaDataConnectionTracker ecdmadataconnectiontracker = this;
+            String s2 = s1;
+            as = ecdmadataconnectiontracker.parseTypes(s2);
+            Cursor cursor3 = cursor;
+            String s3 = "_id";
+            int k = cursor3.getColumnIndexOrThrow(s3);
+            Cursor cursor4 = cursor;
+            int l = k;
+            int i1 = cursor4.getInt(l);
+            Cursor cursor5 = cursor;
+            String s4 = "numeric";
+            int j1 = cursor5.getColumnIndexOrThrow(s4);
+            Cursor cursor6 = cursor;
+            int k1 = j1;
+            String s5 = cursor6.getString(k1);
+            Cursor cursor7 = cursor;
+            String s6 = "name";
+            int l1 = cursor7.getColumnIndexOrThrow(s6);
+            Cursor cursor8 = cursor;
+            int i2 = l1;
+            String s7 = cursor8.getString(i2);
+            Cursor cursor9 = cursor;
+            String s8 = "apn";
+            int j2 = cursor9.getColumnIndexOrThrow(s8);
+            Cursor cursor10 = cursor;
+            int k2 = j2;
+            String s9 = cursor10.getString(k2);
+            Cursor cursor11 = cursor;
+            String s10 = "proxy";
+            int l2 = cursor11.getColumnIndexOrThrow(s10);
+            Cursor cursor12 = cursor;
+            int i3 = l2;
+            String s11 = cursor12.getString(i3);
+            Cursor cursor13 = cursor;
+            String s12 = "port";
+            int j3 = cursor13.getColumnIndexOrThrow(s12);
+            Cursor cursor14 = cursor;
+            int k3 = j3;
+            String s13 = cursor14.getString(k3);
+            Cursor cursor15 = cursor;
+            String s14 = "mmsc";
+            int l3 = cursor15.getColumnIndexOrThrow(s14);
+            Cursor cursor16 = cursor;
+            int i4 = l3;
+            String s15 = cursor16.getString(i4);
+            Cursor cursor17 = cursor;
+            String s16 = "mmsproxy";
+            int j4 = cursor17.getColumnIndexOrThrow(s16);
+            Cursor cursor18 = cursor;
+            int k4 = j4;
+            String s17 = cursor18.getString(k4);
+            Cursor cursor19 = cursor;
+            String s18 = "mmsport";
+            int l4 = cursor19.getColumnIndexOrThrow(s18);
+            Cursor cursor20 = cursor;
+            int i5 = l4;
+            String s19 = cursor20.getString(i5);
+            Cursor cursor21 = cursor;
+            String s20 = "user";
+            int j5 = cursor21.getColumnIndexOrThrow(s20);
+            Cursor cursor22 = cursor;
+            int k5 = j5;
+            String s21 = cursor22.getString(k5);
+            Cursor cursor23 = cursor;
+            String s22 = "password";
+            int l5 = cursor23.getColumnIndexOrThrow(s22);
+            Cursor cursor24 = cursor;
+            int i6 = l5;
+            String s23 = cursor24.getString(i6);
+            Cursor cursor25 = cursor;
+            String s24 = "authtype";
+            int j6 = cursor25.getColumnIndexOrThrow(s24);
+            Cursor cursor26 = cursor;
+            int k6 = j6;
+            int l6 = cursor26.getInt(k6);
+            Cursor cursor27 = cursor;
+            String s25 = "ipversion";
+            int i7 = cursor27.getColumnIndexOrThrow(s25);
+            Cursor cursor28 = cursor;
+            int j7 = i7;
+            String s26 = cursor28.getString(j7);
+            Cursor cursor29 = cursor;
+            String s27 = "inactivity_timer";
+            int k7 = cursor29.getColumnIndexOrThrow(s27);
+            Cursor cursor30 = cursor;
+            int l7 = k7;
+            int i8 = cursor30.getInt(l7);
+            Cursor cursor31 = cursor;
+            String s28 = "statustype";
+            int j8 = cursor31.getColumnIndexOrThrow(s28);
+            Cursor cursor32 = cursor;
+            int k8 = j8;
+            int l8 = cursor32.getInt(k8);
+            apnsetting = new ApnSetting(i1, s5, s7, s9, s11, s13, s15, s17, s19, s21, s23, l6, s26, i8, l8, as);
+            Cursor cursor33 = cursor;
+            String s29 = "statustype";
+            int i9 = cursor33.getColumnIndexOrThrow(s29);
+            Cursor cursor34 = cursor;
+            int j9 = i9;
+            int k9 = cursor34.getInt(j9);
+            Cursor cursor35 = cursor;
+            String s30 = "inactivity_timer";
+            int l9 = cursor35.getColumnIndexOrThrow(s30);
+            Cursor cursor36 = cursor;
+            int i10 = l9;
+            int j10 = cursor36.getInt(i10);
+            k10 = k9;
+            l10 = 1;
+            if (k10 == l10) {
+                String as1[] = as;
+                int i11 = as1.length;
+                int i12 = 0;
+                do
+                {
+                    int i13 = i12;
+                    int j13 = i11;
+                    if(i13 >= j13)
+                        break;
+                    String s31 = as1[i12];
+                    String s32 = s31;
+                    String s33 = "ims";
+                    if(s32.equals(s33))
+                    {
+                        boolean flag = false;
+                        mIsImsEnabled = flag;
+                    }
+                    String s34 = s31;
+                    String s35 = "admin";
+                    if(s34.equals(s35))
+                    {
+                        boolean flag1 = false;
+                        mIsAdminEnabled = flag1;
+                    }
+                    StringBuilder stringbuilder = (new StringBuilder()).append("mIsImsEnabled = ");
+                    boolean flag2 = mIsImsEnabled;
+                    StringBuilder stringbuilder1 = stringbuilder.append(flag2).append(" mIsAdminEnabled = ");
+                    boolean flag3 = mIsAdminEnabled;
+                    String s36 = stringbuilder1.append(flag3).toString();
+                    int k13 = Log.d("eCDMA", s36);
+                    eCdmaDataConnectionTracker ecdmadataconnectiontracker1 = this;
+                    String s37 = s31;
+                    if(ecdmadataconnectiontracker1.isApnTypeActive(s37) && mIsImsEnabled && mIsAdminEnabled)
+                    {
+                        String s38 = "eCDMA";
+                        StringBuilder stringbuilder2 = (new StringBuilder()).append("eCDMADCT createApnList : isDisabled ");
+                        boolean flag4;
+                        StringBuilder stringbuilder3;
+                        String s39;
+                        StringBuilder stringbuilder4;
+                        String s40;
+                        String s41;
+                        int l13;
+                        eCdmaDataConnectionTracker ecdmadataconnectiontracker2;
+                        String s42;
+                        if(apnsetting.isDisable == 1)
+                            flag4 = true;
+                        else
+                            flag4 = false;
+                        stringbuilder3 = stringbuilder2.append(flag4).append(" disabling APN ");
+                        s39 = apnsetting.apn;
+                        stringbuilder4 = stringbuilder3.append(s39).append(" apnType ");
+                        s40 = s31;
+                        s41 = stringbuilder4.append(s40).toString();
+                        l13 = Log.e(s38, s41);
+                        ecdmadataconnectiontracker2 = this;
+                        s42 = s31;
+                        ecdmadataconnectiontracker2.disconnectByApntype(s42);
+                    }
+                    i12++;
+                } while(true);
+                String s43 = "eCDMA";
+                StringBuilder stringbuilder5 = (new StringBuilder()).append("eCDMADCT createApnList : isDisabled ");
+                boolean flag5;
+                StringBuilder stringbuilder6;
+                String s44;
+                StringBuilder stringbuilder7;
+                int i14;
+                String s45;
+                int j14;
                 if(apnsetting.isDisable == 1)
-                    flag4 = true;
+                    flag5 = true;
                 else
-                    flag4 = false;
-                stringbuilder3 = stringbuilder2.append(flag4).append(" disabling APN ");
-                s39 = apnsetting.apn;
-                stringbuilder4 = stringbuilder3.append(s39).append(" apnType ");
-                s40 = s31;
-                s41 = stringbuilder4.append(s40).toString();
-                l13 = Log.e(s38, s41);
-                ecdmadataconnectiontracker2 = this;
-                s42 = s31;
-                ecdmadataconnectiontracker2.disconnectByApntype(s42);
-            }
-            i12++;
-        } while(true);
-        String s43 = "eCDMA";
-        StringBuilder stringbuilder5 = (new StringBuilder()).append("eCDMADCT createApnList : isDisabled ");
-        boolean flag5;
-        StringBuilder stringbuilder6;
-        String s44;
-        StringBuilder stringbuilder7;
-        int i14;
-        String s45;
-        int j14;
-        if(apnsetting.isDisable == 1)
-            flag5 = true;
-        else
-            flag5 = false;
-        stringbuilder6 = stringbuilder5.append(flag5).append(" excluding APN ");
-        s44 = apnsetting.apn;
-        stringbuilder7 = stringbuilder6.append(s44).append(" inactivityTimer ");
-        i14 = apnsetting.inactivityValue;
-        s45 = stringbuilder7.append(i14).toString();
-        j14 = Log.e(s43, s45);
-_L6:
-        if(cursor.moveToNext())
-            continue; /* Loop/switch isn't completed */
-_L2:
-        return arraylist;
-_L4:
+                    flag5 = false;
+                stringbuilder6 = stringbuilder5.append(flag5).append(" excluding APN ");
+                s44 = apnsetting.apn;
+                stringbuilder7 = stringbuilder6.append(s44).append(" inactivityTimer ");
+                i14 = apnsetting.inactivityValue;
+                s45 = stringbuilder7.append(i14).toString();
+                j14 = Log.e(s43, s45);
+                if(cursor.moveToNext())
+                    continue; /* Loop/switch isn't completed */
+                return arraylist;
+            } else {
 label0:
-        {
-            String s46 = "eCDMA";
-            StringBuilder stringbuilder8 = (new StringBuilder()).append("eCDMADCT createApnList : isDisabled : ");
-            String as2[];
-            int j11;
-            int j12;
-            boolean flag6;
-            StringBuilder stringbuilder9;
-            String s47;
-            StringBuilder stringbuilder10;
-            int k14;
-            String s48;
-            int l14;
-            if(apnsetting.isDisable == 1)
-                flag6 = true;
-            else
-                flag6 = false;
-            stringbuilder9 = stringbuilder8.append(flag6).append(" adding APN ");
-            s47 = apnsetting.apn;
-            stringbuilder10 = stringbuilder9.append(s47).append(" inactivityTimer ");
-            k14 = apnsetting.inactivityValue;
-            s48 = stringbuilder10.append(k14).toString();
-            l14 = Log.e(s46, s48);
-            as2 = as;
-            j11 = as2.length;
-            j12 = 0;
-            do
-            {
-                int i15 = j12;
-                int j15 = j11;
-                if(i15 >= j15)
-                    break;
-                String s49 = as2[j12];
-                String s50 = s49;
-                String s51 = "ims";
-                if(s50.equals(s51))
                 {
-                    boolean flag7 = true;
-                    mIsImsEnabled = flag7;
-                }
-                String s52 = s49;
-                String s53 = "admin";
-                if(s52.equals(s53))
-                {
-                    boolean flag8 = true;
-                    mIsAdminEnabled = flag8;
-                }
-                StringBuilder stringbuilder11 = (new StringBuilder()).append("mIsImsEnabled = ");
-                boolean flag9 = mIsImsEnabled;
-                StringBuilder stringbuilder12 = stringbuilder11.append(flag9).append(" mIsAdminEnabled = ");
-                boolean flag10 = mIsAdminEnabled;
-                String s54 = stringbuilder12.append(flag10).toString();
-                int k15 = Log.d("eCDMA", s54);
-                int l15 = j12 + 1;
-            } while(true);
-            String s55 = "eCDMA";
-            StringBuilder stringbuilder13 = (new StringBuilder()).append("isOnDemandEnable = ");
-            boolean flag11 = isOnDemandEnable;
-            StringBuilder stringbuilder14 = stringbuilder13.append(flag11).append(" mImsTestMode = ");
-            boolean flag12 = mImsTestMode;
-            StringBuilder stringbuilder15 = stringbuilder14.append(flag12).append(" !isApnTypeActive(Phone.APN_TYPE_DEFAULT) = ");
-            eCdmaDataConnectionTracker ecdmadataconnectiontracker3 = this;
-            String s56 = "default";
-            boolean flag13;
-            String s57;
-            int i16;
-            if(!ecdmadataconnectiontracker3.isApnTypeActive(s56))
-                flag13 = true;
-            else
-                flag13 = false;
-            s57 = stringbuilder15.append(flag13).toString();
-            i16 = Log.d(s55, s57);
-            if(!isOnDemandEnable || mImsTestMode)
-            {
-                eCdmaDataConnectionTracker ecdmadataconnectiontracker4 = this;
-                String s58 = "default";
-                if(!ecdmadataconnectiontracker4.isApnTypeActive(s58))
-                {
-                    String as3[] = as;
-                    int k11 = as3.length;
-                    int k12 = 0;
+                    String s46 = "eCDMA";
+                    StringBuilder stringbuilder8 = (new StringBuilder()).append("eCDMADCT createApnList : isDisabled : ");
+                    String as2[];
+                    int j11;
+                    int j12;
+                    boolean flag6;
+                    StringBuilder stringbuilder9;
+                    String s47;
+                    StringBuilder stringbuilder10;
+                    int k14;
+                    String s48;
+                    int l14;
+                    if(apnsetting.isDisable == 1)
+                        flag6 = true;
+                    else
+                        flag6 = false;
+                    stringbuilder9 = stringbuilder8.append(flag6).append(" adding APN ");
+                    s47 = apnsetting.apn;
+                    stringbuilder10 = stringbuilder9.append(s47).append(" inactivityTimer ");
+                    k14 = apnsetting.inactivityValue;
+                    s48 = stringbuilder10.append(k14).toString();
+                    l14 = Log.e(s46, s48);
+                    as2 = as;
+                    j11 = as2.length;
+                    j12 = 0;
                     do
                     {
-                        int j16 = k12;
-                        int k16 = k11;
-                        if(j16 >= k16)
+                        int i15 = j12;
+                        int j15 = j11;
+                        if(i15 >= j15)
                             break;
-                        String s59 = as3[k12];
-                        StringBuilder stringbuilder16 = (new StringBuilder()).append("apnType.equals(default) = ");
-                        String s60 = s59;
-                        String s61 = "default";
-                        boolean flag14 = s60.equals(s61);
-                        String s62 = stringbuilder16.append(flag14).toString();
-                        int l16 = Log.d("eCDMA", s62);
-                        String s63 = s59;
-                        String s64 = "default";
-                        if(s63.equals(s64))
+                        String s49 = as2[j12];
+                        String s50 = s49;
+                        String s51 = "ims";
+                        if(s50.equals(s51))
                         {
-                            int i17 = Log.d("eCDMA", "apn type is default ");
-                            eCdmaDataConnectionTracker ecdmadataconnectiontracker5 = this;
-                            String s65 = s59;
-                            com.android.internal.telephony.DataConnectionTracker.State state = ecdmadataconnectiontracker5.getRequestedApnState(s65);
-                            StringBuilder stringbuilder17 = (new StringBuilder()).append("Got the state, it is ");
-                            com.android.internal.telephony.DataConnectionTracker.State state1 = state;
-                            String s66 = stringbuilder17.append(state1).toString();
-                            int j17 = Log.d("eCDMA", s66);
-                            com.android.internal.telephony.DataConnectionTracker.State state2 = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
-                            com.android.internal.telephony.DataConnectionTracker.State state3 = state;
-                            com.android.internal.telephony.DataConnectionTracker.State state4 = state2;
-                            if(state3 != state4)
+                            boolean flag7 = true;
+                            mIsImsEnabled = flag7;
+                        }
+                        String s52 = s49;
+                        String s53 = "admin";
+                        if(s52.equals(s53))
+                        {
+                            boolean flag8 = true;
+                            mIsAdminEnabled = flag8;
+                        }
+                        StringBuilder stringbuilder11 = (new StringBuilder()).append("mIsImsEnabled = ");
+                        boolean flag9 = mIsImsEnabled;
+                        StringBuilder stringbuilder12 = stringbuilder11.append(flag9).append(" mIsAdminEnabled = ");
+                        boolean flag10 = mIsAdminEnabled;
+                        String s54 = stringbuilder12.append(flag10).toString();
+                        int k15 = Log.d("eCDMA", s54);
+                        int l15 = j12 + 1;
+                    } while(true);
+                    String s55 = "eCDMA";
+                    StringBuilder stringbuilder13 = (new StringBuilder()).append("isOnDemandEnable = ");
+                    boolean flag11 = isOnDemandEnable;
+                    StringBuilder stringbuilder14 = stringbuilder13.append(flag11).append(" mImsTestMode = ");
+                    boolean flag12 = mImsTestMode;
+                    StringBuilder stringbuilder15 = stringbuilder14.append(flag12).append(" !isApnTypeActive(Phone.APN_TYPE_DEFAULT) = ");
+                    eCdmaDataConnectionTracker ecdmadataconnectiontracker3 = this;
+                    String s56 = "default";
+                    boolean flag13;
+                    String s57;
+                    int i16;
+                    if(!ecdmadataconnectiontracker3.isApnTypeActive(s56))
+                        flag13 = true;
+                    else
+                        flag13 = false;
+                    s57 = stringbuilder15.append(flag13).toString();
+                    i16 = Log.d(s55, s57);
+                    if(!isOnDemandEnable || mImsTestMode)
+                    {
+                        eCdmaDataConnectionTracker ecdmadataconnectiontracker4 = this;
+                        String s58 = "default";
+                        if(!ecdmadataconnectiontracker4.isApnTypeActive(s58))
+                        {
+                            String as3[] = as;
+                            int k11 = as3.length;
+                            int k12 = 0;
+                            do
                             {
-                                com.android.internal.telephony.DataConnectionTracker.State state5 = com.android.internal.telephony.DataConnectionTracker.State.CONNECTING;
-                                com.android.internal.telephony.DataConnectionTracker.State state6 = state;
-                                com.android.internal.telephony.DataConnectionTracker.State state7 = state5;
-                                if(state6 != state7)
+                                int j16 = k12;
+                                int k16 = k11;
+                                if(j16 >= k16)
+                                    break;
+                                String s59 = as3[k12];
+                                StringBuilder stringbuilder16 = (new StringBuilder()).append("apnType.equals(default) = ");
+                                String s60 = s59;
+                                String s61 = "default";
+                                boolean flag14 = s60.equals(s61);
+                                String s62 = stringbuilder16.append(flag14).toString();
+                                int l16 = Log.d("eCDMA", s62);
+                                String s63 = s59;
+                                String s64 = "default";
+                                if(s63.equals(s64))
                                 {
-                                    StringBuilder stringbuilder18 = (new StringBuilder()).append("Need to up the internet: apnType ");
-                                    String s67 = s59;
-                                    StringBuilder stringbuilder19 = stringbuilder18.append(s67).append("state = ");
-                                    com.android.internal.telephony.DataConnectionTracker.State state8 = state;
-                                    String s68 = stringbuilder19.append(state8).toString();
-                                    int k17 = Log.d("eCDMA", s68);
-                                    int l17 = mCdmaPhone.mSST.getCurrentCdmaDataConnectionState();
-                                    cur_cdmaState = l17;
-                                    StringBuilder stringbuilder20 = (new StringBuilder()).append("DEFAULT :cur_cdmaState = ");
-                                    int i18 = cur_cdmaState;
-                                    String s69 = stringbuilder20.append(i18).toString();
-                                    int j18 = Log.d("eCDMA", s69);
-                                    if(cur_cdmaState == 0 && mCdmaPhone.eHRPDCapable)
+                                    int i17 = Log.d("eCDMA", "apn type is default ");
+                                    eCdmaDataConnectionTracker ecdmadataconnectiontracker5 = this;
+                                    String s65 = s59;
+                                    com.android.internal.telephony.DataConnectionTracker.State state = ecdmadataconnectiontracker5.getRequestedApnState(s65);
+                                    StringBuilder stringbuilder17 = (new StringBuilder()).append("Got the state, it is ");
+                                    com.android.internal.telephony.DataConnectionTracker.State state1 = state;
+                                    String s66 = stringbuilder17.append(state1).toString();
+                                    int j17 = Log.d("eCDMA", s66);
+                                    com.android.internal.telephony.DataConnectionTracker.State state2 = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
+                                    com.android.internal.telephony.DataConnectionTracker.State state3 = state;
+                                    com.android.internal.telephony.DataConnectionTracker.State state4 = state2;
+                                    if(state3 != state4)
                                     {
-                                        int k18 = Log.d("eCDMA", "add default into pending queue");
-                                        eCdmaDataConnectionTracker ecdmadataconnectiontracker6 = this;
-                                        String s70 = "default";
-                                        ecdmadataconnectiontracker6.addPendingApnRequest(s70);
+                                        com.android.internal.telephony.DataConnectionTracker.State state5 = com.android.internal.telephony.DataConnectionTracker.State.CONNECTING;
+                                        com.android.internal.telephony.DataConnectionTracker.State state6 = state;
+                                        com.android.internal.telephony.DataConnectionTracker.State state7 = state5;
+                                        if(state6 != state7)
+                                        {
+                                            StringBuilder stringbuilder18 = (new StringBuilder()).append("Need to up the internet: apnType ");
+                                            String s67 = s59;
+                                            StringBuilder stringbuilder19 = stringbuilder18.append(s67).append("state = ");
+                                            com.android.internal.telephony.DataConnectionTracker.State state8 = state;
+                                            String s68 = stringbuilder19.append(state8).toString();
+                                            int k17 = Log.d("eCDMA", s68);
+                                            int l17 = mCdmaPhone.mSST.getCurrentCdmaDataConnectionState();
+                                            cur_cdmaState = l17;
+                                            StringBuilder stringbuilder20 = (new StringBuilder()).append("DEFAULT :cur_cdmaState = ");
+                                            int i18 = cur_cdmaState;
+                                            String s69 = stringbuilder20.append(i18).toString();
+                                            int j18 = Log.d("eCDMA", s69);
+                                            if(cur_cdmaState == 0 && mCdmaPhone.eHRPDCapable)
+                                            {
+                                                int k18 = Log.d("eCDMA", "add default into pending queue");
+                                                eCdmaDataConnectionTracker ecdmadataconnectiontracker6 = this;
+                                                String s70 = "default";
+                                                ecdmadataconnectiontracker6.addPendingApnRequest(s70);
+                                            }
+                                        }
                                     }
                                 }
-                            }
+                                int l18 = k12 + 1;
+                            } while(true);
+                            break label0;
                         }
-                        int l18 = k12 + 1;
-                    } while(true);
-                    break label0;
+                    }
+                    int i19 = Log.d("eCDMA", "ON-DEMAND is enabled or it is not mImsTestMode: Not checking if status is on");
                 }
-            }
-            int i19 = Log.d("eCDMA", "ON-DEMAND is enabled or it is not mImsTestMode: Not checking if status is on");
-        }
 label1:
-        {
-            String s71 = "eCDMA";
-            StringBuilder stringbuilder21 = (new StringBuilder()).append("mImsTestMode = ");
-            boolean flag15 = mImsTestMode;
-            StringBuilder stringbuilder22 = stringbuilder21.append(flag15).append(" !isApnTypeActive(Phone.APN_TYPE_IMS)");
-            eCdmaDataConnectionTracker ecdmadataconnectiontracker7 = this;
-            String s72 = "ims";
-            boolean flag16;
-            String s73;
-            int j19;
-            if(!ecdmadataconnectiontracker7.isApnTypeActive(s72))
-                flag16 = true;
-            else
-                flag16 = false;
-            s73 = stringbuilder22.append(flag16).toString();
-            j19 = Log.d(s71, s73);
-            if(!mImsTestMode)
-            {
-                eCdmaDataConnectionTracker ecdmadataconnectiontracker8 = this;
-                String s74 = "ims";
-                if(!ecdmadataconnectiontracker8.isApnTypeActive(s74))
                 {
-                    String as4[] = as;
-                    int l11 = as4.length;
-                    int l12 = 0;
-                    do
+                    String s71 = "eCDMA";
+                    StringBuilder stringbuilder21 = (new StringBuilder()).append("mImsTestMode = ");
+                    boolean flag15 = mImsTestMode;
+                    StringBuilder stringbuilder22 = stringbuilder21.append(flag15).append(" !isApnTypeActive(Phone.APN_TYPE_IMS)");
+                    eCdmaDataConnectionTracker ecdmadataconnectiontracker7 = this;
+                    String s72 = "ims";
+                    boolean flag16;
+                    String s73;
+                    int j19;
+                    if(!ecdmadataconnectiontracker7.isApnTypeActive(s72))
+                        flag16 = true;
+                    else
+                        flag16 = false;
+                    s73 = stringbuilder22.append(flag16).toString();
+                    j19 = Log.d(s71, s73);
+                    if(!mImsTestMode)
                     {
-                        int k19 = l12;
-                        int l19 = l11;
-                        if(k19 >= l19)
-                            break;
-                        String s75 = as4[l12];
-                        StringBuilder stringbuilder23 = (new StringBuilder()).append("apnType.equals(ims) = ");
-                        String s76 = s75;
-                        String s77 = "ims";
-                        boolean flag17 = s76.equals(s77);
-                        String s78 = stringbuilder23.append(flag17).toString();
-                        int i20 = Log.d("eCDMA", s78);
-                        String s79 = s75;
-                        String s80 = "ims";
-                        if(s79.equals(s80))
+                        eCdmaDataConnectionTracker ecdmadataconnectiontracker8 = this;
+                        String s74 = "ims";
+                        if(!ecdmadataconnectiontracker8.isApnTypeActive(s74))
                         {
-                            int j20 = Log.d("eCDMA", "apn type is IMS ");
-                            eCdmaDataConnectionTracker ecdmadataconnectiontracker9 = this;
-                            String s81 = s75;
-                            com.android.internal.telephony.DataConnectionTracker.State state9 = ecdmadataconnectiontracker9.getRequestedApnState(s81);
-                            StringBuilder stringbuilder24 = (new StringBuilder()).append("Got the state, it is ");
-                            com.android.internal.telephony.DataConnectionTracker.State state10 = state9;
-                            String s82 = stringbuilder24.append(state10).toString();
-                            int k20 = Log.d("eCDMA", s82);
-                            com.android.internal.telephony.DataConnectionTracker.State state11 = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
-                            com.android.internal.telephony.DataConnectionTracker.State state12 = state9;
-                            com.android.internal.telephony.DataConnectionTracker.State state13 = state11;
-                            if(state12 != state13)
+                            String as4[] = as;
+                            int l11 = as4.length;
+                            int l12 = 0;
+                            do
                             {
-                                com.android.internal.telephony.DataConnectionTracker.State state14 = com.android.internal.telephony.DataConnectionTracker.State.CONNECTING;
-                                com.android.internal.telephony.DataConnectionTracker.State state15 = state9;
-                                com.android.internal.telephony.DataConnectionTracker.State state16 = state14;
-                                if(state15 != state16)
+                                int k19 = l12;
+                                int l19 = l11;
+                                if(k19 >= l19)
+                                    break;
+                                String s75 = as4[l12];
+                                StringBuilder stringbuilder23 = (new StringBuilder()).append("apnType.equals(ims) = ");
+                                String s76 = s75;
+                                String s77 = "ims";
+                                boolean flag17 = s76.equals(s77);
+                                String s78 = stringbuilder23.append(flag17).toString();
+                                int i20 = Log.d("eCDMA", s78);
+                                String s79 = s75;
+                                String s80 = "ims";
+                                if(s79.equals(s80))
                                 {
-                                    StringBuilder stringbuilder25 = (new StringBuilder()).append("Need to up the IMS: apnType ");
-                                    String s83 = s75;
-                                    StringBuilder stringbuilder26 = stringbuilder25.append(s83).append("state = ");
-                                    com.android.internal.telephony.DataConnectionTracker.State state17 = state9;
-                                    String s84 = stringbuilder26.append(state17).toString();
-                                    int l20 = Log.d("eCDMA", s84);
-                                    int i21 = mCdmaPhone.mSST.getCurrentCdmaDataConnectionState();
-                                    cur_cdmaState = i21;
-                                    StringBuilder stringbuilder27 = (new StringBuilder()).append("IMS:cur_cdmaState = ");
-                                    int j21 = cur_cdmaState;
-                                    String s85 = stringbuilder27.append(j21).toString();
-                                    int k21 = Log.d("eCDMA", s85);
-                                    if(cur_cdmaState == 0 && mCdmaPhone.eHRPDCapable)
+                                    int j20 = Log.d("eCDMA", "apn type is IMS ");
+                                    eCdmaDataConnectionTracker ecdmadataconnectiontracker9 = this;
+                                    String s81 = s75;
+                                    com.android.internal.telephony.DataConnectionTracker.State state9 = ecdmadataconnectiontracker9.getRequestedApnState(s81);
+                                    StringBuilder stringbuilder24 = (new StringBuilder()).append("Got the state, it is ");
+                                    com.android.internal.telephony.DataConnectionTracker.State state10 = state9;
+                                    String s82 = stringbuilder24.append(state10).toString();
+                                    int k20 = Log.d("eCDMA", s82);
+                                    com.android.internal.telephony.DataConnectionTracker.State state11 = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
+                                    com.android.internal.telephony.DataConnectionTracker.State state12 = state9;
+                                    com.android.internal.telephony.DataConnectionTracker.State state13 = state11;
+                                    if(state12 != state13)
                                     {
-                                        int l21 = Log.d("eCDMA", "add ims into pending queue");
-                                        eCdmaDataConnectionTracker ecdmadataconnectiontracker10 = this;
-                                        String s86 = "ims";
-                                        ecdmadataconnectiontracker10.addPendingApnRequest(s86);
+                                        com.android.internal.telephony.DataConnectionTracker.State state14 = com.android.internal.telephony.DataConnectionTracker.State.CONNECTING;
+                                        com.android.internal.telephony.DataConnectionTracker.State state15 = state9;
+                                        com.android.internal.telephony.DataConnectionTracker.State state16 = state14;
+                                        if(state15 != state16)
+                                        {
+                                            StringBuilder stringbuilder25 = (new StringBuilder()).append("Need to up the IMS: apnType ");
+                                            String s83 = s75;
+                                            StringBuilder stringbuilder26 = stringbuilder25.append(s83).append("state = ");
+                                            com.android.internal.telephony.DataConnectionTracker.State state17 = state9;
+                                            String s84 = stringbuilder26.append(state17).toString();
+                                            int l20 = Log.d("eCDMA", s84);
+                                            int i21 = mCdmaPhone.mSST.getCurrentCdmaDataConnectionState();
+                                            cur_cdmaState = i21;
+                                            StringBuilder stringbuilder27 = (new StringBuilder()).append("IMS:cur_cdmaState = ");
+                                            int j21 = cur_cdmaState;
+                                            String s85 = stringbuilder27.append(j21).toString();
+                                            int k21 = Log.d("eCDMA", s85);
+                                            if(cur_cdmaState == 0 && mCdmaPhone.eHRPDCapable)
+                                            {
+                                                int l21 = Log.d("eCDMA", "add ims into pending queue");
+                                                eCdmaDataConnectionTracker ecdmadataconnectiontracker10 = this;
+                                                String s86 = "ims";
+                                                ecdmadataconnectiontracker10.addPendingApnRequest(s86);
+                                            }
+                                        }
                                     }
                                 }
-                            }
+                                int i22 = l12 + 1;
+                            } while(true);
+                            break label1;
                         }
-                        int i22 = l12 + 1;
-                    } while(true);
-                    break label1;
+                    }
+                    int j22 = Log.d("eCDMA", "IMS not required");
+                    if(cursor.moveToNext())
+                        continue; /* Loop/switch isn't completed */
+                    return arraylist;
                 }
+                ArrayList arraylist1 = arraylist;
+                ApnSetting apnsetting1 = apnsetting;
+                boolean flag18 = arraylist1.add(apnsetting1);
             }
-            int j22 = Log.d("eCDMA", "IMS not required");
+        } else {
+            return arraylist;
         }
-        ArrayList arraylist1 = arraylist;
-        ApnSetting apnsetting1 = apnsetting;
-        boolean flag18 = arraylist1.add(apnsetting1);
-        if(true) goto _L6; else goto _L5
-_L5:
-        if(true) goto _L1; else goto _L7
-_L7:
     }
 
     private void createPendingIpv6DataCallList()
@@ -943,46 +942,38 @@ _L7:
         Iterator iterator;
         i = 0;
         iterator = pdpList.iterator();
-_L5:
-        if(!iterator.hasNext()) goto _L2; else goto _L1
-_L1:
-        GsmDataConnection gsmdataconnection;
-        String s;
-        gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        s = mCurrentRequestedApnType;
-        if(!gsmdataconnection.canHandleType(s)) goto _L4; else goto _L3
-_L3:
-        GsmDataConnection gsmdataconnection2;
-        String s1 = (new StringBuilder()).append("Free pdp found: idx(").append(i).append(")").toString();
-        log(s1);
-        gsmdataconnection2 = gsmdataconnection;
-_L6:
-        return gsmdataconnection2;
-_L4:
-        i++;
-          goto _L5
-_L2:
+        while (iterator.hasNext()) {
+            GsmDataConnection gsmdataconnection;
+            String s;
+            gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+            s = mCurrentRequestedApnType;
+            if (gsmdataconnection.canHandleType(s)) {
+                GsmDataConnection gsmdataconnection2;
+                String s1 = (new StringBuilder()).append("Free pdp found: idx(").append(i).append(")").toString();
+                log(s1);
+                gsmdataconnection2 = gsmdataconnection;
+                return gsmdataconnection2;
+            }
+            i++;
+        }
         i = 0;
         iterator = pdpList.iterator();
-_L7:
 label0:
         {
-            if(!iterator.hasNext())
-                break MISSING_BLOCK_LABEL_201;
-            GsmDataConnection gsmdataconnection1 = (GsmDataConnection)(DataConnection)iterator.next();
-            if(!gsmdataconnection1.isInactive())
-                break label0;
-            StringBuilder stringbuilder = (new StringBuilder()).append("Free pdp found: idx(").append(i).append("), state(");
-            String s2 = gsmdataconnection1.getStateAsString();
-            String s3 = stringbuilder.append(s2).append(")").toString();
-            log(s3);
-            gsmdataconnection2 = gsmdataconnection1;
+            while (iterator.hasNext()) {
+                GsmDataConnection gsmdataconnection1 = (GsmDataConnection)(DataConnection)iterator.next();
+                if(!gsmdataconnection1.isInactive())
+                    break label0;
+                StringBuilder stringbuilder = (new StringBuilder()).append("Free pdp found: idx(").append(i).append("), state(");
+                String s2 = gsmdataconnection1.getStateAsString();
+                String s3 = stringbuilder.append(s2).append(")").toString();
+                log(s3);
+                gsmdataconnection2 = gsmdataconnection1;
+            }
+            return gsmdataconnection2;
         }
-          goto _L6
-        i++;
-          goto _L7
         gsmdataconnection2 = null;
-          goto _L6
+        return gsmdataconnection2;
     }
 
     private boolean findPendingIpv6DataCallStateByApn(String s)
@@ -997,25 +988,21 @@ label0:
 
     private GsmDataConnection getConnectionByApnType(String s)
     {
-        if(s != null) goto _L2; else goto _L1
-_L1:
         GsmDataConnection gsmdataconnection = null;
-_L4:
-        return gsmdataconnection;
-_L2:
-        for(Iterator iterator = pdpList.iterator(); iterator.hasNext();)
-        {
-            GsmDataConnection gsmdataconnection1 = (GsmDataConnection)(DataConnection)iterator.next();
-            if(gsmdataconnection1.canHandleType(s))
+        if (s == null) {
+            return gsmdataconnection;
+        } else {
+            for(Iterator iterator = pdpList.iterator(); iterator.hasNext();)
             {
-                gsmdataconnection = gsmdataconnection1;
-                continue; /* Loop/switch isn't completed */
+                GsmDataConnection gsmdataconnection1 = (GsmDataConnection)(DataConnection)iterator.next();
+                if(gsmdataconnection1.canHandleType(s))
+                {
+                    gsmdataconnection = gsmdataconnection1;
+                    continue; /* Loop/switch isn't completed */
+                }
             }
+            return gsmdataconnection;
         }
-
-        gsmdataconnection = null;
-        if(true) goto _L4; else goto _L3
-_L3:
     }
 
     private ApnSetting getNextApn()
@@ -1029,48 +1016,26 @@ _L3:
 
     private String getNextPendingApnRequest()
     {
-        if (mPendingRequestedApns != null) {
-        if(mPendingRequestedApns != null) goto _L2; else goto _L1
-_L1:
-        String s;
-        log("mPendingRequestedApns null in getNext ");
-        s = null;
-_L5:
-        return s;
-_L2:
-        ArrayList arraylist = mPendingRequestedApns;
-        arraylist;
-        JVM INSTR monitorenter ;
-        String s1;
-        do
-        {
-            if(mPendingRequestedApns.isEmpty())
-                break MISSING_BLOCK_LABEL_134;
-            s1 = (String)mPendingRequestedApns.remove(0);
-            if(!isApnTypeActive(s1))
-                break;
-            String s2 = (new StringBuilder()).append("type ").append(s1).append(" is already active").toString();
-            log(s2);
-        } while(true);
-          goto _L3
-        Exception exception;
-        exception;
-        arraylist;
-        JVM INSTR monitorexit ;
-        throw exception;
-_L3:
-        String s3 = (new StringBuilder()).append("type returned is ").append(s1).toString();
-        log(s3);
-        arraylist;
-        JVM INSTR monitorexit ;
-        s = s1;
-        continue; /* Loop/switch isn't completed */
-        arraylist;
-        JVM INSTR monitorexit ;
-        log("return type null");
-        s = null;
-        if(true) goto _L5; else goto _L4
-_L4:
+        String s = null;
+        if (mPendingRequestedApns == null) {
+            return s;
+        } else {
+            ArrayList arraylist = mPendingRequestedApns;
+            String s1;
+            do {
+                if (mPendingRequestedApns.isEmpty())
+                    break;
+                s1 = (String)mPendingRequestedApns.remove(0);
+                if (!isApnTypeActive(s1))
+                    break;
+                String s2 = (new StringBuilder()).append("type ").append(s1).append(" is already active").toString();
+                log(s2);
+            } while (true);
+            String s3 = (new StringBuilder()).append("type returned is ").append(s1).toString();
+            log(s3);
+            s = s1;
+            return s;
+        }
     }
 
     private ApnSetting getPreferredApn()
@@ -1112,91 +1077,71 @@ _L4:
     private boolean isApnTypeActivating(String s)
     {
         Iterator iterator = pdpList.iterator();
-_L4:
-        if(!iterator.hasNext()) goto _L2; else goto _L1
-_L1:
-        GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        if(!gsmdataconnection.canHandleType(s) || !gsmdataconnection.isActivating()) goto _L4; else goto _L3
-_L3:
-        boolean flag = true;
-_L6:
+        while (iterator.hasNext()) {
+            GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+            if (gsmdataconnection.canHandleType(s) || gsmdataconnection.isActivating()) {
+                boolean flag = true;
+                return flag;
+            }
+        }
+        boolean flag = false;
         return flag;
-_L2:
-        flag = false;
-        if(true) goto _L6; else goto _L5
-_L5:
     }
 
     private boolean isApnTypeDisconnecting(String s)
     {
         Iterator iterator = pdpList.iterator();
-_L4:
-        if(!iterator.hasNext()) goto _L2; else goto _L1
-_L1:
-        GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        if(!gsmdataconnection.canHandleType(s) || !gsmdataconnection.isDisconnecting()) goto _L4; else goto _L3
-_L3:
-        boolean flag = true;
-_L6:
+        while (iterator.hasNext()) {
+            GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+            if (gsmdataconnection.canHandleType(s) || gsmdataconnection.isDisconnecting()) {
+                boolean flag = true;
+                return flag;
+            }
+        }
+        boolean flag = false;
         return flag;
-_L2:
-        flag = false;
-        if(true) goto _L6; else goto _L5
-_L5:
     }
 
     private boolean isApnTypeInactive(String s)
     {
         Iterator iterator = pdpList.iterator();
-_L4:
-        if(!iterator.hasNext()) goto _L2; else goto _L1
-_L1:
-        GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        if(!gsmdataconnection.canHandleType(s) || gsmdataconnection.isInactive()) goto _L4; else goto _L3
-_L3:
-        boolean flag = false;
-_L6:
+        while (iterator.hasNext()) {
+            GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+            if (gsmdataconnection.canHandleType(s) || !gsmdataconnection.isInactive()) {
+                boolean flag = false;
+                return flag;
+            }
+        }
+        boolean flag = true;
         return flag;
-_L2:
-        flag = true;
-        if(true) goto _L6; else goto _L5
-_L5:
     }
 
     private boolean isDuringActionOnAnyApnType()
     {
         Iterator iterator = pdpList.iterator();
-_L4:
-        if(!iterator.hasNext()) goto _L2; else goto _L1
-_L1:
-        GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        if(gsmdataconnection.isInactive() || gsmdataconnection.isActive()) goto _L4; else goto _L3
-_L3:
-        boolean flag = true;
-_L6:
+        while (iterator.hasNext()) {
+            GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+            if (!gsmdataconnection.isInactive() || !gsmdataconnection.isActive()) {
+                boolean flag = true;
+                return flag;
+            }
+        }
+        boolean flag = false;
         return flag;
-_L2:
-        flag = false;
-        if(true) goto _L6; else goto _L5
-_L5:
     }
 
     private boolean isDuringActionOnApnType(String s)
     {
         Iterator iterator = pdpList.iterator();
-_L4:
-        if(!iterator.hasNext()) goto _L2; else goto _L1
-_L1:
-        GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        if(!gsmdataconnection.canHandleType(s) || gsmdataconnection.isInactive() || gsmdataconnection.isActive()) goto _L4; else goto _L3
-_L3:
-        boolean flag = true;
-_L6:
+        while (iterator.hasNext()) {
+            GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+            if (!gsmdataconnection.canHandleType(s) || !gsmdataconnection.isInactive() || !gsmdataconnection.isActive()) {
+                boolean flag = true;
+                return flag;
+            }
+        }
+        boolean flag = false;
         return flag;
-_L2:
-        flag = false;
-        if(true) goto _L6; else goto _L5
-_L5:
     }
 
     private boolean isEhrpdAttached()
@@ -1250,115 +1195,100 @@ _L5:
     private boolean pdpStatesDormant(ArrayList arraylist)
     {
         boolean flag = true;
-        ((DataCallState)arraylist.get(0)).active;
-        JVM INSTR tableswitch 10 12: default 40
-    //                   10 53
-    //                   11 66
-    //                   12 97;
-           goto _L1 _L2 _L3 _L4
-_L1:
-        int i = Log.d("eCDMA", "pdpStatesDormant: Not a Dormant Notification, proceed with regular PDP states");
-        flag = false;
-_L6:
-        return flag;
-_L2:
-        int j = Log.d("eCDMA", "pdpStatesDormant: Dormant State = INACTIVE. not expected to receive from Modem, ignore");
-        continue; /* Loop/switch isn't completed */
-_L3:
-        int k = Log.d("eCDMA", "pdpStatesDormant: Dormant State = DORMANT");
-        com.android.internal.telephony.DataConnectionTracker.Activity activity = com.android.internal.telephony.DataConnectionTracker.Activity.DORMANT;
-        this.activity = activity;
-        phone.notifyDataActivity();
-        continue; /* Loop/switch isn't completed */
-_L4:
-        int l = Log.d("eCDMA", "pdpStatesDormant: Dormant State = ACTIVE");
-        com.android.internal.telephony.DataConnectionTracker.Activity activity1 = com.android.internal.telephony.DataConnectionTracker.Activity.NONE;
-        this.activity = activity1;
-        phone.notifyDataActivity();
-        if(true) goto _L6; else goto _L5
-_L5:
+        switch(((DataCallState)arraylist.get(0)).active) {
+            case 10:
+                Log.d("eCDMA", "pdpStatesDormant: Dormant State = INACTIVE. not expected to receive from Modem, ignore");
+                return true;
+            case 11:
+                Log.d("eCDMA", "pdpStatesDormant: Dormant State = DORMANT");
+                com.android.internal.telephony.DataConnectionTracker.Activity activity = com.android.internal.telephony.DataConnectionTracker.Activity.DORMANT;
+                this.activity = activity;
+                phone.notifyDataActivity();
+                return flag;
+            case 12:
+                int l = Log.d("eCDMA", "pdpStatesDormant: Dormant State = ACTIVE");
+                com.android.internal.telephony.DataConnectionTracker.Activity activity1 = com.android.internal.telephony.DataConnectionTracker.Activity.NONE;
+                this.activity = activity1;
+                phone.notifyDataActivity();
+                return flag;
+            default:
+                int i = Log.d("eCDMA", "pdpStatesDormant: Not a Dormant Notification, proceed with regular PDP states");
+                flag = false;
+                return flag;
+        }
     }
 
-    private boolean pdpStatesHasActiveCID(ArrayList arraylist, int i)
-    {
+    private boolean pdpStatesHasActiveCID(ArrayList arraylist, int i) {
         int k;
         int l;
+        boolean flag = false;
         String s = (new StringBuilder()).append("pdpStatesHasActiveCID: processing cid:").append(i).toString();
         int j = Log.d("eCDMA", s);
         k = 0;
         l = arraylist.size();
-_L3:
-        if(k >= l)
-            break MISSING_BLOCK_LABEL_407;
-        if(((DataCallState)arraylist.get(k)).cid == i || ((DataCallState)arraylist.get(k)).active != 0) goto _L2; else goto _L1
-_L1:
-        boolean flag;
-        for(Iterator iterator = pdpList.iterator(); iterator.hasNext();)
-        {
-            GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-            if(gsmdataconnection.isActive() && gsmdataconnection.getCid() != i)
-            {
-                String s1 = (new StringBuilder()).append("Deactivated from Modem for Cid").append(i).append(": RESET").toString();
-                int i1 = Log.d("eCDMA", s1);
-                String s2;
-                Message message;
-                if(((DataCallState)arraylist.get(k)).reason == 0)
-                    s2 = "pdndroppedbyNetwork";
-                else
-                    s2 = "handoverdisconncted";
-                message = obtainMessage(25, s2);
-                gsmdataconnection.disconnect(3, message);
-            } else
-            {
-                StringBuilder stringbuilder = (new StringBuilder()).append("pdpStatesHasActiveCID: pdp.getApn()");
-                ApnSetting apnsetting = gsmdataconnection.getApn();
-                StringBuilder stringbuilder1 = stringbuilder.append(apnsetting).append("pdp.getCid()");
-                int j1 = gsmdataconnection.getCid();
-                String s3 = stringbuilder1.append(j1).append("cid").append(i).toString();
-                int k1 = Log.d("eCDMA", s3);
+        while (true) {
+            if (k >= l)
+                break;
+            if (((DataCallState)arraylist.get(k)).cid != i || ((DataCallState)arraylist.get(k)).active == 0) {
+                for(Iterator iterator = pdpList.iterator(); iterator.hasNext();) {
+                    GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+                    if(gsmdataconnection.isActive() && gsmdataconnection.getCid() != i) {
+                        String s1 = (new StringBuilder()).append("Deactivated from Modem for Cid").append(i).append(": RESET").toString();
+                        int i1 = Log.d("eCDMA", s1);
+                        String s2;
+                        Message message;
+                        if(((DataCallState)arraylist.get(k)).reason == 0)
+                            s2 = "pdndroppedbyNetwork";
+                        else
+                            s2 = "handoverdisconncted";
+                        message = obtainMessage(25, s2);
+                        gsmdataconnection.disconnect(3, message);
+                    } else {
+                        StringBuilder stringbuilder = (new StringBuilder()).append("pdpStatesHasActiveCID: pdp.getApn()");
+                        ApnSetting apnsetting = gsmdataconnection.getApn();
+                        StringBuilder stringbuilder1 = stringbuilder.append(apnsetting).append("pdp.getCid()");
+                        int j1 = gsmdataconnection.getCid();
+                        String s3 = stringbuilder1.append(j1).append("cid").append(i).toString();
+                        int k1 = Log.d("eCDMA", s3);
+                    }
+                }
+                flag = true;
+                return flag;
+            } else {
+                StringBuilder stringbuilder2 = (new StringBuilder()).append("pdpStatesHasActiveCID: states.get(").append(k).append(").cid:");
+                int l1 = ((DataCallState)arraylist.get(k)).cid;
+                StringBuilder stringbuilder3 = stringbuilder2.append(l1).append("states.get(").append(k).append(").active");
+                int i2 = ((DataCallState)arraylist.get(k)).active;
+                String s4 = stringbuilder3.append(i2).toString();
+                int j2 = Log.d("eCDMA", s4);
+                k++;
             }
         }
-
         flag = true;
-_L4:
         return flag;
-_L2:
-        StringBuilder stringbuilder2 = (new StringBuilder()).append("pdpStatesHasActiveCID: states.get(").append(k).append(").cid:");
-        int l1 = ((DataCallState)arraylist.get(k)).cid;
-        StringBuilder stringbuilder3 = stringbuilder2.append(l1).append("states.get(").append(k).append(").active");
-        int i2 = ((DataCallState)arraylist.get(k)).active;
-        String s4 = stringbuilder3.append(i2).toString();
-        int j2 = Log.d("eCDMA", s4);
-        k++;
-          goto _L3
-        flag = true;
-          goto _L4
     }
 
     private boolean pdpStatesHasCID(ArrayList arraylist, int i)
     {
         int k;
         int l;
+        boolean flag = false;
         String s = (new StringBuilder()).append("pdpStatesHasCID: processing cid:").append(i).toString();
         int j = Log.d("eCDMA", s);
         k = 0;
         l = arraylist.size();
-_L3:
-        if(k >= l)
-            break MISSING_BLOCK_LABEL_107;
-        if(((DataCallState)arraylist.get(k)).cid == i) goto _L2; else goto _L1
-_L1:
-        boolean flag;
-        String s1 = (new StringBuilder()).append("pdpStatesHasCID: states have cid:").append(i).toString();
-        int i1 = Log.d("eCDMA", s1);
-        flag = true;
-_L4:
+        while (true) {
+            if (k >= l)
+                break;
+            if (((DataCallState)arraylist.get(k)).cid != i) {
+                String s1 = (new StringBuilder()).append("pdpStatesHasCID: states have cid:").append(i).toString();
+                int i1 = Log.d("eCDMA", s1);
+                flag = true;
+                return flag;
+            }
+            k++;
+        }
         return flag;
-_L2:
-        k++;
-          goto _L3
-        flag = false;
-          goto _L4
     }
 
     private void processPendingIpv6DataCallState(GsmDataConnection gsmdataconnection)
@@ -1540,33 +1470,22 @@ label0:
         String s1 = (new StringBuilder()).append("pinging ").append(s).append(" for ").append(j).append("s").toString();
         log(s1);
         if(s == null || "0.0.0.0".equals(s))
-            break MISSING_BLOCK_LABEL_136;
+            return;
         Runtime runtime = Runtime.getRuntime();
         String s2 = (new StringBuilder()).append("ping -c 1 -i 1 -w ").append(j).append(" ").append(s).toString();
         k = runtime.exec(s2).waitFor();
         i = k;
-_L1:
-        IOException ioexception;
-        Exception exception;
-        if(i == 0)
-        {
+        if(i == 0) {
             int l = EventLog.writeEvent(50102, -1);
             mPdpResetCount = 0;
             Message message = obtainMessage(27);
             boolean flag = sendMessage(message);
             return;
-        } else
-        {
+        } else {
             Message message1 = obtainMessage(28);
             boolean flag1 = sendMessage(message1);
             return;
         }
-        ioexception;
-        log("ping failed: IOException");
-          goto _L1
-        exception;
-        log("exception trying to ping");
-          goto _L1
     }
 
     private void setCurrentDefEpsBearer(GsmDataConnection gsmdataconnection)
@@ -1607,11 +1526,9 @@ _L1:
         ContentResolver contentresolver = phone.getContext().getContentResolver();
         Uri uri = PREFERAPN_URI;
         int j = contentresolver.delete(uri, null, null);
-        if(i < 0)
-        {
+        if(i < 0) {
             return;
-        } else
-        {
+        } else {
             ContentValues contentvalues = new ContentValues();
             Integer integer = Integer.valueOf(i);
             contentvalues.put("apn_id", integer);
@@ -1744,57 +1661,54 @@ _L1:
 
     protected boolean IsEventApnTypeEqualsApnSettingType(String as[], String as1[])
     {
-        if(as != null && as1 != null) goto _L2; else goto _L1
-_L1:
-        boolean flag;
-        log(" IsEventApnTypeEqualsApnSettingType Input APNs are null");
-        flag = false;
-_L4:
-        return flag;
-_L2:
-        String as2[] = as1;
-        int i = as2.length;
-        int j = 0;
-        do
-        {
-            if(j >= i)
-                break;
-            if(as2[j].equals("*"))
-            {
-                flag = true;
-                continue; /* Loop/switch isn't completed */
-            }
-            j++;
-        } while(true);
-        as2 = as;
-        i = as2.length;
-label0:
-        for(int l = 0; l < i; l++)
-        {
-            String s = as2[l];
-            boolean flag1 = false;
-            String as3[] = as1;
-            int i1 = as3.length;
-            int k = 0;
+        boolean flag = false;
+        if (as == null && as1 == null) {
+            log(" IsEventApnTypeEqualsApnSettingType Input APNs are null");
+            return flag;
+        } else {
+            String as2[] = as1;
+            int i = as2.length;
+            int j = 0;
             do
             {
-                if(k >= i1 || as3[k].equals(s))
+                if(j >= i)
+                    break;
+                if(as2[j].equals("*"))
                 {
-                    if(flag1)
-                        continue label0;
-                    String s1 = (new StringBuilder()).append(" IsEventApnTypeEqualsApnSettingType Cannot find the ApnType ").append(s).append(" so return false").toString();
-                    log(s1);
-                    flag = false;
+                    flag = true;
                     continue; /* Loop/switch isn't completed */
                 }
-                k++;
+                j++;
             } while(true);
-        }
+            as2 = as;
+            i = as2.length;
+label0:
+            for(int l = 0; l < i; l++)
+            {
+                String s = as2[l];
+                boolean flag1 = false;
+                String as3[] = as1;
+                int i1 = as3.length;
+                int k = 0;
+                do
+                {
+                    if(k >= i1 || as3[k].equals(s))
+                    {
+                        if(flag1)
+                            continue label0;
+                        String s1 = (new StringBuilder()).append(" IsEventApnTypeEqualsApnSettingType Cannot find the ApnType ").append(s).append(" so return false").toString();
+                        log(s1);
+                        flag = false;
+                        return flag;
+                    }
+                    k++;
+                } while(true);
+            }
 
-        log("IsEventApnTypeEqualsApnSettingType All Apns are matching so return true");
-        flag = true;
-        if(true) goto _L4; else goto _L3
-_L3:
+            log("IsEventApnTypeEqualsApnSettingType All Apns are matching so return true");
+            flag = true;
+            return flag;
+        }
     }
 
     protected void cleanUpConnection(boolean flag, String s)
@@ -1909,73 +1823,62 @@ _L3:
 
     public int enableApnType(String s)
     {
-        this;
-        JVM INSTR monitorenter ;
         int i = apnTypeToId(s);
         int j = i;
-        if(j != -1) goto _L2; else goto _L1
-_L1:
-        byte byte0 = 3;
-_L4:
-        this;
-        JVM INSTR monitorexit ;
-        return byte0;
-_L2:
-        boolean flag;
-        StringBuilder stringbuilder = (new StringBuilder()).append("enableApnType(").append(s).append("), isApnTypeActive = ");
-        boolean flag1 = isApnTypeActive(s);
-        StringBuilder stringbuilder1 = stringbuilder.append(flag1).append(" and state = ");
-        com.android.internal.telephony.DataConnectionTracker.State state = this.state;
-        String s1 = stringbuilder1.append(state).toString();
-        int k = Log.d("eCDMA", s1);
-        if(!isApnTypeAvailable(s))
-        {
-            log("type not available");
-            byte0 = 2;
-            continue; /* Loop/switch isn't completed */
+        if (j == -1) {
+            byte byte0 = 3;
+            return byte0;
+        } else {
+            boolean flag;
+            StringBuilder stringbuilder = (new StringBuilder()).append("enableApnType(").append(s).append("), isApnTypeActive = ");
+            boolean flag1 = isApnTypeActive(s);
+            StringBuilder stringbuilder1 = stringbuilder.append(flag1).append(" and state = ");
+            com.android.internal.telephony.DataConnectionTracker.State state = this.state;
+            String s1 = stringbuilder1.append(state).toString();
+            int k = Log.d("eCDMA", s1);
+            if(!isApnTypeAvailable(s))
+            {
+                log("type not available");
+                byte0 = 2;
+                continue; /* Loop/switch isn't completed */
+            }
+            setEnabled(j, true);
+            flag = isApnTypeActive(s);
+            if(flag)
+                byte0 = 0;
+            else
+                byte0 = 1;
+            return byte0;
         }
-        setEnabled(j, true);
-        flag = isApnTypeActive(s);
-        if(flag)
-            byte0 = 0;
-        else
-            byte0 = 1;
-        if(true) goto _L4; else goto _L3
-_L3:
-        Exception exception;
-        exception;
-        throw exception;
     }
 
     public boolean explicitDetach(int i, int j)
     {
-        if(!mCdmaPhone.eHRPDCapable) goto _L2; else goto _L1
-_L1:
-        int k = Log.d("eCDMA", "Explicit Detach Called");
-        Iterator iterator = pdpList.iterator();
-        do
-        {
-            if(!iterator.hasNext())
+        if (mCdmaPhone.eHRPDCapable) {
+            int k = Log.d("eCDMA", "Explicit Detach Called");
+            Iterator iterator = pdpList.iterator();
+            do
+            {
+                if(!iterator.hasNext())
+                    break;
+                GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+                String s = mAttachApnType;
+                if(!gsmdataconnection.canHandleType(s))
+                    continue;
+                int l = Log.d("eCDMA", "Detach Initiated");
+                com.android.internal.telephony.DataConnectionTracker.State state = com.android.internal.telephony.DataConnectionTracker.State.DISCONNECTING;
+                setState(state);
+                Message message = obtainMessage(25, "apnDisabled");
+                gsmdataconnection.detach(message);
                 break;
-            GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-            String s = mAttachApnType;
-            if(!gsmdataconnection.canHandleType(s))
-                continue;
-            int l = Log.d("eCDMA", "Detach Initiated");
-            com.android.internal.telephony.DataConnectionTracker.State state = com.android.internal.telephony.DataConnectionTracker.State.DISCONNECTING;
-            setState(state);
-            Message message = obtainMessage(25, "apnDisabled");
-            gsmdataconnection.detach(message);
-            break;
-        } while(true);
-        clearAllPendingApnRequest();
-_L4:
-        return true;
-_L2:
-        Message message1 = obtainMessage(28);
-        boolean flag = sendMessage(message1);
-        if(true) goto _L4; else goto _L3
-_L3:
+            } while(true);
+            clearAllPendingApnRequest();
+            return true;
+        } else {
+            Message message1 = obtainMessage(28);
+            boolean flag = sendMessage(message1);
+            return flag;
+        }
     }
 
     protected int getActiveApnCount()
@@ -2130,122 +2033,114 @@ _L3:
 
     protected String[] getDnsServers(String s)
     {
-        if(!mCdmaPhone.eHRPDCapable) goto _L2; else goto _L1
-_L1:
-        if(s != null) goto _L4; else goto _L3
-_L3:
-        if(mActivePdp == null) goto _L6; else goto _L5
-_L5:
-        String as[] = mActivePdp.getDnsServers();
-_L11:
-        return as;
-_L4:
-        Iterator iterator = pdpList.iterator();
-_L9:
-        if(!iterator.hasNext()) goto _L6; else goto _L7
-_L7:
-        GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        if(!gsmdataconnection.canHandleType(s)) goto _L9; else goto _L8
-_L8:
-        as = gsmdataconnection.getDnsServers();
-        continue; /* Loop/switch isn't completed */
-_L6:
-        as = null;
-        continue; /* Loop/switch isn't completed */
-_L2:
-        as = getDnsServers(s);
-        if(true) goto _L11; else goto _L10
-_L10:
+        if (mCdmaPhone.eHRPDCapable) {
+            if (s == null) {
+                if (mActivePdp != null) {
+                    String as[] = mActivePdp.getDnsServers();
+                    return as;
+                } else {
+                    as = null;
+                    return as;
+                }
+            } else {
+                Iterator iterator = pdpList.iterator();
+                while (iterator.hasNext()) {
+                    GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+                    if (gsmdataconnection.canHandleType(s)) {
+                        as = gsmdataconnection.getDnsServers();
+                        return as;
+                    }
+                }
+                as = null;
+                return as;
+            }
+        } else {
+            as = getDnsServers(s);
+            return as;
+        }
     }
 
     public String getGateway(String s)
     {
-        if(!mCdmaPhone.eHRPDCapable) goto _L2; else goto _L1
-_L1:
-        if(s != null) goto _L4; else goto _L3
-_L3:
-        if(mActivePdp == null) goto _L6; else goto _L5
-_L5:
-        String s1 = mActivePdp.getGatewayAddress();
-_L11:
-        return s1;
-_L4:
-        Iterator iterator = pdpList.iterator();
-_L9:
-        if(!iterator.hasNext()) goto _L6; else goto _L7
-_L7:
-        GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        if(!gsmdataconnection.canHandleType(s)) goto _L9; else goto _L8
-_L8:
-        s1 = gsmdataconnection.getGatewayAddress();
-        continue; /* Loop/switch isn't completed */
-_L6:
-        s1 = null;
-        continue; /* Loop/switch isn't completed */
-_L2:
-        s1 = getGateway(s);
-        if(true) goto _L11; else goto _L10
-_L10:
+        String s1 = null;
+        if (mCdmaPhone.eHRPDCapable) {
+            if (s == null) {
+                if (mActivePdp != null) {
+                    s1 = mActivePdp.getGatewayAddress();
+                    return s1;
+                } else {
+                    return s1;
+                }
+            } else {
+                Iterator iterator pdpList.iterator();
+                while (iterator.hasNext()) {
+                    GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+                    if (gsmdataconnection.canHandleType(s)) {
+                        s1 = gsmdataconnection.getGatewayAddress();
+                        return s1;
+                    }
+                }
+                return s1;
+            }
+        } else {
+            s1 = getGateway(s);
+            return s1;
+        }
     }
 
     protected String getInterfaceName(String s)
     {
-        if(!mCdmaPhone.eHRPDCapable) goto _L2; else goto _L1
-_L1:
-        if(s != null) goto _L4; else goto _L3
-_L3:
-        if(mActivePdp == null) goto _L6; else goto _L5
-_L5:
-        String s1 = mActivePdp.getInterface();
-_L11:
-        return s1;
-_L4:
-        Iterator iterator = pdpList.iterator();
-_L9:
-        if(!iterator.hasNext()) goto _L6; else goto _L7
-_L7:
-        GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        if(!gsmdataconnection.canHandleType(s)) goto _L9; else goto _L8
-_L8:
-        s1 = gsmdataconnection.getInterface();
-        continue; /* Loop/switch isn't completed */
-_L6:
-        s1 = null;
-        continue; /* Loop/switch isn't completed */
-_L2:
-        s1 = getInterfaceName(s);
-        if(true) goto _L11; else goto _L10
-_L10:
+        String s1 = null;
+        if (mCdmaPhone.eHRPDCapable) {
+            if (s == null) {
+                if (mActivePdp != null) {
+                    s1 = mActivePdp.getInterface();
+                    return s1;
+                }
+                return s1;
+            } else {
+                Iterator iterator pdpList.iterator();
+                while (iterator.hasNext()) {
+                    GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+                    if (gsmdataconnection.canHandleType(s)) {
+                        s1 = gsmdataconnection.getInterface();
+                        return s1;
+                    }
+                }
+                return s1;
+            }
+        } else {
+            s1 = getInterfaceName(s);
+            return s1;
+        }
     }
 
     protected String getIpAddress(String s)
     {
-        if(!mCdmaPhone.eHRPDCapable) goto _L2; else goto _L1
-_L1:
-        if(s != null) goto _L4; else goto _L3
-_L3:
-        if(mActivePdp == null) goto _L6; else goto _L5
-_L5:
-        String s1 = mActivePdp.getIpAddress();
-_L11:
-        return s1;
-_L4:
-        Iterator iterator = pdpList.iterator();
-_L9:
-        if(!iterator.hasNext()) goto _L6; else goto _L7
-_L7:
-        GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        if(!gsmdataconnection.canHandleType(s)) goto _L9; else goto _L8
-_L8:
-        s1 = gsmdataconnection.getIpAddress();
-        continue; /* Loop/switch isn't completed */
-_L6:
-        s1 = null;
-        continue; /* Loop/switch isn't completed */
-_L2:
-        s1 = getIpAddress(s);
-        if(true) goto _L11; else goto _L10
-_L10:
+        String s1 = null;
+        if (mCdmaPhone.eHRPDCapable) {
+            if (s == null) {
+                if (mActivePdp != null) {
+                    s1 = mActivePdp.getIpAddress();
+                    return s1;
+                } else {
+                    return s1;
+                }
+            } else {
+                Iterator iterator = pdpList.iterator();
+                while (iterator.hasNext()) {
+                    GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+                    if (gsmdataconnection.canHandleType(s)) {
+                        s1 = gsmdataconnection.getIpAddress();
+                        return s1;
+                    }
+                }
+                return s1;
+            }
+        } else {
+            s1 = getIpAddress(s);
+            return s1;
+        }
     }
 
     public int getIpAddressType(String s)
@@ -2260,86 +2155,86 @@ _L10:
 
     protected com.android.internal.telephony.DataConnectionTracker.State getRequestedApnState(String s)
     {
-        if(mCdmaPhone.eHRPDCapable) goto _L2; else goto _L1
-_L1:
-        com.android.internal.telephony.DataConnectionTracker.State state = getState();
-_L4:
-        return state;
-_L2:
+        com.android.internal.telephony.DataConnectionTracker.State state;
+        if (mCdmaPhone.eHRPDCapable) {
 label0:
-        {
-            Iterator iterator = pdpList.iterator();
-            GsmDataConnection gsmdataconnection;
-            do
             {
+                Iterator iterator = pdpList.iterator();
+                GsmDataConnection gsmdataconnection;
                 do
                 {
-                    if(!iterator.hasNext())
-                        break label0;
-                    gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-                } while(gsmdataconnection == null || gsmdataconnection.getApn() == null || !gsmdataconnection.getApn().canHandleType(s));
-                if(gsmdataconnection.isActive())
-                {
-                    state = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
-                } else
-                {
-                    if(!gsmdataconnection.isActivating())
-                        continue;
-                    state = com.android.internal.telephony.DataConnectionTracker.State.INITING;
-                }
+                    do
+                    {
+                        if(!iterator.hasNext())
+                            break label0;
+                        gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+                    } while(gsmdataconnection == null || gsmdataconnection.getApn() == null || !gsmdataconnection.getApn().canHandleType(s));
+                    if(gsmdataconnection.isActive())
+                    {
+                        state = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
+                        return state;
+                    } else {
+                        if(!gsmdataconnection.isActivating())
+                            continue;
+                        state = com.android.internal.telephony.DataConnectionTracker.State.INITING;
+                        return state;
+                    }
+                    continue; /* Loop/switch isn't completed */
+                } while(!gsmdataconnection.isDisconnecting());
+                state = com.android.internal.telephony.DataConnectionTracker.State.DISCONNECTING;
+                return state;
                 continue; /* Loop/switch isn't completed */
-            } while(!gsmdataconnection.isDisconnecting());
-            state = com.android.internal.telephony.DataConnectionTracker.State.DISCONNECTING;
-            continue; /* Loop/switch isn't completed */
+            }
+            state = com.android.internal.telephony.DataConnectionTracker.State.IDLE;
+            return state;
+        } else {
+            state = getState();
+            return state;
         }
-        state = com.android.internal.telephony.DataConnectionTracker.State.IDLE;
-        if(true) goto _L4; else goto _L3
-_L3:
     }
 
     public com.android.internal.telephony.DataConnectionTracker.State getState()
     {
-        if(mCdmaPhone.eHRPDCapable) goto _L2; else goto _L1
-_L1:
-        com.android.internal.telephony.DataConnectionTracker.State state = this.state;
-_L4:
-        return state;
-_L2:
-        boolean flag = false;
-        boolean flag1 = false;
-        Iterator iterator = pdpList.iterator();
-        do
-        {
-            if(!iterator.hasNext())
-                break;
-            GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-            if(gsmdataconnection.canHandleType("ims") || gsmdataconnection.canHandleType("admin"))
-                continue;
-            if(gsmdataconnection.isActive())
+        com.android.internal.telephony.DataConnectionTracker.State state;
+        if (mCdmaPhone.eHRPDCapable) {
+            boolean flag = false;
+            boolean flag1 = false;
+            Iterator iterator = pdpList.iterator();
+            do
             {
+                if(!iterator.hasNext())
+                    break;
+                GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+                if(gsmdataconnection.canHandleType("ims") || gsmdataconnection.canHandleType("admin"))
+                    continue;
+                if(gsmdataconnection.isActive())
+                {
+                    state = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
+                    continue; /* Loop/switch isn't completed */
+                }
+                if(gsmdataconnection.isActivating())
+                    flag = true;
+                if(gsmdataconnection.isDisconnecting())
+                    flag1 = true;
+            } while(true);
+            if(flag && flag1)
                 state = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
-                continue; /* Loop/switch isn't completed */
-            }
-            if(gsmdataconnection.isActivating())
-                flag = true;
-            if(gsmdataconnection.isDisconnecting())
-                flag1 = true;
-        } while(true);
-        if(flag && flag1)
-            state = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
-        else
-        if(flag && !flag1)
-            state = com.android.internal.telephony.DataConnectionTracker.State.CONNECTING;
-        else
-        if(!flag && flag1)
-            state = com.android.internal.telephony.DataConnectionTracker.State.DISCONNECTING;
-        else
-        if(!flag && !flag1)
-            state = com.android.internal.telephony.DataConnectionTracker.State.IDLE;
-        else
+            else
+            if(flag && !flag1)
+                state = com.android.internal.telephony.DataConnectionTracker.State.CONNECTING;
+            else
+            if(!flag && flag1)
+                state = com.android.internal.telephony.DataConnectionTracker.State.DISCONNECTING;
+            else
+            if(!flag && !flag1)
+                state = com.android.internal.telephony.DataConnectionTracker.State.IDLE;
+            else
+                state = this.state;
+            return state;
+        } else {
             state = this.state;
-        if(true) goto _L4; else goto _L3
-_L3:
+            return state;
+        }
     }
 
     public void handleMessage(Message message)
@@ -2348,373 +2243,370 @@ _L3:
         int i = message.what;
         String s = stringbuilder.append(i).toString();
         int j = Log.d("eCDMA", s);
-        message.what;
-        JVM INSTR lookupswitch 17: default 188
-    //                   6: 727
-    //                   27: 1307
-    //                   28: 1319
-    //                   29: 722
-    //                   42: 744
-    //                   46: 1224
-    //                   49: 972
-    //                   50: 447
-    //                   51: 706
-    //                   52: 770
-    //                   55: 798
-    //                   56: 827
-    //                   58: 873
-    //                   59: 1161
-    //                   61: 1166
-    //                   63: 204
-    //                   68: 392;
-           goto _L1 _L2 _L3 _L4 _L5 _L6 _L7 _L8 _L9 _L10 _L11 _L12 _L13 _L14 _L15 _L16 _L17 _L18
-_L1:
-        int k = Log.d("eCDMA", "[eCDMADataConnectionTracker] Calling super.handleMessage");
-        handleMessage(message);
-        return;
-_L17:
-        if(!mCdmaPhone.eHRPDCapable) goto _L20; else goto _L19
-_L19:
-        String s1 = mAttachApnType;
-        if(isApnTypeActive(s1)) goto _L22; else goto _L21
-_L21:
-        String s2 = mAttachApnType;
-        if(!isApnTypeActivating(s2)) goto _L23; else goto _L22
-_L22:
-        int l = Log.d("eCDMA", "[eCdmaDataConnectionTracker]HRPD activated, explicit detach eHRPD");
-        explicitDetach("hrpdenabled");
-        return;
-_L23:
-        String s3 = mAttachApnType;
-        if(isApnTypeDisconnecting(s3))
-        {
-            int i1 = Log.d("eCDMA", "[eCdmaDataConnectionTracker] IMS PDN over eHRPD is disconnecting, wait before initiating CDMA Data Call");
-            return;
-        }
-        if(!isAllDataConnectionInactive()) goto _L25; else goto _L24
-_L24:
-        cleanUpConnection(false, "hrpdenabled");
-        onHOCleanupHOAPN();
-        stopNetStatPoll();
-        mCdmaPhone.eHRPDCapable = false;
-        removeMessages(52);
-        removeMessages(68);
-_L20:
-        String s4 = null;
-        if(message.obj instanceof String)
-            s4 = (String)message.obj;
-        boolean flag = onTrySetupData(s4);
-        return;
-_L25:
-        int j1 = Log.d("eCDMA", "[eCdmaDataConnectionTracker] wait for pdn disconnect");
-        Message message1 = obtainMessage(68);
-        boolean flag1 = sendMessageDelayed(message1, 30000L);
-        return;
-_L18:
-        if(!mCdmaPhone.eHRPDCapable)
-        {
-            return;
-        } else
-        {
-            int k1 = Log.d("eCDMA", "[eCdmaDataConnectionTracker] clean up eHRPD PDNs and try 1x/EVDO");
-            cleanUpConnection(false, "hrpdenabled");
-            onHOCleanupHOAPN();
-            stopNetStatPoll();
-            mCdmaPhone.eHRPDCapable = false;
-            boolean flag2 = onTrySetupData("hrpdenabled");
-            return;
-        }
-_L9:
-        com.android.internal.telephony.HandoverTracker.State state = mHandoverTracker.getState();
-        com.android.internal.telephony.HandoverTracker.State state1 = com.android.internal.telephony.HandoverTracker.State.LTE_TO_CDMA;
-        if(state == state1)
-        {
-            log("[Handover]**L2C phase 4 : DCT is receiving params and start triggering");
-            mCdmaPhone.eHRPDCapable = true;
-            ArrayList arraylist = mHandoverTracker.getFields();
-            putApnListForHandover(arraylist);
-            ArrayList arraylist1 = mHandoverTracker.getFields();
-            startHandoverConnection(arraylist1);
-            return;
-        }
-        if(mCdmaPhone.eHRPDCapable) goto _L27; else goto _L26
-_L26:
-        com.android.internal.telephony.DataConnectionTracker.State state2;
-        com.android.internal.telephony.DataConnectionTracker.State state3;
-        state2 = this.state;
-        state3 = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
-        if(state2 == state3) goto _L29; else goto _L28
-_L28:
-        com.android.internal.telephony.DataConnectionTracker.State state4;
-        com.android.internal.telephony.DataConnectionTracker.State state5;
-        state4 = this.state;
-        state5 = com.android.internal.telephony.DataConnectionTracker.State.INITING;
-        if(state4 != state5) goto _L30; else goto _L29
-_L29:
-        int l1 = Log.d("eCDMA", "[eCdmaDataConnectionTracker]eHRPD activated, explicit detach HRPD , setting legacyToEhrpd");
-        onCleanUpConnection(true, "ehrpdsyncdone");
-        return;
-_L30:
-        com.android.internal.telephony.DataConnectionTracker.State state8;
-        com.android.internal.telephony.DataConnectionTracker.State state9;
-        com.android.internal.telephony.DataConnectionTracker.State state6 = this.state;
-        com.android.internal.telephony.DataConnectionTracker.State state7 = com.android.internal.telephony.DataConnectionTracker.State.DISCONNECTING;
-        if(state6 == state7)
-        {
-            int i2 = Log.d("eCDMA", "[eCdmaDataConnectionTracker] HRPD is disconnecting, wait before initiating EHRPD data call");
-            return;
-        }
-        state8 = this.state;
-        state9 = com.android.internal.telephony.DataConnectionTracker.State.FAILED;
-        if(state8 == state9) goto _L32; else goto _L31
-_L31:
-        com.android.internal.telephony.DataConnectionTracker.State state10;
-        com.android.internal.telephony.DataConnectionTracker.State state11;
-        state10 = this.state;
-        state11 = com.android.internal.telephony.DataConnectionTracker.State.IDLE;
-        if(state10 != state11) goto _L33; else goto _L32
-_L32:
-        onCleanUpConnection(true, "ehrpdsyncdone");
-        int j2 = Log.d("eCDMA", "[eCdmaDataConnectionTracker] To make sure cleanup PPP, sent DTR off.");
-_L33:
-        int k2 = Log.d("eCDMA", "[eCdmaDataConnectionTracker] HRPD is not active. Can go ahead with normal operation in eHRPD");
-_L27:
-        removeMessages(68);
-        mCdmaPhone.eHRPDCapable = true;
-        int l2 = Log.d("eCDMA", "[eCDMADataConnectionTracker] EVENT_EHRPD_SYNC_COMPLETED ");
-        mIsEhrpdSyncDone = true;
-        trySetupAllEnabledServices();
-        return;
-_L10:
-        int i3 = Log.d("eCDMA", "[eCDMADataConnectionTracker] EVENT_EHRPD_SYNC_BROKEN ");
-        mIsEhrpdSyncDone = false;
-        return;
-_L5:
-        onApnChanged();
-        return;
-_L2:
-        AsyncResult asyncresult = (AsyncResult)message.obj;
-        onPdpStateChanged(asyncresult, false);
-        return;
-_L6:
-        int j3 = Log.d("eCDMA", "EVENT_IPV6_ADDR_STATUS_CHANGED ");
-        AsyncResult asyncresult1 = (AsyncResult)message.obj;
-        onIpv6AddrStatusChanged(asyncresult1);
-        return;
-_L11:
-        int k3 = message.arg1;
-        cidActive = k3;
-        AsyncResult asyncresult2 = (AsyncResult)message.obj;
-        onDataSetupCompleteEhrpd(asyncresult2);
-        return;
-_L12:
-        log("[Handover]**C2L phase 2 : pass ho params to handovertracker");
-        HandoverTracker handovertracker = mHandoverTracker;
-        ArrayList arraylist2 = getApnListForHandover();
-        boolean flag3 = handovertracker.startHandoverFromLte(arraylist2);
-        return;
-_L13:
-        log("[Handover]**L2C phase 4 : DCT is receiving params and start triggering");
-        mCdmaPhone.eHRPDCapable = true;
-        ArrayList arraylist3 = mHandoverTracker.getFields();
-        putApnListForHandover(arraylist3);
-        ArrayList arraylist4 = mHandoverTracker.getFields();
-        startHandoverConnection(arraylist4);
-        return;
-_L14:
-        int l3 = Log.d("eCDMA", "[eCdmaDataConnectionTracker] USIM Records Loaded");
-        int l4;
-        if(message.obj instanceof AsyncResult)
-        {
-            int i4 = Log.d("eCDMA", "msg obj is instance of SIM records");
-            SIMRecords simrecords = (SIMRecords)((AsyncResult)message.obj).userObj;
-            mSimRecords = simrecords;
-            int j4;
-            int k4;
-            if(mSimRecords == null)
-                j4 = Log.d("eCDMA", "mSimRecords  is null");
-            else
-                k4 = Log.d("eCDMA", "mSimRecords  is not null");
-        } else
-        {
-            l4 = Log.d("eCDMA", "msg obj is not instance of SIM records");
-        }
-        onSimRecordsLoaded();
-        return;
-_L8:
-        int i5 = Log.e("eCDMA", "stoping  InactivityTimer : EVENT_INACTIVITY_TIMER_EXPIRY");
-        AsyncResult asyncresult3 = (AsyncResult)message.obj;
-        String s5 = null;
-        if(asyncresult3.userObj instanceof String)
-            s5 = (String)asyncresult3.userObj;
-        stopInactivityTimer(s5);
-        String s6 = (new StringBuilder()).append("InactivityTimer : disabling ").append(s5).toString();
-        log(s6);
-        if("ims".equals(s5) || "default".equals(s5))
-        {
-            Iterator iterator = pdpList.iterator();
-            do
-            {
-                GsmDataConnection gsmdataconnection;
-                do
-                {
-                    if(!iterator.hasNext())
-                        return;
-                    gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-                } while(!gsmdataconnection.isActive() || !gsmdataconnection.canHandleType(s5));
-                Message message2 = obtainMessage(25, "pdndroppedbyNetwork");
-                gsmdataconnection.disconnect(message2);
-            } while(true);
-        } else
-        {
-            int j5 = apnTypeToId(s5);
-            onEnableApn(j5, 0);
-            return;
-        }
-_L15:
-        trySetupNextData();
-        return;
-_L16:
-        int k5 = Log.d("eCDMA", "[Handover] **L2C Resume Timeout or handover fail");
-        mRetryMgr.resetRetryCount();
-        int l5 = 0;
-        do
-        {
-            int i6 = mRetryEhrpd.length;
-            if(l5 < i6)
-            {
-                mRetryEhrpd[l5].resetRetryCount();
-                l5++;
-            } else
-            {
-                trySetupAllEnabledServices();
+        switch(message.what) {
+            case 6:
+                AsyncResult asyncresult = (AsyncResult)message.obj;
+                onPdpStateChanged(asyncresult, false);
                 return;
-            }
-        } while(true);
-_L7:
-        String s7 = (String)message.obj;
-        boolean flag4;
-        String s8;
-        int j6;
-        if(message.arg1 == 0)
-            flag4 = false;
-        else
-            flag4 = true;
-        s8 = (new StringBuilder()).append("EVENT_DETACH_REQ: reason = ").append(s7).toString();
-        j6 = Log.d("eCDMA", s8);
-        if(mCdmaPhone.eHRPDCapable)
-        {
-            explicitDetach(s7);
-            return;
-        } else
-        {
-            cleanUpConnection(flag4, s7);
-            return;
+            case 27:
+                startNetStatPoll();
+                sentSinceLastRecv = 0L;
+                return;
+            case 28:
+                doRecovery();
+                return;
+            case 29:
+                onApnChanged();
+                return;
+            case 42:
+                int j3 = Log.d("eCDMA", "EVENT_IPV6_ADDR_STATUS_CHANGED ");
+                AsyncResult asyncresult1 = (AsyncResult)message.obj;
+                onIpv6AddrStatusChanged(asyncresult1);
+                return;
+            case 46:
+                String s7 = (String)message.obj;
+                boolean flag4;
+                String s8;
+                int j6;
+                if(message.arg1 == 0)
+                    flag4 = false;
+                else
+                    flag4 = true;
+                s8 = (new StringBuilder()).append("EVENT_DETACH_REQ: reason = ").append(s7).toString();
+                j6 = Log.d("eCDMA", s8);
+                if(mCdmaPhone.eHRPDCapable)
+                {
+                    explicitDetach(s7);
+                    return;
+                } else {
+                    cleanUpConnection(flag4, s7);
+                    return;
+                }
+            case 49:
+                int i5 = Log.e("eCDMA", "stoping  InactivityTimer : EVENT_INACTIVITY_TIMER_EXPIRY");
+                AsyncResult asyncresult3 = (AsyncResult)message.obj;
+                String s5 = null;
+                if(asyncresult3.userObj instanceof String)
+                    s5 = (String)asyncresult3.userObj;
+                stopInactivityTimer(s5);
+                String s6 = (new StringBuilder()).append("InactivityTimer : disabling ").append(s5).toString();
+                log(s6);
+                if("ims".equals(s5) || "default".equals(s5))
+                {
+                    Iterator iterator = pdpList.iterator();
+                    do
+                    {
+                        GsmDataConnection gsmdataconnection;
+                        do
+                        {
+                            if(!iterator.hasNext())
+                                return;
+                            gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+                        } while(!gsmdataconnection.isActive() || !gsmdataconnection.canHandleType(s5));
+                        Message message2 = obtainMessage(25, "pdndroppedbyNetwork");
+                        gsmdataconnection.disconnect(message2);
+                    } while(true);
+                } else
+                {
+                    int j5 = apnTypeToId(s5);
+                    onEnableApn(j5, 0);
+                    return;
+                }
+                trySetupNextData();
+                return;
+            case 50:
+                com.android.internal.telephony.HandoverTracker.State state = mHandoverTracker.getState();
+                com.android.internal.telephony.HandoverTracker.State state1 = com.android.internal.telephony.HandoverTracker.State.LTE_TO_CDMA;
+                if(state == state1) {
+                    log("[Handover]**L2C phase 4 : DCT is receiving params and start triggering");
+                    mCdmaPhone.eHRPDCapable = true;
+                    ArrayList arraylist = mHandoverTracker.getFields();
+                    putApnListForHandover(arraylist);
+                    ArrayList arraylist1 = mHandoverTracker.getFields();
+                    startHandoverConnection(arraylist1);
+                    return;
+                }
+                if (mCdmaPhone.eHRPDCapable) {
+                    removeMessages(68);
+                    mCdmaPhone.eHRPDCapable = true;
+                    int l2 = Log.d("eCDMA", "[eCDMADataConnectionTracker] EVENT_EHRPD_SYNC_COMPLETED ");
+                    mIsEhrpdSyncDone = true;
+                    trySetupAllEnabledServices();
+                    return;
+                } else {
+                    com.android.internal.telephony.DataConnectionTracker.State state2;
+                    com.android.internal.telephony.DataConnectionTracker.State state3;
+                    state2 = this.state;
+                    state3 = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
+                    if (state2 == state3) {
+                        int l1 = Log.d("eCDMA", "[eCdmaDataConnectionTracker]eHRPD activated, explicit detach HRPD , setting legacyToEhrpd");
+                        onCleanUpConnection(true, "ehrpdsyncdone");
+                        return;
+                    } else {
+                        com.android.internal.telephony.DataConnectionTracker.State state4;
+                        com.android.internal.telephony.DataConnectionTracker.State state5;
+                        state4 = this.state;
+                        state5 = com.android.internal.telephony.DataConnectionTracker.State.INITING;
+                        if (state4 != state5) {
+                            com.android.internal.telephony.DataConnectionTracker.State state8;
+                            com.android.internal.telephony.DataConnectionTracker.State state9;
+                            com.android.internal.telephony.DataConnectionTracker.State state6 = this.state;
+                            com.android.internal.telephony.DataConnectionTracker.State state7 = com.android.internal.telephony.DataConnectionTracker.State.DISCONNECTING;
+                            if(state6 == state7) {
+                                int i2 = Log.d("eCDMA", "[eCdmaDataConnectionTracker] HRPD is disconnecting, wait before initiating EHRPD data call");
+                                return;
+                            }
+                            state8 = this.state;
+                            state9 = com.android.internal.telephony.DataConnectionTracker.State.FAILED;
+                            if (state8 == state9) {
+                                onCleanUpConnection(true, "ehrpdsyncdone");
+                                int j2 = Log.d("eCDMA", "[eCdmaDataConnectionTracker] To make sure cleanup PPP, sent DTR off.");
+                                int k2 = Log.d("eCDMA", "[eCdmaDataConnectionTracker] HRPD is not active. Can go ahead with normal operation in eHRPD");
+                                removeMessages(68);
+                                mCdmaPhone.eHRPDCapable = true;
+                                int l2 = Log.d("eCDMA", "[eCDMADataConnectionTracker] EVENT_EHRPD_SYNC_COMPLETED ");
+                                mIsEhrpdSyncDone = true;
+                                trySetupAllEnabledServices();
+                                return;
+                            } else {
+                                com.android.internal.telephony.DataConnectionTracker.State state10;
+                                com.android.internal.telephony.DataConnectionTracker.State state11;
+                                state10 = this.state;
+                                state11 = com.android.internal.telephony.DataConnectionTracker.State.IDLE;
+                                if (state10 != state11) {
+                                    int k2 = Log.d("eCDMA", "[eCdmaDataConnectionTracker] HRPD is not active. Can go ahead with normal operation in eHRPD");
+                                    removeMessages(68);
+                                    mCdmaPhone.eHRPDCapable = true;
+                                    int l2 = Log.d("eCDMA", "[eCDMADataConnectionTracker] EVENT_EHRPD_SYNC_COMPLETED ");
+                                    mIsEhrpdSyncDone = true;
+                                    trySetupAllEnabledServices();
+                                    return;
+                                } else {
+                                    onCleanUpConnection(true, "ehrpdsyncdone");
+                                    int j2 = Log.d("eCDMA", "[eCdmaDataConnectionTracker] To make sure cleanup PPP, sent DTR off.");
+                                    int k2 = Log.d("eCDMA", "[eCdmaDataConnectionTracker] HRPD is not active. Can go ahead with normal operation in eHRPD");
+                                    removeMessages(68);
+                                    mCdmaPhone.eHRPDCapable = true;
+                                    int l2 = Log.d("eCDMA", "[eCDMADataConnectionTracker] EVENT_EHRPD_SYNC_COMPLETED ");
+                                    mIsEhrpdSyncDone = true;
+                                    trySetupAllEnabledServices();
+                                    return;
+                                }
+                            }
+                        } else {
+                            int l1 = Log.d("eCDMA", "[eCdmaDataConnectionTracker]eHRPD activated, explicit detach HRPD , setting legacyToEhrpd");
+                            onCleanUpConnection(true, "ehrpdsyncdone");
+                            return;
+                        }
+                    }
+                }
+                case 51:
+                    int i3 = Log.d("eCDMA", "[eCDMADataConnectionTracker] EVENT_EHRPD_SYNC_BROKEN ");
+                    mIsEhrpdSyncDone = false;
+                    return;
+                case 52:
+                    int k3 = message.arg1;
+                    cidActive = k3;
+                    AsyncResult asyncresult2 = (AsyncResult)message.obj;
+                    onDataSetupCompleteEhrpd(asyncresult2);
+                    return;
+                case 55:
+                    log("[Handover]**C2L phase 2 : pass ho params to handovertracker");
+                    HandoverTracker handovertracker = mHandoverTracker;
+                    ArrayList arraylist2 = getApnListForHandover();
+                    boolean flag3 = handovertracker.startHandoverFromLte(arraylist2);
+                    return;
+                case 56:
+                    log("[Handover]**L2C phase 4 : DCT is receiving params and start triggering");
+                    mCdmaPhone.eHRPDCapable = true;
+                    ArrayList arraylist3 = mHandoverTracker.getFields();
+                    putApnListForHandover(arraylist3);
+                    ArrayList arraylist4 = mHandoverTracker.getFields();
+                    startHandoverConnection(arraylist4);
+                    return;
+                case 58:
+                    int l3 = Log.d("eCDMA", "[eCdmaDataConnectionTracker] USIM Records Loaded");
+                    int l4;
+                    if(message.obj instanceof AsyncResult) {
+                        int i4 = Log.d("eCDMA", "msg obj is instance of SIM records");
+                        SIMRecords simrecords = (SIMRecords)((AsyncResult)message.obj).userObj;
+                        mSimRecords = simrecords;
+                        int j4;
+                        int k4;
+                        if(mSimRecords == null)
+                            j4 = Log.d("eCDMA", "mSimRecords  is null");
+                        else
+                            k4 = Log.d("eCDMA", "mSimRecords  is not null");
+                    } else {
+                        l4 = Log.d("eCDMA", "msg obj is not instance of SIM records");
+                    }
+                    onSimRecordsLoaded();
+                    return;
+                case 59:
+                    trySetupNextData();
+                    return;
+                case 61:
+                    int k5 = Log.d("eCDMA", "[Handover] **L2C Resume Timeout or handover fail");
+                    mRetryMgr.resetRetryCount();
+                    int l5 = 0;
+                    do
+                    {
+                        int i6 = mRetryEhrpd.length;
+                        if(l5 < i6)
+                        {
+                            mRetryEhrpd[l5].resetRetryCount();
+                            l5++;
+                        } else
+                        {
+                            trySetupAllEnabledServices();
+                            return;
+                        }
+                    } while(true);
+                case 63:
+                    if(!mCdmaPhone.eHRPDCapable) {
+                        String s4 = null;
+                        if(message.obj instanceof String)
+                            s4 = (String)message.obj;
+                        boolean flag = onTrySetupData(s4);
+                        return;
+                    } else {
+                        String s1 = mAttachApnType;
+                        if(isApnTypeActive(s1)) {
+                            int l = Log.d("eCDMA", "[eCdmaDataConnectionTracker]HRPD activated, explicit detach eHRPD");
+                            explicitDetach("hrpdenabled");
+                            return;
+                        } else {
+                            String s2 = mAttachApnType;
+                            if(!isApnTypeActivating(s2)) {
+                                String s3 = mAttachApnType;
+                                if(isApnTypeDisconnecting(s3))
+                                {
+                                    int i1 = Log.d("eCDMA", "[eCdmaDataConnectionTracker] IMS PDN over eHRPD is disconnecting, wait before initiating CDMA Data Call");
+                                    return;
+                                }
+                                if(!isAllDataConnectionInactive()) {
+                                    int j1 = Log.d("eCDMA", "[eCdmaDataConnectionTracker] wait for pdn disconnect");
+                                    Message message1 = obtainMessage(68);
+                                    boolean flag1 = sendMessageDelayed(message1, 30000L);
+                                    return;
+                                } else {
+                                    cleanUpConnection(false, "hrpdenabled");
+                                    onHOCleanupHOAPN();
+                                    stopNetStatPoll();
+                                    mCdmaPhone.eHRPDCapable = false;
+                                    removeMessages(52);
+                                    removeMessages(68);
+                                    String s4 = null;
+                                    if(message.obj instanceof String)
+                                        s4 = (String)message.obj;
+                                    boolean flag = onTrySetupData(s4);
+                                    return;
+                                }
+                            } else {
+                                int l = Log.d("eCDMA", "[eCdmaDataConnectionTracker]HRPD activated, explicit detach eHRPD");
+                                explicitDetach("hrpdenabled");
+                                return;
+                            }
+                        }
+                    }
+                case 68:
+                    if(!mCdmaPhone.eHRPDCapable) {
+                        return;
+                    } else {
+                        int k1 = Log.d("eCDMA", "[eCdmaDataConnectionTracker] clean up eHRPD PDNs and try 1x/EVDO");
+                        cleanUpConnection(false, "hrpdenabled");
+                        onHOCleanupHOAPN();
+                        stopNetStatPoll();
+                        mCdmaPhone.eHRPDCapable = false;
+                        boolean flag2 = onTrySetupData("hrpdenabled");
+                        return;
+                    }
+                default:
+                    int k = Log.d("eCDMA", "[eCDMADataConnectionTracker] Calling super.handleMessage");
+                    handleMessage(message);
+                    return;
         }
-_L3:
-        startNetStatPoll();
-        sentSinceLastRecv = 0L;
-        return;
-_L4:
-        doRecovery();
-        return;
     }
 
     public boolean isAllDataConnectionInactive()
     {
-        if(!mCdmaPhone.eHRPDCapable) goto _L2; else goto _L1
-_L1:
-        Iterator iterator = pdpList.iterator();
-_L6:
-        if(!iterator.hasNext()) goto _L4; else goto _L3
-_L3:
-        if(((GsmDataConnection)(DataConnection)iterator.next()).isInactive()) goto _L6; else goto _L5
-_L5:
-        boolean flag = false;
-_L8:
-        return flag;
-_L4:
-        flag = true;
-        continue; /* Loop/switch isn't completed */
-_L2:
-        flag = isAllDataConnectionInactive();
-        if(true) goto _L8; else goto _L7
-_L7:
+        boolean flag;
+        if (mCdmaPhone.eHRPDCapable) {
+            Iterator iterator = pdpList.iterator();
+            while (iterator.hasNext()) {
+                if (!((GsmDataConnection)(DataConnection)iterator.next()).isInactive()) {
+                    flag = false;
+                    return flag;
+                }
+            }
+            flag = true;
+            return flag;
+        } else {
+            flag = isAllDataConnectionInactive();
+            return flag;
+        }
     }
 
     public boolean isAnyApnTypeActive()
     {
-        if(!mCdmaPhone.eHRPDCapable) goto _L2; else goto _L1
-_L1:
-        Iterator iterator = pdpList.iterator();
-_L6:
-        if(!iterator.hasNext()) goto _L4; else goto _L3
-_L3:
-        GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        if(!gsmdataconnection.isActive()) goto _L6; else goto _L5
-_L5:
         boolean flag;
-        StringBuilder stringbuilder = (new StringBuilder()).append("isAnyApnTypeActive(): active pdp found: ");
-        ApnSetting apnsetting = gsmdataconnection.getApn();
-        String s = stringbuilder.append(apnsetting).toString();
-        int i = Log.d("eCDMA", s);
-        flag = true;
-_L8:
-        return flag;
-_L4:
-        flag = false;
-        continue; /* Loop/switch isn't completed */
-_L2:
-        flag = isAnyApnTypeActive();
-        if(true) goto _L8; else goto _L7
-_L7:
+        if (mCdmaPhone.eHRPDCapable) {
+            Iterator iterator = pdpList.iterator();
+            while (iterator.hasNext()) {
+                GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+                if (gsmdataconnection.isActive()) {
+                    StringBuilder stringbuilder = (new StringBuilder()).append("isAnyApnTypeActive(): active pdp found: ");
+                    ApnSetting apnsetting = gsmdataconnection.getApn();
+                    String s = stringbuilder.append(apnsetting).toString();
+                    int i = Log.d("eCDMA", s);
+                    flag = true;
+                    return flag;
+                }
+            }
+            flag = false;
+            return flag;
+        } else {
+            flag = isAnyApnTypeActive();
+            return flag;
+        }
     }
 
     public boolean isApnTypeActive(String s)
     {
-        if(!mCdmaPhone.eHRPDCapable) goto _L2; else goto _L1
-_L1:
-        Iterator iterator = pdpList.iterator();
-_L6:
-        if(!iterator.hasNext()) goto _L4; else goto _L3
-_L3:
-        GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        if(!gsmdataconnection.canHandleType(s) || !gsmdataconnection.isActive()) goto _L6; else goto _L5
-_L5:
-        boolean flag = true;
-_L8:
-        return flag;
-_L4:
-        flag = false;
-        continue; /* Loop/switch isn't completed */
-_L2:
-        flag = isApnTypeActive(s);
-        if(true) goto _L8; else goto _L7
-_L7:
+        boolean flag;
+        if (mCdmaPhone.eHRPDCapable) {
+            Iterator iterator = pdpList.iterator();
+            while (iterator.hasNext()) {
+                GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+                if (gsmdataconnection.canHandleType(s) || gsmdataconnection.isActive()) {
+                    flag = true;
+                    return flag;
+                }
+            }
+            flag = false;
+            return flag;
+        } else {
+            flag = isApnTypeActive(s);
+            return flag;
+        }
     }
 
     protected boolean isApnTypeAvailable(String s)
     {
-        if(!mCdmaPhone.eHRPDCapable) goto _L2; else goto _L1
-_L1:
-        if(allApns == null) goto _L4; else goto _L3
-_L3:
-        Iterator iterator = allApns.iterator();
-_L7:
-        if(!iterator.hasNext()) goto _L4; else goto _L5
-_L5:
-        if(!((ApnSetting)iterator.next()).canHandleType(s)) goto _L7; else goto _L6
-_L6:
-        boolean flag = true;
-_L9:
-        return flag;
-_L4:
-        flag = false;
-        continue; /* Loop/switch isn't completed */
-_L2:
-        flag = isApnTypeAvailable(s);
-        if(true) goto _L9; else goto _L8
-_L8:
+        if (mCdmaPhone.eHRPDCapable) {
+            if (allApns != null) {
+                Iterator iterator = allApns.iterator();
+                while (iterator.hasNext()) {
+                    if (((ApnSetting)iterator.next().canHandleType(s))
+                        return true;
+                }
+                return false;
+            } else {
+                return false;
+            }
+        } else {
+            return isAnyApnTypeActive(s);
+        }
     }
 
     protected boolean isDataAllowed()
@@ -2953,9 +2845,9 @@ label0:
                 Object obj1 = waitingApns.remove(0);
             }
             if(!waitingApns.isEmpty())
-                break MISSING_BLOCK_LABEL_945;
+                break;
             if(mActiveApn == null || mCdmaPhone.mSST.getCurrentEhrpdDataConnectionState() != 0)
-                break MISSING_BLOCK_LABEL_885;
+                break;
             String s8 = mAttachApnType;
             if(!isApnTypeActive(s8))
             {
@@ -2969,7 +2861,6 @@ label0:
         }
         notifyNoData(failcause);
         phone.notifyDataConnection("apnFailed");
-_L1:
         if(mActivePdp != null)
             mActivePdp.resetSynchronously();
         String s11 = mCurrentRequestedApnType;
@@ -2993,7 +2884,6 @@ _L1:
         {
             log("PDN Connection failed: Doing Nothing");
         }
-          goto _L1
         com.android.internal.telephony.DataConnectionTracker.State state = com.android.internal.telephony.DataConnectionTracker.State.SCANNING;
         setState(state);
         Message message1 = obtainMessage(5, s);
@@ -3286,92 +3176,76 @@ _L1:
         String s2 = stringbuilder2.append(flag1).toString();
         log(s2);
         if(!mCdmaPhone.eHRPDCapable)
-            break MISSING_BLOCK_LABEL_611;
-        if(j != 1) goto _L2; else goto _L1
-_L1:
-        if(dataEnabled[i] == null)
-        {
-            dataEnabled[i] = true;
-            int l = enabledCount + 1;
-            enabledCount = l;
-        }
-        String s3 = apnIdToType(i);
-        if(!isApnTypeActive(s3))
-        {
-            mRequestedApnType = s3;
-            onEnableNewApn();
-        }
-_L4:
-        this;
-        JVM INSTR monitorexit ;
-        return;
-_L2:
-        if(!mCdmaPhone.eHRPDCapable || dataEnabled[i] == null) goto _L4; else goto _L3
-_L3:
-        int j1;
-        Iterator iterator;
-        dataEnabled[i] = false;
-        int i1 = enabledCount - 1;
-        enabledCount = i1;
-        String s4 = apnIdToType(i);
-        removeFromPendingRequestedApns(s4);
-        j1 = 0;
-        iterator = pdpList.iterator();
-_L11:
-        if(!iterator.hasNext()) goto _L4; else goto _L5
-_L5:
-        GsmDataConnection gsmdataconnection;
-        boolean flag3;
-        int k1;
-        gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        String s5 = apnIdToType(i);
-        boolean flag2 = gsmdataconnection.canHandleType(s5);
-        StringBuilder stringbuilder3 = (new StringBuilder()).append("idx ").append(j1).append(": ");
-        String s6 = gsmdataconnection.getStateAsString();
-        StringBuilder stringbuilder4 = stringbuilder3.append(s6).append(", apn(");
-        ApnSetting apnsetting = gsmdataconnection.getApn();
-        String s7 = stringbuilder4.append(apnsetting).append("), ").append("canHandle(").append(flag2).append(")").toString();
-        log(s7);
-        if(gsmdataconnection.isInactive() || !flag2)
-            break MISSING_BLOCK_LABEL_573;
-        flag3 = false;
-        k1 = 0;
-_L12:
-        if(k1 >= 8) goto _L7; else goto _L6
-_L6:
-        if(i == k1) goto _L9; else goto _L8
-_L8:
-        String s8 = apnIdToType(k1);
-        if(!gsmdataconnection.canHandleType(s8) || dataEnabled[k1] == null) goto _L9; else goto _L10
-_L10:
-        log("Apn used by other connection");
-        flag3 = true;
-_L7:
-        if(!flag3)
-            if(gsmdataconnection.isDisconnecting())
-            {
-                log("Already in disconnecting state");
-            } else
-            {
-                String s9 = (new StringBuilder()).append("Disconnect pdp(").append(j1).append(")").toString();
-                log(s9);
-                Message message = obtainMessage(25, "apnDisabled");
-                gsmdataconnection.disconnect(3, message);
+            return;
+        if (j == 1) {
+            if(dataEnabled[i] == null) {
+                dataEnabled[i] = true;
+                int l = enabledCount + 1;
+                enabledCount = l;
             }
-_L13:
-        j1++;
-          goto _L11
-_L9:
-        k1++;
-          goto _L12
-        Exception exception;
-        exception;
-        throw exception;
-        String s10 = (new StringBuilder()).append("idx ").append(j1).append(" pass!!").toString();
-        log(s10);
-          goto _L13
-        onEnableApn(i, j);
-          goto _L4
+            String s3 = apnIdToType(i);
+            if(!isApnTypeActive(s3)) {
+                mRequestedApnType = s3;
+                onEnableNewApn();
+            }
+            return;
+        } else {
+            if(mCdmaPhone.eHRPDCapable || dataEnabled[i] != null) {
+                int j1;
+                Iterator iterator;
+                dataEnabled[i] = false;
+                int i1 = enabledCount - 1;
+                enabledCount = i1;
+                String s4 = apnIdToType(i);
+                removeFromPendingRequestedApns(s4);
+                j1 = 0;
+                iterator = pdpList.iterator();
+                while (iterator.hasNext()) {
+                    GsmDataConnection gsmdataconnection;
+                    boolean flag3;
+                    int k1;
+                    gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+                    String s5 = apnIdToType(i);
+                    boolean flag2 = gsmdataconnection.canHandleType(s5);
+                    StringBuilder stringbuilder3 = (new StringBuilder()).append("idx ").append(j1).append(": ");
+                    String s6 = gsmdataconnection.getStateAsString();
+                    StringBuilder stringbuilder4 = stringbuilder3.append(s6).append(", apn(");
+                    ApnSetting apnsetting = gsmdataconnection.getApn();
+                    String s7 = stringbuilder4.append(apnsetting).append("), ").append("canHandle(").append(flag2).append(")").toString();
+                    log(s7);
+                    if(gsmdataconnection.isInactive() || !flag2)
+                        return;
+                    flag3 = false;
+                    k1 = 0;
+                    while (k1 < 8) {
+                        if (i != k1) {
+                            String s8 = apnIdToType(k1);
+                            if(gsmdataconnection.canHandleType(s8) || dataEnabled[k1] != null) {
+                                log("Apn used by other connection");
+                                flag3 = true;
+                                return;
+                            } else {
+                                k1++;
+                            }
+                        }
+                    }
+                    if(!flag3) {
+                        if(gsmdataconnection.isDisconnecting()) {
+                            log("Already in disconnecting state");
+                        } else {
+                            String s9 = (new StringBuilder()).append("Disconnect pdp(").append(j1).append(")").toString();
+                            log(s9);
+                            Message message = obtainMessage(25, "apnDisabled");
+                            gsmdataconnection.disconnect(3, message);
+                        }
+                    }
+                    j1++;
+                }
+                return;
+            } else {
+                return;
+            }
+        }
     }
 
     protected void onEnableNewApn()
@@ -3668,37 +3542,22 @@ label3:
 
     protected void onIpv6AddrStatusChangedIpv6Ipv4(AsyncResult asyncresult, GsmDataConnection gsmdataconnection)
     {
-        gsmdataconnection;
-        JVM INSTR monitorenter ;
-        if(gsmdataconnection != null)
-            break MISSING_BLOCK_LABEL_18;
-        int i = Log.d("eCDMA", "Current bearer is null");
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
-        return;
-        if(gsmdataconnection.getApn() != null)
-            break MISSING_BLOCK_LABEL_45;
-        int j = Log.d("eCDMA", "Current bearer apn is null");
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
-        return;
-        Exception exception;
-        exception;
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
-        throw exception;
-        if(gsmdataconnection.isActive())
-            break MISSING_BLOCK_LABEL_65;
-        int k = Log.d("eCDMA", "Current bearer is not active");
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
-        return;
+        if(gsmdataconnection == null) {
+            int i = Log.d("eCDMA", "Current bearer is null");
+            return;
+        }
+        if(gsmdataconnection.getApn() == null) {
+            int j = Log.d("eCDMA", "Current bearer apn is null");
+            return;
+        }
+        if(!gsmdataconnection.isActive()) {
+            int k = Log.d("eCDMA", "Current bearer is not active");
+            return;
+        }
         int l;
         l = gsmdataconnection.isipv4configured;
-        if(l == 1)
-        {
-            if(gsmdataconnection != null)
-            {
+        if(l == 1) {
+            if(gsmdataconnection != null) {
                 mActivePdp = gsmdataconnection;
                 ApnSetting apnsetting = gsmdataconnection.getApn();
                 mActiveApn = apnsetting;
@@ -3712,15 +3571,11 @@ label3:
             String s2 = gsmdataconnection.getInterfaceName();
             startInactivityTimer(i1, s1, s2, gsmdataconnection);
         }
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
         if(l != 1)
             return;
-        if(isOnDemandEnable)
-        {
+        if(isOnDemandEnable) {
             return;
-        } else
-        {
+        } else {
             trySetupAllEnabledServices();
             return;
         }
@@ -3731,35 +3586,22 @@ label3:
         log("onIpv6AddrStatusChangedIpv6Only");
         gsmdataconnection;
         JVM INSTR monitorenter ;
-        if(gsmdataconnection != null)
-            break MISSING_BLOCK_LABEL_25;
-        int i = Log.d("eCDMA", "Current bearer is null");
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
-        return;
-        if(gsmdataconnection.getApn() != null)
-            break MISSING_BLOCK_LABEL_52;
-        int j = Log.d("eCDMA", "Current bearer apn is null");
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
-        return;
-        Exception exception;
-        exception;
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
-        throw exception;
-        if(gsmdataconnection.isActive())
-            break MISSING_BLOCK_LABEL_72;
-        int k = Log.d("eCDMA", "Current bearer is not active");
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
-        return;
+        if(gsmdataconnection == null) {
+            int i = Log.d("eCDMA", "Current bearer is null");
+            return;
+        }
+        if(gsmdataconnection.getApn() == null) {
+            int j = Log.d("eCDMA", "Current bearer apn is null");
+            return;
+        }
+        if(!gsmdataconnection.isActive()) {
+            int k = Log.d("eCDMA", "Current bearer is not active");
+            return;
+        }
         int l;
         l = gsmdataconnection.isipv4configured;
-        if(l == 1)
-        {
-            if(gsmdataconnection != null)
-            {
+        if(l == 1) {
+            if(gsmdataconnection != null) {
                 mActivePdp = gsmdataconnection;
                 ApnSetting apnsetting = gsmdataconnection.getApn();
                 mActiveApn = apnsetting;
@@ -3773,15 +3615,11 @@ label3:
             String s2 = gsmdataconnection.getInterfaceName();
             startInactivityTimer(i1, s1, s2, gsmdataconnection);
         }
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
         if(l != 1)
             return;
-        if(isOnDemandEnable)
-        {
+        if(isOnDemandEnable) {
             return;
-        } else
-        {
+        } else {
             trySetupAllEnabledServices();
             return;
         }
@@ -3795,24 +3633,20 @@ label3:
 
     protected void onPdpStateChanged(AsyncResult asyncresult, boolean flag)
     {
-        if(mCdmaPhone.eHRPDCapable)
-        {
+        if(mCdmaPhone.eHRPDCapable) {
             ArrayList arraylist = (ArrayList)(ArrayList)asyncresult.result;
             if(asyncresult.exception != null)
                 return;
             if(!isAnyApnTypeActive())
                 return;
-            if(pdpStatesDormant(arraylist))
-            {
+            if(pdpStatesDormant(arraylist)) {
                 int i = Log.d("eCDMA", "onPdpStateChanged: This is a Dormant Mode Status Notification.");
                 return;
             }
             Iterator iterator = pdpList.iterator();
-            do
-            {
+            do {
                 GsmDataConnection gsmdataconnection;
-                do
-                {
+                do {
                     if(!iterator.hasNext())
                         return;
                     gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
@@ -3822,23 +3656,21 @@ label3:
                 ApnSetting apnsetting = gsmdataconnection.getApn();
                 String s = stringbuilder.append(apnsetting).append("cid:").append(j).toString();
                 int k = Log.d("eCDMA", s);
-                if(!pdpStatesHasCID(arraylist, j))
-                {
+                if(!pdpStatesHasCID(arraylist, j)) {
                     log("PDP connection has dropped. Reconnecting");
                     writeEventLogCdmaDataDrop();
-                } else
-                if(!pdpStatesHasActiveCID(arraylist, j))
-                    if(!flag)
-                    {
-                        flag = true;
-                    } else
-                    {
-                        log("PDP connection has dropped (active=false case).  Reconnecting");
-                        writeEventLogCdmaDataDrop();
+                } else {
+                    if(!pdpStatesHasActiveCID(arraylist, j)) {
+                        if(!flag) {
+                            flag = true;
+                        } else {
+                            log("PDP connection has dropped (active=false case).  Reconnecting");
+                            writeEventLogCdmaDataDrop();
+                        }
                     }
+                }
             } while(true);
-        } else
-        {
+        } else {
             onDataStateChanged(asyncresult);
             return;
         }
@@ -3858,14 +3690,11 @@ label3:
         log("Overriding onVoiceCallEnded() in eCDMADCT");
         com.android.internal.telephony.DataConnectionTracker.State state = getState();
         com.android.internal.telephony.DataConnectionTracker.State state1 = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
-        if(state == state1)
-        {
-            if(!mCdmaPhone.mSST.isConcurrentVoiceAndData())
-            {
+        if(state == state1) {
+            if(!mCdmaPhone.mSST.isConcurrentVoiceAndData()) {
                 startNetStatPoll();
                 phone.notifyDataConnection("2GVoiceCallEnded");
-            } else
-            {
+            } else {
                 resetPollStats();
             }
             trySetupAllEnabledServices();
@@ -3873,15 +3702,12 @@ label3:
         }
         mRetryMgr.resetRetryCount();
         int i = 0;
-        do
-        {
+        do {
             int j = mRetryEhrpd.length;
-            if(i < j)
-            {
+            if(i < j) {
                 mRetryEhrpd[i].resetRetryCount();
                 i++;
-            } else
-            {
+            } else {
                 trySetupAllEnabledServices();
                 return;
             }
@@ -3893,8 +3719,7 @@ label3:
         log("Overriding onVoiceCallStarted() in eCDMADCT");
         com.android.internal.telephony.DataConnectionTracker.State state = getState();
         com.android.internal.telephony.DataConnectionTracker.State state1 = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
-        if(state == state1 && !mCdmaPhone.mSST.isConcurrentVoiceAndData())
-        {
+        if(state == state1 && !mCdmaPhone.mSST.isConcurrentVoiceAndData()) {
             stopNetStatPoll();
             phone.notifyDataConnection("2GVoiceCallStarted");
         }
@@ -3905,28 +3730,24 @@ label3:
     public void putApnListForHandover(ArrayList arraylist)
     {
         int i = Log.d("eCDMA", "[HANDOVER] putApnListForHandover");
-        if(arraylist == null)
-        {
+        if(arraylist == null) {
             int j = Log.d("eCDMA", "[HANDOVER] Handover APN List is null, can't putApnListForHandover we proceed with initial attach");
             return;
         }
-        if(allApns == null)
-        {
+        if(allApns == null) {
             int k = Log.d("eCDMA", "[HANDOVER] allApn List is null, can't putApnListForHandover");
             return;
         }
         int l = Log.d("eCDMA", "[Handover] **L2C cleanup AllApns handover info before copying Handover Information");
         onHOCleanupHOAPN();
         Iterator iterator = arraylist.iterator();
-        do
-        {
+        do {
             if(!iterator.hasNext())
                 return;
             ApnSetting apnsetting = (ApnSetting)iterator.next();
             boolean flag = false;
             Iterator iterator1 = allApns.iterator();
-            do
-            {
+            do {
                 if(!iterator1.hasNext())
                     break;
                 ApnSetting apnsetting1 = (ApnSetting)iterator1.next();
@@ -3955,7 +3776,7 @@ label3:
         com.android.internal.telephony.DataConnectionTracker.State state = this.state;
         com.android.internal.telephony.DataConnectionTracker.State state1 = com.android.internal.telephony.DataConnectionTracker.State.FAILED;
         if(state != state1 || !mCdmaPhone.eHRPDCapable)
-            break MISSING_BLOCK_LABEL_555;
+            return;
         if(s1 == null)
         {
             int i = Log.d("eCDMA", " reconnectAfterFail returning since type is null");
@@ -3964,19 +3785,16 @@ label3:
         RetryManager retrymanager = null;
         int j = 0;
 label0:
-        do
-        {
+        do {
 label1:
             {
                 int k = mRetryEhrpd.length;
-                if(j < k)
-                {
+                if(j < k) {
                     if(!mRetryEhrpd[j].getApnType().equals(s1))
                         break label1;
                     retrymanager = mRetryEhrpd[j];
                 }
-                if(retrymanager == null)
-                {
+                if(retrymanager == null) {
                     phone.notifyDataConnection("apnFailed");
                     int l = apnTypeToId(s1);
                     onEnableApn(l, 0);
@@ -4103,135 +3921,127 @@ label2:
 
     protected boolean setupData(String s)
     {
-        if(!mCdmaPhone.eHRPDCapable) goto _L2; else goto _L1
-_L1:
-        ApnSetting apnsetting = getNextApn();
-        if(apnsetting != null) goto _L4; else goto _L3
-_L3:
         boolean flag = false;
-_L10:
-        return flag;
-_L4:
-        GsmDataConnection gsmdataconnection;
-        Message message;
-        gsmdataconnection = findFreePdp();
-        if(gsmdataconnection == null)
-        {
-            log("setupData: No free GsmDataConnection found!");
-            flag = false;
-            continue; /* Loop/switch isn't completed */
-        }
-        StringBuilder stringbuilder;
-        boolean flag1;
-        StringBuilder stringbuilder1;
-        boolean flag2;
-        String s4;
-        int j1;
-        int i2;
-        com.android.internal.telephony.DataConnectionTracker.State state;
-        int j2;
-        if(false)
-            if(mSimRecords.getACLStatus())
-            {
-                int i = Log.d("eCDMA", "getACLStatus() is true");
-                if(mSimRecords == null)
+        if (mCdmaPhone.eHRPDCapable) {
+            ApnSetting apnsetting = getNextApn();
+            if (apnsetting == null) {
+                return flag;
+            } else {
+                GsmDataConnection gsmdataconnection;
+                Message message;
+                gsmdataconnection = findFreePdp();
+                if(gsmdataconnection == null)
                 {
+                    log("setupData: No free GsmDataConnection found!");
                     flag = false;
-                    continue; /* Loop/switch isn't completed */
+                    return flag; /* Loop/switch isn't completed */
                 }
-                String s1 = apnsetting.apn;
-                int j = Log.d("eCDMA", s1);
-                SIMRecords simrecords = mSimRecords;
-                String s2 = apnsetting.apn;
-                if(!simrecords.verifyACL(s2))
-                {
-                    int k = Log.d("eCDMA", "verifyACL is false");
-                    String s3 = apnsetting.types[0];
-                    if("admin".equals(s3))
-                    {
-                        int l = Log.d("eCDMA", "ADMIN APN requested and verifyACL is false. Calling explicitDetach()");
-                        explicitDetach(null);
+                StringBuilder stringbuilder;
+                boolean flag1;
+                StringBuilder stringbuilder1;
+                boolean flag2;
+                String s4;
+                int j1;
+                int i2;
+                com.android.internal.telephony.DataConnectionTracker.State state;
+                int j2;
+                if(false) {
+                    if(mSimRecords.getACLStatus()) {
+                        int i = Log.d("eCDMA", "getACLStatus() is true");
+                        if(mSimRecords == null)
+                        {
+                            flag = false;
+                            return flag; /* Loop/switch isn't completed */
+                        }
+                        String s1 = apnsetting.apn;
+                        int j = Log.d("eCDMA", s1);
+                        SIMRecords simrecords = mSimRecords;
+                        String s2 = apnsetting.apn;
+                        if(!simrecords.verifyACL(s2)) {
+                            int k = Log.d("eCDMA", "verifyACL is false");
+                            String s3 = apnsetting.types[0];
+                            if("admin".equals(s3))
+                            {
+                                int l = Log.d("eCDMA", "ADMIN APN requested and verifyACL is false. Calling explicitDetach()");
+                                explicitDetach(null);
+                            }
+                            flag = false;
+                            continue; /* Loop/switch isn't completed */
+                        }
+                        int i1 = Log.d("eCDMA", "verifyACL is true");
+                    } else {
+                        j2 = Log.d("eCDMA", "IsACLEnabled() is false");
                     }
-                    flag = false;
-                    continue; /* Loop/switch isn't completed */
                 }
-                int i1 = Log.d("eCDMA", "verifyACL is true");
-            } else
-            {
-                j2 = Log.d("eCDMA", "IsACLEnabled() is false");
+                mActiveApn = apnsetting;
+                mActivePdp = gsmdataconnection;
+                message = obtainMessage();
+                message.what = 52;
+                message.obj = s;
+                stringbuilder = (new StringBuilder()).append("[eCDMADataConnectionTracker]: mIsImsEnabled = ");
+                flag1 = mIsImsEnabled;
+                stringbuilder1 = stringbuilder.append(flag1).append("mIsAdminEnabled = ");
+                flag2 = mIsAdminEnabled;
+                s4 = stringbuilder1.append(flag2).toString();
+                j1 = Log.d("eCDMA", s4);
+                if(apnsetting.ipv6 != null || apnsetting.ipv4 != null)
+                {
+                    gsmdataconnection.resetHandoverIpInfo();
+                    StringBuilder stringbuilder2 = (new StringBuilder()).append("[Handover] **L2C IPv6:");
+                    String s5 = apnsetting.ipv6;
+                    StringBuilder stringbuilder3 = stringbuilder2.append(s5).append(" IPv4:");
+                    String s6 = apnsetting.ipv4;
+                    String s7 = stringbuilder3.append(s6).toString();
+                    int k1 = Log.d("eCDMA", s7);
+                    String s8 = apnsetting.ipv6;
+                    String s9 = apnsetting.ipv4;
+                    gsmdataconnection.setHandoverIpInfo(s8, s9);
+                    int l1 = GsmDataConnection.CONN_TYPE_HANDOVER;
+                    gsmdataconnection.setConnType(l1);
+                } else
+                {
+                    gsmdataconnection.resetHandoverIpInfo();
+                    int k2 = GsmDataConnection.CONN_TYPE_INITIAL;
+                    gsmdataconnection.setConnType(k2);
+                    int l2 = Log.d("eCDMA", "[eCDMADataConnectionTracker] Initial Connect ");
+                }
+                if(isEhrpdAttached()) {
+                    i2 = Log.d("eCDMA", "[eCDMADataConnectionTracker] connect called ");
+                    gsmdataconnection.connect(message, apnsetting, 3, false);
+                    state = com.android.internal.telephony.DataConnectionTracker.State.INITING;
+                    setState(state);
+                    if(apnsetting.ipv4 == null && apnsetting.ipv6 == null)
+                        phone.notifyDataConnection(s);
+                    flag = true;
+                    return flag; /* Loop/switch isn't completed */
+                } else {
+                    if(!mIsImsEnabled || !mIsAdminEnabled)
+                        break; /* Loop/switch isn't completed */
+                    int i3 = Log.d("eCDMA", "[eCDMADataConnectionTracker] attach called ");
+                    gsmdataconnection.connect(message, apnsetting, 3, true);
+                    if(true) goto _L8; else goto _L7
+                    flag = false;
+                    return flag; /* Loop/switch isn't completed */
+                }
             }
-        mActiveApn = apnsetting;
-        mActivePdp = gsmdataconnection;
-        message = obtainMessage();
-        message.what = 52;
-        message.obj = s;
-        stringbuilder = (new StringBuilder()).append("[eCDMADataConnectionTracker]: mIsImsEnabled = ");
-        flag1 = mIsImsEnabled;
-        stringbuilder1 = stringbuilder.append(flag1).append("mIsAdminEnabled = ");
-        flag2 = mIsAdminEnabled;
-        s4 = stringbuilder1.append(flag2).toString();
-        j1 = Log.d("eCDMA", s4);
-        if(apnsetting.ipv6 != null || apnsetting.ipv4 != null)
-        {
-            gsmdataconnection.resetHandoverIpInfo();
-            StringBuilder stringbuilder2 = (new StringBuilder()).append("[Handover] **L2C IPv6:");
-            String s5 = apnsetting.ipv6;
-            StringBuilder stringbuilder3 = stringbuilder2.append(s5).append(" IPv4:");
-            String s6 = apnsetting.ipv4;
-            String s7 = stringbuilder3.append(s6).toString();
-            int k1 = Log.d("eCDMA", s7);
-            String s8 = apnsetting.ipv6;
-            String s9 = apnsetting.ipv4;
-            gsmdataconnection.setHandoverIpInfo(s8, s9);
-            int l1 = GsmDataConnection.CONN_TYPE_HANDOVER;
-            gsmdataconnection.setConnType(l1);
-        } else
-        {
-            gsmdataconnection.resetHandoverIpInfo();
-            int k2 = GsmDataConnection.CONN_TYPE_INITIAL;
-            gsmdataconnection.setConnType(k2);
-            int l2 = Log.d("eCDMA", "[eCDMADataConnectionTracker] Initial Connect ");
+        } else {
+            flag = setupData(s);
+            return flag;
         }
-        if(!isEhrpdAttached()) goto _L6; else goto _L5
-_L5:
-        i2 = Log.d("eCDMA", "[eCDMADataConnectionTracker] connect called ");
-        gsmdataconnection.connect(message, apnsetting, 3, false);
-_L8:
-        state = com.android.internal.telephony.DataConnectionTracker.State.INITING;
-        setState(state);
-        if(apnsetting.ipv4 == null && apnsetting.ipv6 == null)
-            phone.notifyDataConnection(s);
-        flag = true;
-        continue; /* Loop/switch isn't completed */
-_L6:
-        if(!mIsImsEnabled || !mIsAdminEnabled)
-            break; /* Loop/switch isn't completed */
-        int i3 = Log.d("eCDMA", "[eCDMADataConnectionTracker] attach called ");
-        gsmdataconnection.connect(message, apnsetting, 3, true);
-        if(true) goto _L8; else goto _L7
-_L7:
-        flag = false;
-        continue; /* Loop/switch isn't completed */
-_L2:
-        flag = setupData(s);
-        if(true) goto _L10; else goto _L9
-_L9:
     }
 
     protected boolean shouldPostNotification(com.android.internal.telephony.DataConnection.FailCause failcause)
     {
-        if(false) goto _L2; else goto _L1
-_L1:
-        com.android.internal.telephony.DataConnection.FailCause failcause1 = com.android.internal.telephony.DataConnection.FailCause.UNKNOWN;
-        if(failcause == failcause1) goto _L2; else goto _L3
-_L3:
-        boolean flag = true;
-_L5:
-        return flag;
-_L2:
-        flag = false;
-        if(true) goto _L5; else goto _L4
-_L4:
+        if (false) {
+            return false;
+        } else {
+            com.android.internal.telephony.DataConnection.FailCause failcause1 = com.android.internal.telephony.DataConnection.FailCause.UNKNOWN;
+            if(failcause == failcause1) {
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
 
     public void startHandoverConnection(ArrayList arraylist)
@@ -4405,205 +4215,195 @@ _L4:
 
     protected boolean trySetupData(String s)
     {
-        if(!mCdmaPhone.eHRPDCapable) goto _L2; else goto _L1
-_L1:
-        boolean flag;
-        StringBuilder stringbuilder = (new StringBuilder()).append("***trySetupData due to ");
-        String s1;
-        StringBuilder stringbuilder1;
-        String s2;
-        String s3;
-        com.android.internal.telephony.DataConnectionTracker.State state;
-        int i;
-        if(s == null)
-            s1 = "(unspecified)";
-        else
-            s1 = s;
-        stringbuilder1 = stringbuilder.append(s1).append(", mCurrReqApnType(");
-        s2 = mCurrentRequestedApnType;
-        s3 = stringbuilder1.append(s2).append(")").toString();
-        log(s3);
-        if(phone.getSimulatedRadioControl() == null) goto _L4; else goto _L3
-_L3:
-        state = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
-        setState(state);
-        phone.notifyDataConnection(s);
-        i = Log.i("eCDMA", "(fix?) We're on the simulator; assuming data is connected");
-        flag = true;
-_L6:
-        return flag;
-_L4:
-        if(!mCurrentRequestedApnType.equals("ims") && !mImsTestMode && !isApnTypeActive("ims"))
-        {
-            StringBuilder stringbuilder2 = (new StringBuilder()).append("eCdmaDCT: Non-Ims PDN should be rejected if IMS is not up mCurrentRequestedApnType:");
-            String s4 = mCurrentRequestedApnType;
-            StringBuilder stringbuilder3 = stringbuilder2.append(s4).append("mImsTestMode");
-            boolean flag1 = mImsTestMode;
-            StringBuilder stringbuilder4 = stringbuilder3.append(flag1).append("isApnTypeActive(ims)");
-            boolean flag2 = isApnTypeActive("ims");
-            String s5 = stringbuilder4.append(flag2).toString();
-            log(s5);
-            flag = false;
-            continue; /* Loop/switch isn't completed */
-        }
-        if(!mCurrentRequestedApnType.equals("default") && mImsTestMode && !isApnTypeActive("default"))
-        {
-            StringBuilder stringbuilder5 = (new StringBuilder()).append("eCdmaDCT: Non-default PDN should be rejected if default pdn is not up in test mode: mCurrentRequestedApnType:");
-            String s6 = mCurrentRequestedApnType;
-            StringBuilder stringbuilder6 = stringbuilder5.append(s6).append("mImsTestMode");
-            boolean flag3 = mImsTestMode;
-            StringBuilder stringbuilder7 = stringbuilder6.append(flag3).append("isApnTypeActive(default)");
-            boolean flag4 = isApnTypeActive("default");
-            String s7 = stringbuilder7.append(flag4).toString();
-            log(s7);
-            flag = false;
-            continue; /* Loop/switch isn't completed */
-        }
-        String s8 = android.provider.Settings.System.getString(phone.getContext().getContentResolver(), "mode_type");
-        boolean flag5;
-        boolean flag6;
-        boolean flag7;
-        GsmDataConnection gsmdataconnection;
-        boolean flag8;
-        boolean flag9;
-        if(s8.equals("CDMA") || s8.equals("GLOBAL"))
-            flag5 = true;
-        else
-            flag5 = false;
-        flag6 = phone.getServiceState().getRoaming();
-        flag7 = mCdmaPhone.mSST.getDesiredPowerState();
-        gsmdataconnection = findFreePdp();
-        if(gsmdataconnection == null)
-            flag8 = false;
-        else
-            flag8 = true;
-        flag9 = SystemProperties.getBoolean("gsm.default.esn", false);
-        if(flag8 && gsmdataconnection.isInactive())
-        {
-            com.android.internal.telephony.CommandsInterface.RadioState radiostate = phone.mCM.getRadioState();
-            com.android.internal.telephony.CommandsInterface.RadioState radiostate1 = com.android.internal.telephony.CommandsInterface.RadioState.NV_READY;
-            if(radiostate == radiostate1 || mCdmaPhone.mRuimRecords.getRecordsLoaded())
-            {
-                com.android.internal.telephony.Phone.State state1 = phone.getState();
-                com.android.internal.telephony.Phone.State state2 = com.android.internal.telephony.Phone.State.IDLE;
-                if((state1 == state2 || mCdmaPhone.mSST.isConcurrentVoiceAndData()) && isDataAllowed() && flag7 && !mPendingRestartRadio && flag5 && !getDataOnDunEnabled() && mIsEhrpdSyncDone && mCdmaPhone.mSST.getCurrentEhrpdDataConnectionState() == 0 && !flag9)
-                {
-                    com.android.internal.telephony.HandoverTracker.State state3 = mHandoverTracker.getState();
-                    com.android.internal.telephony.HandoverTracker.State state4 = com.android.internal.telephony.HandoverTracker.State.CDMA_TO_LTE;
-                    if(state3 != state4 && mIsSimRecordsLoaded && mIsImsEnabled && mIsAdminEnabled)
-                    {
-                        if(waitingApns == null || waitingApns.isEmpty())
-                        {
-                            ArrayList arraylist = buildWaitingApns();
-                            waitingApns = arraylist;
-                            if(waitingApns.isEmpty())
-                            {
-                                log("No APN found");
-                                com.android.internal.telephony.DataConnection.FailCause failcause = com.android.internal.telephony.DataConnection.FailCause.MISSING_UNKNOWN_APN;
-                                notifyNoData(failcause);
-                                flag = false;
-                                continue; /* Loop/switch isn't completed */
-                            }
-                            StringBuilder stringbuilder8 = (new StringBuilder()).append("Create from allApns : ");
-                            ArrayList arraylist1 = allApns;
-                            String s9 = apnListToString(arraylist1);
-                            String s10 = stringbuilder8.append(s9).toString();
-                            log(s10);
-                        }
-                        StringBuilder stringbuilder9 = (new StringBuilder()).append("Setup waitngApns : ");
-                        ArrayList arraylist2 = waitingApns;
-                        String s11 = apnListToString(arraylist2);
-                        String s12 = stringbuilder9.append(s11).toString();
-                        log(s12);
-                        boolean flag10 = setupData(s);
-                        if(!flag10)
-                        {
-                            log("setupData() has returned false. Clearing waitingApns");
-                            if(waitingApns != null && !waitingApns.isEmpty())
-                            {
-                                StringBuilder stringbuilder10 = (new StringBuilder()).append("Removing waiting apns: current size(");
-                                int j = waitingApns.size();
-                                StringBuilder stringbuilder11 = stringbuilder10.append(j).append(") and apn is ");
-                                ArrayList arraylist3 = waitingApns;
-                                String s13 = apnListToString(arraylist3);
-                                String s14 = stringbuilder11.append(s13).toString();
-                                log(s14);
-                                Object obj = waitingApns.remove(0);
+        if (mCdmaPhone.eHRPDCapable) {
+            boolean flag;
+            StringBuilder stringbuilder = (new StringBuilder()).append("***trySetupData due to ");
+            String s1;
+            StringBuilder stringbuilder1;
+            String s2;
+            String s3;
+            com.android.internal.telephony.DataConnectionTracker.State state;
+            int i;
+            if(s == null)
+                s1 = "(unspecified)";
+            else
+                s1 = s;
+            stringbuilder1 = stringbuilder.append(s1).append(", mCurrReqApnType(");
+            s2 = mCurrentRequestedApnType;
+            s3 = stringbuilder1.append(s2).append(")").toString();
+            log(s3);
+            if(phone.getSimulatedRadioControl() != null) {goto _L4; else goto _L3
+                state = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
+                setState(state);
+                phone.notifyDataConnection(s);
+                i = Log.i("eCDMA", "(fix?) We're on the simulator; assuming data is connected");
+                flag = true;
+                return flag;
+            } else {
+                if(!mCurrentRequestedApnType.equals("ims") && !mImsTestMode && !isApnTypeActive("ims")) {
+                    StringBuilder stringbuilder2 = (new StringBuilder()).append("eCdmaDCT: Non-Ims PDN should be rejected if IMS is not up mCurrentRequestedApnType:");
+                    String s4 = mCurrentRequestedApnType;
+                    StringBuilder stringbuilder3 = stringbuilder2.append(s4).append("mImsTestMode");
+                    boolean flag1 = mImsTestMode;
+                    StringBuilder stringbuilder4 = stringbuilder3.append(flag1).append("isApnTypeActive(ims)");
+                    boolean flag2 = isApnTypeActive("ims");
+                    String s5 = stringbuilder4.append(flag2).toString();
+                    log(s5);
+                    flag = false;
+                    return flag; /* Loop/switch isn't completed */
+                }
+                if(!mCurrentRequestedApnType.equals("default") && mImsTestMode && !isApnTypeActive("default")) {
+                    StringBuilder stringbuilder5 = (new StringBuilder()).append("eCdmaDCT: Non-default PDN should be rejected if default pdn is not up in test mode: mCurrentRequestedApnType:");
+                    String s6 = mCurrentRequestedApnType;
+                    StringBuilder stringbuilder6 = stringbuilder5.append(s6).append("mImsTestMode");
+                    boolean flag3 = mImsTestMode;
+                    StringBuilder stringbuilder7 = stringbuilder6.append(flag3).append("isApnTypeActive(default)");
+                    boolean flag4 = isApnTypeActive("default");
+                    String s7 = stringbuilder7.append(flag4).toString();
+                    log(s7);
+                    flag = false;
+                    return flag; /* Loop/switch isn't completed */
+                }
+                String s8 = android.provider.Settings.System.getString(phone.getContext().getContentResolver(), "mode_type");
+                boolean flag5;
+                boolean flag6;
+                boolean flag7;
+                GsmDataConnection gsmdataconnection;
+                boolean flag8;
+                boolean flag9;
+                if(s8.equals("CDMA") || s8.equals("GLOBAL"))
+                    flag5 = true;
+                else
+                    flag5 = false;
+                flag6 = phone.getServiceState().getRoaming();
+                flag7 = mCdmaPhone.mSST.getDesiredPowerState();
+                gsmdataconnection = findFreePdp();
+                if(gsmdataconnection == null)
+                    flag8 = false;
+                else
+                    flag8 = true;
+                flag9 = SystemProperties.getBoolean("gsm.default.esn", false);
+                if(flag8 && gsmdataconnection.isInactive()) {
+                    com.android.internal.telephony.CommandsInterface.RadioState radiostate = phone.mCM.getRadioState();
+                    com.android.internal.telephony.CommandsInterface.RadioState radiostate1 = com.android.internal.telephony.CommandsInterface.RadioState.NV_READY;
+                    if(radiostate == radiostate1 || mCdmaPhone.mRuimRecords.getRecordsLoaded()) {
+                        com.android.internal.telephony.Phone.State state1 = phone.getState();
+                        com.android.internal.telephony.Phone.State state2 = com.android.internal.telephony.Phone.State.IDLE;
+                        if((state1 == state2 || mCdmaPhone.mSST.isConcurrentVoiceAndData()) && isDataAllowed() && flag7 && !mPendingRestartRadio && flag5 && !getDataOnDunEnabled() && mIsEhrpdSyncDone && mCdmaPhone.mSST.getCurrentEhrpdDataConnectionState() == 0 && !flag9) {
+                            com.android.internal.telephony.HandoverTracker.State state3 = mHandoverTracker.getState();
+                            com.android.internal.telephony.HandoverTracker.State state4 = com.android.internal.telephony.HandoverTracker.State.CDMA_TO_LTE;
+                            if(state3 != state4 && mIsSimRecordsLoaded && mIsImsEnabled && mIsAdminEnabled) {
+                                if(waitingApns == null || waitingApns.isEmpty())
+                                {
+                                    ArrayList arraylist = buildWaitingApns(); waitingApns = arraylist;
+                                    if(waitingApns.isEmpty()) {
+                                        log("No APN found");
+                                        com.android.internal.telephony.DataConnection.FailCause failcause = com.android.internal.telephony.DataConnection.FailCause.MISSING_UNKNOWN_APN;
+                                        notifyNoData(failcause);
+                                        flag = false;
+                                        return flag; /* Loop/switch isn't completed */
+                                    }
+                                    StringBuilder stringbuilder8 = (new StringBuilder()).append("Create from allApns : ");
+                                    ArrayList arraylist1 = allApns;
+                                    String s9 = apnListToString(arraylist1);
+                                    String s10 = stringbuilder8.append(s9).toString();
+                                    log(s10);
+                                }
+                                StringBuilder stringbuilder9 = (new StringBuilder()).append("Setup waitngApns : ");
+                                ArrayList arraylist2 = waitingApns;
+                                String s11 = apnListToString(arraylist2);
+                                String s12 = stringbuilder9.append(s11).toString();
+                                log(s12);
+                                boolean flag10 = setupData(s);
+                                if(!flag10)
+                                {
+                                    log("setupData() has returned false. Clearing waitingApns");
+                                    if(waitingApns != null && !waitingApns.isEmpty())
+                                    {
+                                        StringBuilder stringbuilder10 = (new StringBuilder()).append("Removing waiting apns: current size(");
+                                        int j = waitingApns.size();
+                                        StringBuilder stringbuilder11 = stringbuilder10.append(j).append(") and apn is ");
+                                        ArrayList arraylist3 = waitingApns;
+                                        String s13 = apnListToString(arraylist3);
+                                        String s14 = stringbuilder11.append(s13).toString();
+                                        log(s14);
+                                        Object obj = waitingApns.remove(0);
+                                    }
+                                }
+                                flag = flag10;
+                                return flag; /* Loop/switch isn't completed */
                             }
                         }
-                        flag = flag10;
-                        continue; /* Loop/switch isn't completed */
                     }
                 }
+                StringBuilder stringbuilder12 = (new StringBuilder()).append("trySetupData: Not ready for data: pdpslotAvailable=").append(flag8).append(" dataState=");
+                String s15;
+                StringBuilder stringbuilder13;
+                com.android.internal.telephony.CommandsInterface.RadioState radiostate2;
+                StringBuilder stringbuilder14;
+                boolean flag11;
+                StringBuilder stringbuilder15;
+                com.android.internal.telephony.Phone.State state5;
+                StringBuilder stringbuilder16;
+                String s16;
+                int k;
+                boolean flag12;
+                StringBuilder stringbuilder17;
+                boolean flag13;
+                StringBuilder stringbuilder18;
+                boolean flag14;
+                StringBuilder stringbuilder19;
+                boolean flag15;
+                StringBuilder stringbuilder20;
+                int l;
+                StringBuilder stringbuilder21;
+                com.android.internal.telephony.HandoverTracker.State state6;
+                StringBuilder stringbuilder22;
+                boolean flag16;
+                StringBuilder stringbuilder23;
+                boolean flag17;
+                StringBuilder stringbuilder24;
+                boolean flag18;
+                String s17;
+                if(gsmdataconnection == null)
+                    s15 = "NA";
+                else
+                    s15 = gsmdataconnection.getStateAsString();
+                stringbuilder13 = stringbuilder12.append(s15).append(" radioState=");
+                radiostate2 = phone.mCM.getRadioState();
+                stringbuilder14 = stringbuilder13.append(radiostate2).append(" sim=");
+                flag11 = mCdmaPhone.mRuimRecords.getRecordsLoaded();
+                stringbuilder15 = stringbuilder14.append(flag11).append(" phoneState=");
+                state5 = phone.getState();
+                stringbuilder16 = stringbuilder15.append(state5).append(" dataEnabled=");
+                s16 = mCurrentRequestedApnType;
+                k = apnTypeToId(s16);
+                flag12 = isEnabled(k);
+                stringbuilder17 = stringbuilder16.append(flag12).append(" roaming=").append(flag6).append(" dataOnRoamingEnable=");
+                flag13 = getDataOnRoamingEnabled();
+                stringbuilder18 = stringbuilder17.append(flag13).append(" desiredPowerState=").append(flag7).append(" MasterDataEnabled=");
+                flag14 = mMasterDataEnabled;
+                stringbuilder19 = stringbuilder18.append(flag14).append(" selectionMode=").append(s8).append(" mIsEhrpdSyncDone= ");
+                flag15 = mIsEhrpdSyncDone;
+                stringbuilder20 = stringbuilder19.append(flag15).append(" eHRPDDataState(in service = 0, out service = 1) =");
+                l = mCdmaPhone.mSST.getCurrentEhrpdDataConnectionState();
+                stringbuilder21 = stringbuilder20.append(l).append(" isDefaultEsn=").append(flag9).append(" handoverState=");
+                state6 = mHandoverTracker.getState();
+                stringbuilder22 = stringbuilder21.append(state6).append(" isUSimRecordsLoaded");
+                flag16 = mIsSimRecordsLoaded;
+                stringbuilder23 = stringbuilder22.append(flag16).append(" mIsImsEnabled=");
+                flag17 = mIsImsEnabled;
+                stringbuilder24 = stringbuilder23.append(flag17).append(" mIsAdminEnabled=");
+                flag18 = mIsAdminEnabled;
+                s17 = stringbuilder24.append(flag18).toString();
+                log(s17);
+                flag = false;
+                return flag; /* Loop/switch isn't completed */
             }
+        } else {
+            flag = trySetupData(s);
+            return flag;
         }
-        StringBuilder stringbuilder12 = (new StringBuilder()).append("trySetupData: Not ready for data: pdpslotAvailable=").append(flag8).append(" dataState=");
-        String s15;
-        StringBuilder stringbuilder13;
-        com.android.internal.telephony.CommandsInterface.RadioState radiostate2;
-        StringBuilder stringbuilder14;
-        boolean flag11;
-        StringBuilder stringbuilder15;
-        com.android.internal.telephony.Phone.State state5;
-        StringBuilder stringbuilder16;
-        String s16;
-        int k;
-        boolean flag12;
-        StringBuilder stringbuilder17;
-        boolean flag13;
-        StringBuilder stringbuilder18;
-        boolean flag14;
-        StringBuilder stringbuilder19;
-        boolean flag15;
-        StringBuilder stringbuilder20;
-        int l;
-        StringBuilder stringbuilder21;
-        com.android.internal.telephony.HandoverTracker.State state6;
-        StringBuilder stringbuilder22;
-        boolean flag16;
-        StringBuilder stringbuilder23;
-        boolean flag17;
-        StringBuilder stringbuilder24;
-        boolean flag18;
-        String s17;
-        if(gsmdataconnection == null)
-            s15 = "NA";
-        else
-            s15 = gsmdataconnection.getStateAsString();
-        stringbuilder13 = stringbuilder12.append(s15).append(" radioState=");
-        radiostate2 = phone.mCM.getRadioState();
-        stringbuilder14 = stringbuilder13.append(radiostate2).append(" sim=");
-        flag11 = mCdmaPhone.mRuimRecords.getRecordsLoaded();
-        stringbuilder15 = stringbuilder14.append(flag11).append(" phoneState=");
-        state5 = phone.getState();
-        stringbuilder16 = stringbuilder15.append(state5).append(" dataEnabled=");
-        s16 = mCurrentRequestedApnType;
-        k = apnTypeToId(s16);
-        flag12 = isEnabled(k);
-        stringbuilder17 = stringbuilder16.append(flag12).append(" roaming=").append(flag6).append(" dataOnRoamingEnable=");
-        flag13 = getDataOnRoamingEnabled();
-        stringbuilder18 = stringbuilder17.append(flag13).append(" desiredPowerState=").append(flag7).append(" MasterDataEnabled=");
-        flag14 = mMasterDataEnabled;
-        stringbuilder19 = stringbuilder18.append(flag14).append(" selectionMode=").append(s8).append(" mIsEhrpdSyncDone= ");
-        flag15 = mIsEhrpdSyncDone;
-        stringbuilder20 = stringbuilder19.append(flag15).append(" eHRPDDataState(in service = 0, out service = 1) =");
-        l = mCdmaPhone.mSST.getCurrentEhrpdDataConnectionState();
-        stringbuilder21 = stringbuilder20.append(l).append(" isDefaultEsn=").append(flag9).append(" handoverState=");
-        state6 = mHandoverTracker.getState();
-        stringbuilder22 = stringbuilder21.append(state6).append(" isUSimRecordsLoaded");
-        flag16 = mIsSimRecordsLoaded;
-        stringbuilder23 = stringbuilder22.append(flag16).append(" mIsImsEnabled=");
-        flag17 = mIsImsEnabled;
-        stringbuilder24 = stringbuilder23.append(flag17).append(" mIsAdminEnabled=");
-        flag18 = mIsAdminEnabled;
-        s17 = stringbuilder24.append(flag18).toString();
-        log(s17);
-        flag = false;
-        continue; /* Loop/switch isn't completed */
-_L2:
-        flag = trySetupData(s);
-        if(true) goto _L6; else goto _L5
-_L5:
     }
 
     protected static final int APN_DELAY_MILLIS = 5000;
