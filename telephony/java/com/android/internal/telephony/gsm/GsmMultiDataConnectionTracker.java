@@ -1192,11 +1192,9 @@ label0:
         String s13;
         String s14;
         SQLiteException sqliteexception;
-        if(!file.exists())
-        {
+        if(!file.exists()) {
             file = new File("/system/csc", "nwk_info.db");
-            if(!file.exists())
-            {
+            if(!file.exists()) {
                 log("[FD] no nwk info db");
                 StringBuilder stringbuilder1 = (new StringBuilder()).append("[FD] Dormant flag(");
                 String s7 = mDormFlag;
@@ -1205,16 +1203,11 @@ label0:
                 return;
             }
             log("[FD] csc system area");
-        } else
-        {
+        } else {
             log("[FD] provider data area");
-        }
-        try
-        {
+        } try {
             sqlitedatabase = SQLiteDatabase.openDatabase(file.getPath(), null, 1);
-        }
-        catch(SQLiteException sqliteexception1)
-        {
+        } catch(SQLiteException sqliteexception1) {
             log("[FD] nwk info db open exception");
             return;
         }
@@ -1223,42 +1216,47 @@ label0:
         s9 = mOperatorNumeric;
         s10 = stringbuilder2.append(s9).append("'").toString();
         cursor = sqlitedatabase1.query("nwkinfo", null, s10, null, null, null, null);
-        if(cursor == null) goto _L2; else goto _L1
-_L1:
-        if(!cursor.moveToFirst()) goto _L4; else goto _L3
-_L3:
-        i = cursor.getColumnIndexOrThrow("dormancy");
-        mDormFlag = cursor.getString(i);
-        if(mDormFlag == null) goto _L6; else goto _L5
-_L5:
-        stringbuilder3 = (new StringBuilder()).append("[FD] read from DB: dormancy(");
-        s11 = mDormFlag;
-        s12 = stringbuilder3.append(s11).append(")").toString();
-        log(s12);
-        if(!mDormFlag.equals("off")) goto _L6; else goto _L4
-_L4:
-        cursor.close();
-_L2:
-        if(sqlitedatabase1 != null)
-            sqlitedatabase1.close();
-        stringbuilder4 = (new StringBuilder()).append("[FD] Dormant flag(");
-        s13 = mDormFlag;
-        s14 = stringbuilder4.append(s13).append(")").toString();
-        log(s14);
-        return;
-_L6:
-        boolean flag1;
-        try
-        {
-            flag1 = cursor.moveToNext();
-        }
-        // Misplaced declaration of an exception variable
-        catch(SQLiteException sqliteexception)
-        {
-            log("[FD] Exception during query");
+        if (cursor != null) {
+            if(sqlitedatabase1 != null)
+                sqlitedatabase1.close();
+            stringbuilder4 = (new StringBuilder()).append("[FD] Dormant flag(");
+            s13 = mDormFlag;
+            s14 = stringbuilder4.append(s13).append(")").toString();
+            log(s14);
             return;
+        } else {
+            if (cursor.moveToFirst()) {
+                do {
+                    i = cursor.getColumnIndexOrThrow("dormancy");
+                    mDormFlag = cursor.getString(i);
+                    if (mDormFlag != null) {
+                        stringbuilder3 = (new StringBuilder()).append("[FD] read from DB: dormancy(");
+                        s11 = mDormFlag;
+                        s12 = stringbuilder3.append(s11).append(")").toString();
+                        log(s12);
+                        if (mDormFlag.equals("off")) {
+                            cursor.close();
+                            if(sqlitedatabase1 != null)
+                                sqlitedatabase1.close();
+                            stringbuilder4 = (new StringBuilder()).append("[FD] Dormant flag(");
+                            s13 = mDormFlag;
+                            s14 = stringbuilder4.append(s13).append(")").toString();
+                            log(s14);
+                            return;
+                        }
+                    }
+                } while (cursor.moveToNext())
+            } else {
+                cursor.close();
+                if(sqlitedatabase1 != null)
+                    sqlitedatabase1.close();
+                stringbuilder4 = (new StringBuilder()).append("[FD] Dormant flag(");
+                s13 = mDormFlag;
+                s14 = stringbuilder4.append(s13).append(")").toString();
+                log(s14);
+                return;
+            }
         }
-        if(flag1) goto _L3; else goto _L4
     }
 
     private ApnSetting getNextApn()
@@ -1272,42 +1270,25 @@ _L6:
 
     private String getNextPendingApnRequest()
     {
-        if(mPendingRequestedApns != null) goto _L2; else goto _L1
-_L1:
         String s = null;
-_L5:
-        return s;
-_L2:
-        ArrayList arraylist = mPendingRequestedApns;
-        arraylist;
-        JVM INSTR monitorenter ;
-        String s1;
-        do
-        {
-            if(mPendingRequestedApns.isEmpty())
-                break MISSING_BLOCK_LABEL_99;
-            s1 = (String)mPendingRequestedApns.remove(0);
-            if(!isApnTypeActive(s1))
-                break;
-            String s2 = (new StringBuilder()).append("type ").append(s1).append(" is already active").toString();
-            log(s2);
-        } while(true);
-          goto _L3
-        Exception exception;
-        exception;
-        arraylist;
-        JVM INSTR monitorexit ;
-        throw exception;
-_L3:
-        arraylist;
-        JVM INSTR monitorexit ;
-        s = s1;
-        continue; /* Loop/switch isn't completed */
-        arraylist;
-        JVM INSTR monitorexit ;
-        s = null;
-        if(true) goto _L5; else goto _L4
-_L4:
+        if (mPendingRequestedApns == null) {
+            return s;
+        } else {
+            ArrayList arraylist = mPendingRequestedApns;
+            String s1;
+            do
+            {
+                if(mPendingRequestedApns.isEmpty())
+                    return s;
+                s1 = (String)mPendingRequestedApns.remove(0);
+                if(!isApnTypeActive(s1))
+                    break;
+                String s2 = (new StringBuilder()).append("type ").append(s1).append(" is already active").toString();
+                log(s2);
+            } while(true);
+            s = s1;
+            return s;
+        }
     }
 
     private ApnSetting getPreferredApn()
@@ -1344,20 +1325,16 @@ _L4:
     {
         log("handleAsyncConnect");
         int i = apnTypeToId(s);
-        boolean flag1;
-        if(isEnabled(i))
-        {
+        if(isEnabled(i)) {
             addPendingApnRequest(s);
             Message message = obtainMessage(59);
             boolean flag = sendMessage(message);
-            flag1 = true;
-        } else
-        {
+            return true;
+        } else {
             String s1 = (new StringBuilder()).append("handleAsyncConnect: ").append(s).append(" is not enabled").toString();
             log(s1);
-            flag1 = false;
+            return false;
         }
-        return flag1;
     }
 
     private boolean handleAsyncDisconnect(int i, int j)
@@ -1366,91 +1343,70 @@ _L4:
         String s = (new StringBuilder()).append("handleAsyncDisconnect").append(i).append(" ").append(j).toString();
         log(s);
         iterator = pdpList.iterator();
-_L4:
-        if(!iterator.hasNext()) goto _L2; else goto _L1
-_L1:
-        GsmDataConnection gsmdataconnection;
-        gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        StringBuilder stringbuilder = (new StringBuilder()).append("handleAsyncDisconnect");
-        int k = gsmdataconnection.getCid();
-        StringBuilder stringbuilder1 = stringbuilder.append(k).append(" ");
-        boolean flag = gsmdataconnection.isActive();
-        String s1 = stringbuilder1.append(flag).toString();
-        log(s1);
-        if(!gsmdataconnection.isActive() || gsmdataconnection.getCid() == i) goto _L4; else goto _L3
-_L3:
-        log("handleAsyncDisconnect  Calling Disconnect now");
-        if(j != 0) goto _L6; else goto _L5
-_L5:
-        log("handleAsyncDisconnect: Normal disconnect");
-        if(gsmdataconnection.canHandleType("ims"))
-        {
-            mImsSMSInterface.unregisterImsOnImsPdnDetach();
-            gsmdataconnection.resetSynchronously();
-            phone.notifyDataConnection(null);
-            com.android.internal.telephony.DataConnectionTracker.State state = com.android.internal.telephony.DataConnectionTracker.State.IDLE;
-            setState(state);
-            trySetupAllEnabledServices();
-        } else
-        {
-            Message message = obtainMessage(25, "pdndroppedbyNetwork");
-            gsmdataconnection.disconnect(message);
+        while (iterator.hasNext()) {
+            GsmDataConnection gsmdataconnection;
+            gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+            StringBuilder stringbuilder = (new StringBuilder()).append("handleAsyncDisconnect");
+            int k = gsmdataconnection.getCid();
+            StringBuilder stringbuilder1 = stringbuilder.append(k).append(" ");
+            boolean flag = gsmdataconnection.isActive();
+            String s1 = stringbuilder1.append(flag).toString();
+            log(s1);
+            if (gsmdataconnection.isActive() || !gsmdataconnection.getCid() == i) {
+                log("handleAsyncDisconnect  Calling Disconnect now");
+                if (j == 0) {
+                    log("handleAsyncDisconnect: Normal disconnect");
+                    if(gsmdataconnection.canHandleType("ims")) {
+                        mImsSMSInterface.unregisterImsOnImsPdnDetach();
+                        gsmdataconnection.resetSynchronously();
+                        phone.notifyDataConnection(null);
+                        com.android.internal.telephony.DataConnectionTracker.State state = com.android.internal.telephony.DataConnectionTracker.State.IDLE;
+                        setState(state);
+                        trySetupAllEnabledServices();
+                    } else {
+                        Message message = obtainMessage(25, "pdndroppedbyNetwork");
+                        gsmdataconnection.disconnect(message);
+                    }
+                    return true;
+                } else {
+                    if(j == 1) {
+                        log("handleAsyncDisconnect: Handover disconnect");
+                        Message message1 = obtainMessage(25, "handoverdisconncted");
+                        gsmdataconnection.disconnect(message1);
+                    } else if(j == 2) {
+                        log("handleAsyncDisconnect: Regular  disconnect");
+                        Message message2 = obtainMessage(25, "regulardisconncted");
+                        gsmdataconnection.disconnect(message2);
+                    }
+                    return true;
+                }
+            }
         }
-_L2:
-        return true;
-_L6:
-        if(j == 1)
-        {
-            log("handleAsyncDisconnect: Handover disconnect");
-            Message message1 = obtainMessage(25, "handoverdisconncted");
-            gsmdataconnection.disconnect(message1);
-        } else
-        if(j == 2)
-        {
-            log("handleAsyncDisconnect: Regular  disconnect");
-            Message message2 = obtainMessage(25, "regulardisconncted");
-            gsmdataconnection.disconnect(message2);
-        }
-        if(true) goto _L2; else goto _L7
-_L7:
     }
 
     private void handleIpv6AddressConfigured(GsmDataConnection gsmdataconnection)
     {
         boolean flag;
         flag = false;
-        if(gsmdataconnection == null || gsmdataconnection.getApn() == null)
-        {
+        if(gsmdataconnection == null || gsmdataconnection.getApn() == null) {
             log("handleIpv6AddressConfigured: conn is null");
             return;
         }
-        gsmdataconnection;
-        JVM INSTR monitorenter ;
-        if(gsmdataconnection.getApn() != null)
-            break MISSING_BLOCK_LABEL_45;
-        log("handleIpv6AddressConfigured: apn is null");
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
-        return;
-        Exception exception;
-        exception;
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
-        throw exception;
-        if(!gsmdataconnection.isActive())
-        {
+        if(gsmdataconnection.getApn() == null) {
+            log("handleIpv6AddressConfigured: apn is null");
+            return;
+        }
+        if(!gsmdataconnection.isActive()) {
             StringBuilder stringbuilder = (new StringBuilder()).append("handleIpv6AddressConfigured: connection's state is not active, ");
             String s = gsmdataconnection.getStateAsString();
             String s1 = stringbuilder.append(s).toString();
             log(s1);
             return;
         }
-        if(gsmdataconnection.isipv6configured == 1)
-            break MISSING_BLOCK_LABEL_112;
-        log("IPv4 is not yet configured");
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
-        return;
+        if(gsmdataconnection.isipv6configured != 1) {
+            log("IPv4 is not yet configured");
+            return;
+        }
         setDefaultPdpContextProperty(gsmdataconnection);
         int i = Log.e("GSM", "starting InactivityTimer : handleIpv6AddressConfigured ");
         int j = gsmdataconnection.getApn().inactivityValue;
@@ -1472,11 +1428,9 @@ _L7:
         notifyDefaultData("ipv6addressconfigured");
         if(isOnDemandEnable)
             return;
-        if(!flag)
-        {
+        if(!flag) {
             return;
-        } else
-        {
+        } else {
             trySetupAllEnabledServices();
             return;
         }
@@ -1485,19 +1439,12 @@ _L7:
     private boolean isApnTypeInactive(String s)
     {
         Iterator iterator = pdpList.iterator();
-_L4:
-        if(!iterator.hasNext()) goto _L2; else goto _L1
-_L1:
-        GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        if(!gsmdataconnection.canHandleType(s) || gsmdataconnection.isInactive()) goto _L4; else goto _L3
-_L3:
-        boolean flag = false;
-_L6:
-        return flag;
-_L2:
-        flag = true;
-        if(true) goto _L6; else goto _L5
-_L5:
+        while (iterator.hasNext()) {
+            GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+            if (gsmdataconnection.canHandleType(s) || !gsmdataconnection.isInactive())
+                return false;
+        }
+        return true;
     }
 
     private boolean isDataAllowed()
@@ -1516,37 +1463,23 @@ _L5:
     private boolean isDuringActionOnAnyApnType()
     {
         Iterator iterator = pdpList.iterator();
-_L4:
-        if(!iterator.hasNext()) goto _L2; else goto _L1
-_L1:
-        GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        if(gsmdataconnection.isInactive() || gsmdataconnection.isActive()) goto _L4; else goto _L3
-_L3:
-        boolean flag = true;
-_L6:
-        return flag;
-_L2:
-        flag = false;
-        if(true) goto _L6; else goto _L5
-_L5:
+        while (iterator.hasNext()) {
+            GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+            if (!gsmdataconnection.isInactive() || !gsmdataconnection.isActive())
+                return true;
+        }
+        return false;
     }
 
     private boolean isDuringActionOnApnType(String s)
     {
         Iterator iterator = pdpList.iterator();
-_L4:
-        if(!iterator.hasNext()) goto _L2; else goto _L1
-_L1:
-        GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        if(!gsmdataconnection.canHandleType(s) || gsmdataconnection.isInactive() || gsmdataconnection.isActive()) goto _L4; else goto _L3
-_L3:
-        boolean flag = true;
-_L6:
-        return flag;
-_L2:
-        flag = false;
-        if(true) goto _L6; else goto _L5
-_L5:
+        while (iterator.hasNext()) {
+            GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+            if (gsmdataconnection.canHandleType(s) || !gsmdataconnection.isInactive() || !gsmdataconnection.isActive())
+                return true;
+        }
+        return false;
     }
 
     private void notifyDefaultData(String s)
@@ -1649,12 +1582,10 @@ _L5:
     private String[] parseTypes(String s)
     {
         String as[];
-        if(s == null || s.equals(""))
-        {
+        if(s == null || s.equals("")) {
             as = new String[1];
             as[0] = "*";
-        } else
-        {
+        } else {
             as = s.split(",");
         }
         return as;
@@ -1696,55 +1627,48 @@ label0:
     {
         int j;
         int k;
+        boolean flag;
         log("pdpStatesHasCID");
         j = 0;
         k = arraylist.size();
-_L3:
-        boolean flag;
-        if(j >= k)
-            break MISSING_BLOCK_LABEL_209;
-        flag = false;
-        Iterator iterator = pdpList.iterator();
-        do
-        {
-            if(!iterator.hasNext())
+        do {
+            flag = false
+            Iterator iterator = pdpList.iterator();
+            do
+            {
+                if(!iterator.hasNext())
+                    break;
+                GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+                if(!gsmdataconnection.isActive())
+                    continue;
+                int l = ((DataCallState)arraylist.get(j)).cid;
+                int i1 = gsmdataconnection.getCid();
+                if(l == i1)
+                    continue;
+                flag = true;
                 break;
-            GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-            if(!gsmdataconnection.isActive())
-                continue;
-            int l = ((DataCallState)arraylist.get(j)).cid;
-            int i1 = gsmdataconnection.getCid();
-            if(l == i1)
-                continue;
-            flag = true;
-            break;
-        } while(true);
-        if(flag || ((DataCallState)arraylist.get(j)).active != 1) goto _L2; else goto _L1
-_L1:
-        boolean flag2;
-        log("pdpStatesHasCID PDP up from down ");
-        String s = ((DataCallState)arraylist.get(j)).apn;
-        String as[] = getApnTypeByApnName(s);
-        if(as != null)
-        {
-            String s1 = as[0];
-            if(s1.equals("*"))
-                s1 = "default";
-            boolean flag1 = handleAsyncConnect(s1);
-        } else
-        {
-            log("pdpStatesHasCID apnTypes is null Unexpected behaviour ");
-        }
-        log("pdpStatesHasCID return false ");
-        flag2 = false;
-_L4:
-        return flag2;
-_L2:
-        j++;
-          goto _L3
-        log("pdpStatesHasCID return true ");
-        flag2 = true;
-          goto _L4
+            } while(true);
+            if (flag || ((DataCallState)arraylist.get(j)).active == 1) {
+                log("pdpStatesHasCID PDP up from down ");
+                String s = ((DataCallState)arraylist.get(j)).apn;
+                String as[] = getApnTypeByApnName(s);
+                if(as != null)
+                {
+                    String s1 = as[0];
+                    if(s1.equals("*"))
+                        s1 = "default";
+                    boolean flag1 = handleAsyncConnect(s1);
+                } else
+                {
+                    log("pdpStatesHasCID apnTypes is null Unexpected behaviour ");
+                }
+                log("pdpStatesHasCID return false ");
+                return false;
+            } else {
+                j++;
+            }
+        } while (j < k)
+        return true;
     }
 
     private void printProperties(AsyncResult asyncresult)
@@ -1782,54 +1706,41 @@ _L2:
             log("processPendingIpv6DataCallState Pending list is empty ");
             return;
         }
-        gsmdataconnection;
-        JVM INSTR monitorenter ;
         if(gsmdataconnection == null)
-            break MISSING_BLOCK_LABEL_453;
+            return;
         String s;
         DataCallState datacallstate;
         if(gsmdataconnection.getApn() == null || gsmdataconnection.getApn().apn == null)
-            break MISSING_BLOCK_LABEL_453;
+            return;
         s = gsmdataconnection.getApn().apn;
         datacallstate = (DataCallState)mPendingIpv6DataCallList.get(s);
         if(datacallstate != null)
-            break MISSING_BLOCK_LABEL_102;
-        log("No DataCall State pertaining to the ApnName given");
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
-        return;
-        Exception exception;
-        exception;
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
-        throw exception;
+            return;
         GsmDataConnection gsmdataconnection1;
         int i = datacallstate.cid;
         int j = gsmdataconnection.getCid();
-        if(i != j)
-        {
+        if(i != j) {
             if(datacallstate.apn == null)
-                break MISSING_BLOCK_LABEL_443;
+                return;
             String s1 = datacallstate.apn;
             String s2 = gsmdataconnection.getApn().apn;
             if(!s1.equals(s2))
-                break MISSING_BLOCK_LABEL_443;
+                return;
         }
         log("processPendingIpv6DataCallState Matching CallState found Update pdp list now");
         Iterator iterator = pdpList.iterator();
         int k;
         int l;
-        do
-        {
+        do {
             if(!iterator.hasNext())
-                break MISSING_BLOCK_LABEL_433;
+                return;
             gsmdataconnection1 = (GsmDataConnection)(DataConnection)iterator.next();
             k = gsmdataconnection1.getCid();
             l = gsmdataconnection.getCid();
         } while(k == l);
         log("processPendingIpv6DataCallState Updating Master Pdp list now");
         if(datacallstate.active != 1)
-            break MISSING_BLOCK_LABEL_306;
+            return;
         log("processPendingIpv6DataCallState Updated Master Pdp list as ipv6 configured");
         gsmdataconnection1.isipv6configured = 1;
         String s3 = datacallstate.address;
@@ -1839,45 +1750,28 @@ _L2:
         String s5 = stringbuilder.append(s4).toString();
         int i1 = Log.d("GSM", s5);
         removePendingIpv6DataCallList(s);
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
-        return;
         log("processPendingIpv6DataCallState Updated Master Pdp list as ipv6 configured");
         gsmdataconnection1.isipv6configured = 0;
         removePendingIpv6DataCallList(s);
-        if(gsmdataconnection1.getApn() == null || !gsmdataconnection1.getApn().canHandleType("ims")) goto _L2; else goto _L1
-_L1:
-        log("[DSAC DEB] onIpv6AddrStatusChanged IPv6 Address assignment failed for IMS so Detach ");
-        boolean flag;
-        if(isApnTypeActive("ims"))
-            imsDeregistrationOnDisconnect("pdndroppedbyNetwork");
-        else
-            flag = explicitDetach();
-_L4:
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
+        if (gsmdataconnection1.getApn() != null || gsmdataconnection1.getApn().canHandleType("ims")) {
+            log("[DSAC DEB] onIpv6AddrStatusChanged IPv6 Address assignment failed for IMS so Detach ");
+            boolean flag;
+            if(isApnTypeActive("ims"))
+                imsDeregistrationOnDisconnect("pdndroppedbyNetwork");
+            else
+                flag = explicitDetach();
+        } else {
+            log("[DSAC DEB] onIpv6AddrStatusChanged IPv6 Address assignment failed for other APN ");
+            if (gsmdataconnection1.ipaddresstype == 2) {
+                String s6 = gsmdataconnection1.getApn().types[0];
+                int j1 = apnTypeToId(s6);
+                onEnableApn(j1, 0);
+                return;
+            } else {
+                return;
+            }
+        }
         return;
-_L2:
-        log("[DSAC DEB] onIpv6AddrStatusChanged IPv6 Address assignment failed for other APN ");
-        if(gsmdataconnection1.ipaddresstype != 2) goto _L4; else goto _L3
-_L3:
-        log("[DSAC DEB] onIpv6AddrStatusChanged IPv6 Address assignment failed and address is IPv6 alone");
-        String s6 = gsmdataconnection1.getApn().types[0];
-        int j1 = apnTypeToId(s6);
-        onEnableApn(j1, 0);
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
-        return;
-        log("processPendingIpv6DataCallState Mismatch of both given Connection and Master DataConnection list");
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
-        return;
-        log("processPendingIpv6DataCallState Mismatch of both CID and Apn Generally should not occur");
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
-        return;
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
     }
 
     private int readIntFromSocket(DataInputStream datainputstream)
@@ -2127,28 +2021,17 @@ label1:
         String s2 = (new StringBuilder()).append("ping -c 1 -i 1 -w ").append(j).append(" ").append(s).toString();
         k = runtime.exec(s2).waitFor();
         i = k;
-_L1:
-        IOException ioexception;
-        Exception exception;
-        if(i == 0)
-        {
+        if(i == 0) {
             int l = EventLog.writeEvent(50102, -1);
             mPdpResetCount = 0;
             Message message = obtainMessage(27);
             boolean flag = sendMessage(message);
             return;
-        } else
-        {
+        } else {
             Message message1 = obtainMessage(28);
             boolean flag1 = sendMessage(message1);
             return;
         }
-        ioexception;
-        log("ping failed: IOException");
-          goto _L1
-        exception;
-        log("exception trying to ping");
-          goto _L1
     }
 
     private void setDefaultPdpContextProperty(GsmDataConnection gsmdataconnection)
@@ -2190,91 +2073,46 @@ _L1:
     private boolean setupData(String s)
     {
         ApnSetting apnsetting = getNextApn();
-        if(apnsetting != null) goto _L2; else goto _L1
-_L1:
-        boolean flag = false;
-_L12:
-        return flag;
-_L2:
-        if(true) goto _L4; else goto _L3
-_L3:
-        if(!mGsmPhone.IsACLEnabled()) goto _L6; else goto _L5
-_L5:
-        int i = Log.d("GSM", "IsACLEnabled() is true");
-        if(mGsmPhone.mSIMRecords != null) goto _L8; else goto _L7
-_L7:
-        flag = false;
-          goto _L9
-_L8:
-        SIMRecords simrecords;
-        String s2;
-        String s1 = apnsetting.apn;
-        int j = Log.d("GSM", s1);
-        simrecords = mGsmPhone.mSIMRecords;
-        s2 = apnsetting.apn;
-        if(simrecords.verifyACL(s2)) goto _L11; else goto _L10
-_L10:
-        int k = Log.d("GSM", "verifyACL is false");
-        String s3 = apnsetting.types[0];
-        if("admin".equals(s3))
-        {
-            int l = Log.d("GSM", "ADMIN APN requested and verifyACL is false. Calling explicitDetach()");
-            boolean flag1;
-            if(isApnTypeActive("ims"))
-                imsDeregistrationOnDetach(0, 0);
-            else
-                flag1 = explicitDetach();
-        }
-        flag = false;
-          goto _L9
-_L11:
-        int i1 = Log.d("GSM", "verifyACL is true");
-_L4:
-        GsmDataConnection gsmdataconnection = findFreePdp();
-        int j1;
-        if(gsmdataconnection == null)
-        {
-            log("setupData: No free GsmDataConnection found!");
-            flag = false;
-        } else
-        {
-            mActiveApn = apnsetting;
-            mActivePdp = gsmdataconnection;
-            Message message = obtainMessage();
-            message.what = 1;
-            message.obj = s;
-            com.android.internal.telephony.DataConnectionTracker.State state;
-            if(apnsetting.ipv4 != null || apnsetting.ipv6 != null)
-            {
-                int k1 = Log.d("GSM", "[GsmMultiDataConnectionTracker] resetting Handover Info before copying IP address for Handover Connect PDN");
-                gsmdataconnection.resetHandoverIpInfo();
-                int l1 = Log.d("GSM", "[GsmMultiDataConnectionTracker] setting Handover  IP address for Handover Connect PDN");
-                String s4 = apnsetting.ipv6;
-                String s5 = apnsetting.ipv4;
-                gsmdataconnection.setHandoverIpInfo(s4, s5);
-                int i2 = GsmDataConnection.CONN_TYPE_HANDOVER;
-                gsmdataconnection.setConnType(i2);
-                int j2 = Log.d("GSM", "[GsmMultiDataConnectionTracker] Handover Connect ");
-            } else
-            {
-                int k2 = Log.d("GSM", "[GsmMultiDataConnectionTracker] resetting Handover IP address for Initial Connect PDN");
-                gsmdataconnection.resetHandoverIpInfo();
-                int l2 = GsmDataConnection.CONN_TYPE_INITIAL;
-                gsmdataconnection.setConnType(l2);
-                int i3 = Log.d("GSM", "[GsmMultiDataConnectionTracker] Initial Connect ");
+        if (apnsetting == null) {
+            return false;
+        } else {
+            GsmDataConnection gsmdataconnection = findFreePdp();
+            int j1;
+            if(gsmdataconnection == null) {
+                log("setupData: No free GsmDataConnection found!");
+                return false;
+            } else {
+                mActiveApn = apnsetting;
+                mActivePdp = gsmdataconnection;
+                Message message = obtainMessage();
+                message.what = 1;
+                message.obj = s;
+                com.android.internal.telephony.DataConnectionTracker.State state;
+                if(apnsetting.ipv4 != null || apnsetting.ipv6 != null) {
+                    int k1 = Log.d("GSM", "[GsmMultiDataConnectionTracker] resetting Handover Info before copying IP address for Handover Connect PDN");
+                    gsmdataconnection.resetHandoverIpInfo();
+                    int l1 = Log.d("GSM", "[GsmMultiDataConnectionTracker] setting Handover  IP address for Handover Connect PDN");
+                    String s4 = apnsetting.ipv6;
+                    String s5 = apnsetting.ipv4;
+                    gsmdataconnection.setHandoverIpInfo(s4, s5);
+                    int i2 = GsmDataConnection.CONN_TYPE_HANDOVER;
+                    gsmdataconnection.setConnType(i2);
+                    int j2 = Log.d("GSM", "[GsmMultiDataConnectionTracker] Handover Connect ");
+                } else {
+                    int k2 = Log.d("GSM", "[GsmMultiDataConnectionTracker] resetting Handover IP address for Initial Connect PDN");
+                    gsmdataconnection.resetHandoverIpInfo();
+                    int l2 = GsmDataConnection.CONN_TYPE_INITIAL;
+                    gsmdataconnection.setConnType(l2);
+                    int i3 = Log.d("GSM", "[GsmMultiDataConnectionTracker] Initial Connect ");
+                }
+                gsmdataconnection.connect(message, apnsetting, 1);
+                state = com.android.internal.telephony.DataConnectionTracker.State.INITING;
+                setState(state);
+                if(apnsetting.ipv4 == null && apnsetting.ipv6 == null)
+                    phone.notifyDataConnection(s);
+                return true;
             }
-            gsmdataconnection.connect(message, apnsetting, 1);
-            state = com.android.internal.telephony.DataConnectionTracker.State.INITING;
-            setState(state);
-            if(apnsetting.ipv4 == null && apnsetting.ipv6 == null)
-                phone.notifyDataConnection(s);
-            flag = true;
         }
-_L9:
-        if(true) goto _L12; else goto _L6
-_L6:
-        j1 = Log.d("GSM", "IsACLEnabled() is false");
-          goto _L4
     }
 
     private boolean shouldPostNotification(com.android.internal.telephony.DataConnection.FailCause failcause)
@@ -2379,181 +2217,167 @@ _L6:
         flag = mIsPsRestricted;
         s4 = stringbuilder2.append(flag).toString();
         log(s4);
-        if(phone.getSimulatedRadioControl() == null) goto _L2; else goto _L1
-_L1:
-        state = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
-        setState(state);
-        phone.notifyDataConnection(s);
-        i = Log.i("GSM", "(fix?) We're on the simulator; assuming data is connected");
-        flag1 = true;
-_L4:
-        return flag1;
-_L2:
-        if(mGsmPhone.mSST.getSuspend() != 0)
-        {
-            int j = Log.d("GSM", "Handover in progress,do not allow trySetupData");
-            flag1 = false;
-            continue; /* Loop/switch isn't completed */
-        }
-        if(!mCurrentRequestedApnType.equals("ims") && !mImsTestMode && !isApnTypeActive("ims"))
-        {
-            StringBuilder stringbuilder3 = (new StringBuilder()).append("GsmMultiDCT: Non-Ims PDN should be rejected if IMS is not up mCurrentRequestedApnType:");
-            String s5 = mCurrentRequestedApnType;
-            StringBuilder stringbuilder4 = stringbuilder3.append(s5).append("mImsTestMode");
-            boolean flag2 = mImsTestMode;
-            StringBuilder stringbuilder5 = stringbuilder4.append(flag2).append("isApnTypeActive(ims)");
-            boolean flag3 = isApnTypeActive("ims");
-            String s6 = stringbuilder5.append(flag3).toString();
-            log(s6);
-            flag1 = false;
-            continue; /* Loop/switch isn't completed */
-        }
-        if(!mCurrentRequestedApnType.equals("default") && mImsTestMode && !isApnTypeActive("default"))
-        {
-            StringBuilder stringbuilder6 = (new StringBuilder()).append("GsmMultiDCT: Non-default PDN should be rejected if default pdn is not up in test mode: mCurrentRequestedApnType:");
-            String s7 = mCurrentRequestedApnType;
-            StringBuilder stringbuilder7 = stringbuilder6.append(s7).append("mImsTestMode");
-            boolean flag4 = mImsTestMode;
-            StringBuilder stringbuilder8 = stringbuilder7.append(flag4).append("isApnTypeActive(default)");
-            boolean flag5 = isApnTypeActive("default");
-            String s8 = stringbuilder8.append(flag5).toString();
-            log(s8);
-            flag1 = false;
-            continue; /* Loop/switch isn't completed */
-        }
-        int k = mGsmPhone.mSST.getCurrentGprsState();
-        boolean flag6 = mGsmPhone.mSST.getDesiredPowerState();
-        GsmDataConnection gsmdataconnection = findFreePdp();
-        boolean flag7;
-        String s9;
-        boolean flag8;
-        if(gsmdataconnection == null)
-            flag7 = false;
-        else
-            flag7 = true;
-        s9 = android.provider.Settings.System.getString(phone.getContext().getContentResolver(), "mode_type");
-        if(s9.equals("LTE") || s9.equals("GLOBAL"))
-            flag8 = true;
-        else
-            flag8 = false;
-        if(flag7 && gsmdataconnection.isInactive() && k == 0 && mGsmPhone.mSIMRecords.getRecordsLoaded())
-        {
-            com.android.internal.telephony.Phone.State state1 = phone.getState();
-            com.android.internal.telephony.Phone.State state2 = com.android.internal.telephony.Phone.State.IDLE;
-            if((state1 == state2 || mGsmPhone.mSST.isConcurrentVoiceAndData()) && isDataAllowed() && !mIsPsRestricted && flag6 && flag8)
+        if (phone.getSimulatedRadioControl() != null) {
+            state = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
+            setState(state);
+            phone.notifyDataConnection(s);
+            i = Log.i("GSM", "(fix?) We're on the simulator; assuming data is connected");
+            return true;
+        } else {
+            if(mGsmPhone.mSST.getSuspend() != 0) {
+                int j = Log.d("GSM", "Handover in progress,do not allow trySetupData");
+                return false;
+            }
+            if(!mCurrentRequestedApnType.equals("ims") && !mImsTestMode && !isApnTypeActive("ims")) {
+                StringBuilder stringbuilder3 = (new StringBuilder()).append("GsmMultiDCT: Non-Ims PDN should be rejected if IMS is not up mCurrentRequestedApnType:");
+                String s5 = mCurrentRequestedApnType;
+                StringBuilder stringbuilder4 = stringbuilder3.append(s5).append("mImsTestMode");
+                boolean flag2 = mImsTestMode;
+                StringBuilder stringbuilder5 = stringbuilder4.append(flag2).append("isApnTypeActive(ims)");
+                boolean flag3 = isApnTypeActive("ims");
+                String s6 = stringbuilder5.append(flag3).toString();
+                log(s6);
+                return false;
+            }
+            if(!mCurrentRequestedApnType.equals("default") && mImsTestMode && !isApnTypeActive("default")) {
+                StringBuilder stringbuilder6 = (new StringBuilder()).append("GsmMultiDCT: Non-default PDN should be rejected if default pdn is not up in test mode: mCurrentRequestedApnType:");
+                String s7 = mCurrentRequestedApnType;
+                StringBuilder stringbuilder7 = stringbuilder6.append(s7).append("mImsTestMode");
+                boolean flag4 = mImsTestMode;
+                StringBuilder stringbuilder8 = stringbuilder7.append(flag4).append("isApnTypeActive(default)");
+                boolean flag5 = isApnTypeActive("default");
+                String s8 = stringbuilder8.append(flag5).toString();
+                log(s8);
+                return false;
+            }
+            int k = mGsmPhone.mSST.getCurrentGprsState();
+            boolean flag6 = mGsmPhone.mSST.getDesiredPowerState();
+            GsmDataConnection gsmdataconnection = findFreePdp();
+            boolean flag7;
+            String s9;
+            boolean flag8;
+            if(gsmdataconnection == null)
+                flag7 = false;
+            else
+                flag7 = true;
+            s9 = android.provider.Settings.System.getString(phone.getContext().getContentResolver(), "mode_type");
+            if(s9.equals("LTE") || s9.equals("GLOBAL"))
+                flag8 = true;
+            else
+                flag8 = false;
+            if(flag7 && gsmdataconnection.isInactive() && k == 0 && mGsmPhone.mSIMRecords.getRecordsLoaded())
             {
-                com.android.internal.telephony.HandoverTracker.State state3 = mHandoverTracker.getState();
-                com.android.internal.telephony.HandoverTracker.State state4 = com.android.internal.telephony.HandoverTracker.State.LTE_TO_CDMA;
-                if(state3 != state4 && mIsImsEnabled && mIsAdminEnabled)
+                com.android.internal.telephony.Phone.State state1 = phone.getState();
+                com.android.internal.telephony.Phone.State state2 = com.android.internal.telephony.Phone.State.IDLE;
+                if((state1 == state2 || mGsmPhone.mSST.isConcurrentVoiceAndData()) && isDataAllowed() && !mIsPsRestricted && flag6 && flag8)
                 {
-                    if(waitingApns == null || waitingApns.isEmpty())
+                    com.android.internal.telephony.HandoverTracker.State state3 = mHandoverTracker.getState();
+                    com.android.internal.telephony.HandoverTracker.State state4 = com.android.internal.telephony.HandoverTracker.State.LTE_TO_CDMA;
+                    if(state3 != state4 && mIsImsEnabled && mIsAdminEnabled)
                     {
-                        ArrayList arraylist = buildWaitingApns();
-                        waitingApns = arraylist;
-                        if(waitingApns.isEmpty())
+                        if(waitingApns == null || waitingApns.isEmpty())
                         {
-                            log("No APN found");
-                            com.android.internal.telephony.DataConnection.FailCause failcause = com.android.internal.telephony.DataConnection.FailCause.MISSING_UNKNOWN_APN;
-                            notifyNoData(failcause);
-                            flag1 = false;
-                            continue; /* Loop/switch isn't completed */
+                            ArrayList arraylist = buildWaitingApns();
+                            waitingApns = arraylist;
+                            if(waitingApns.isEmpty())
+                            {
+                                log("No APN found");
+                                com.android.internal.telephony.DataConnection.FailCause failcause = com.android.internal.telephony.DataConnection.FailCause.MISSING_UNKNOWN_APN;
+                                notifyNoData(failcause);
+                                return false;
+                            }
+                            StringBuilder stringbuilder9 = (new StringBuilder()).append("Create from allApns : ");
+                            ArrayList arraylist1 = allApns;
+                            String s10 = apnListToString(arraylist1);
+                            String s11 = stringbuilder9.append(s10).toString();
+                            log(s11);
                         }
-                        StringBuilder stringbuilder9 = (new StringBuilder()).append("Create from allApns : ");
-                        ArrayList arraylist1 = allApns;
-                        String s10 = apnListToString(arraylist1);
-                        String s11 = stringbuilder9.append(s10).toString();
-                        log(s11);
-                    }
-                    StringBuilder stringbuilder10 = (new StringBuilder()).append("Setup waitngApns : ");
-                    ArrayList arraylist2 = waitingApns;
-                    String s12 = apnListToString(arraylist2);
-                    String s13 = stringbuilder10.append(s12).toString();
-                    log(s13);
-                    boolean flag9 = setupData(s);
-                    if(!flag9)
-                    {
-                        log("setupData() has returned false. Clearing waitingApns");
-                        if(waitingApns != null && !waitingApns.isEmpty())
-                        {
-                            StringBuilder stringbuilder11 = (new StringBuilder()).append("Removing waiting apns: current size(");
-                            int l = waitingApns.size();
-                            StringBuilder stringbuilder12 = stringbuilder11.append(l).append(") and apn is ");
-                            ArrayList arraylist3 = waitingApns;
-                            String s14 = apnListToString(arraylist3);
-                            String s15 = stringbuilder12.append(s14).toString();
-                            log(s15);
-                            Object obj = waitingApns.remove(0);
+                        StringBuilder stringbuilder10 = (new StringBuilder()).append("Setup waitngApns : ");
+                        ArrayList arraylist2 = waitingApns;
+                        String s12 = apnListToString(arraylist2);
+                        String s13 = stringbuilder10.append(s12).toString();
+                        log(s13);
+                        boolean flag9 = setupData(s);
+                        if(!flag9) {
+                            log("setupData() has returned false. Clearing waitingApns");
+                            if(waitingApns != null && !waitingApns.isEmpty()) {
+                                StringBuilder stringbuilder11 = (new StringBuilder()).append("Removing waiting apns: current size(");
+                                int l = waitingApns.size();
+                                StringBuilder stringbuilder12 = stringbuilder11.append(l).append(") and apn is ");
+                                ArrayList arraylist3 = waitingApns;
+                                String s14 = apnListToString(arraylist3);
+                                String s15 = stringbuilder12.append(s14).toString();
+                                log(s15);
+                                Object obj = waitingApns.remove(0);
+                            }
                         }
+                        return flag9;
                     }
-                    flag1 = flag9;
-                    continue; /* Loop/switch isn't completed */
                 }
             }
+            StringBuilder stringbuilder13 = (new StringBuilder()).append("trySetupData: Not ready for data: pdpslotAvailable=").append(flag7).append(" dataState=");
+            String s16;
+            StringBuilder stringbuilder14;
+            boolean flag10;
+            StringBuilder stringbuilder15;
+            boolean flag11;
+            StringBuilder stringbuilder16;
+            com.android.internal.telephony.Phone.State state5;
+            StringBuilder stringbuilder17;
+            boolean flag12;
+            StringBuilder stringbuilder18;
+            String s17;
+            int i1;
+            boolean flag13;
+            StringBuilder stringbuilder19;
+            boolean flag14;
+            StringBuilder stringbuilder20;
+            boolean flag15;
+            StringBuilder stringbuilder21;
+            boolean flag16;
+            StringBuilder stringbuilder22;
+            com.android.internal.telephony.HandoverTracker.State state6;
+            StringBuilder stringbuilder23;
+            boolean flag17;
+            StringBuilder stringbuilder24;
+            boolean flag18;
+            StringBuilder stringbuilder25;
+            boolean flag19;
+            String s18;
+            if(gsmdataconnection == null)
+                s16 = "N/A";
+            else
+                s16 = gsmdataconnection.getStateAsString();
+            stringbuilder14 = stringbuilder13.append(s16).append(" gprsState=").append(k).append(" sim=");
+            flag10 = mGsmPhone.mSIMRecords.getRecordsLoaded();
+            stringbuilder15 = stringbuilder14.append(flag10).append(" UMTS=");
+            flag11 = mGsmPhone.mSST.isConcurrentVoiceAndData();
+            stringbuilder16 = stringbuilder15.append(flag11).append(" phoneState=");
+            state5 = phone.getState();
+            stringbuilder17 = stringbuilder16.append(state5).append(" isDataAllowed=");
+            flag12 = isDataAllowed();
+            stringbuilder18 = stringbuilder17.append(flag12).append(" dataEnabled=");
+            s17 = mCurrentRequestedApnType;
+            i1 = apnTypeToId(s17);
+            flag13 = isEnabled(i1);
+            stringbuilder19 = stringbuilder18.append(flag13).append(" roaming=");
+            flag14 = phone.getServiceState().getRoaming();
+            stringbuilder20 = stringbuilder19.append(flag14).append(" dataOnRoamingEnable=");
+            flag15 = getDataOnRoamingEnabled();
+            stringbuilder21 = stringbuilder20.append(flag15).append(" ps restricted=");
+            flag16 = mIsPsRestricted;
+            stringbuilder22 = stringbuilder21.append(flag16).append(" desiredPowerState=").append(flag6).append(" selectionMode=").append(s9).append(" handoverState=");
+            state6 = mHandoverTracker.getState();
+            stringbuilder23 = stringbuilder22.append(state6).append(" MasterDataEnabled=");
+            flag17 = mMasterDataEnabled;
+            stringbuilder24 = stringbuilder23.append(flag17).append(" mIsImsEnabled=");
+            flag18 = mIsImsEnabled;
+            stringbuilder25 = stringbuilder24.append(flag18).append(" mIsAdminEnabled=");
+            flag19 = mIsAdminEnabled;
+            s18 = stringbuilder25.append(flag19).toString();
+            log(s18);
+            return false;
         }
-        StringBuilder stringbuilder13 = (new StringBuilder()).append("trySetupData: Not ready for data: pdpslotAvailable=").append(flag7).append(" dataState=");
-        String s16;
-        StringBuilder stringbuilder14;
-        boolean flag10;
-        StringBuilder stringbuilder15;
-        boolean flag11;
-        StringBuilder stringbuilder16;
-        com.android.internal.telephony.Phone.State state5;
-        StringBuilder stringbuilder17;
-        boolean flag12;
-        StringBuilder stringbuilder18;
-        String s17;
-        int i1;
-        boolean flag13;
-        StringBuilder stringbuilder19;
-        boolean flag14;
-        StringBuilder stringbuilder20;
-        boolean flag15;
-        StringBuilder stringbuilder21;
-        boolean flag16;
-        StringBuilder stringbuilder22;
-        com.android.internal.telephony.HandoverTracker.State state6;
-        StringBuilder stringbuilder23;
-        boolean flag17;
-        StringBuilder stringbuilder24;
-        boolean flag18;
-        StringBuilder stringbuilder25;
-        boolean flag19;
-        String s18;
-        if(gsmdataconnection == null)
-            s16 = "N/A";
-        else
-            s16 = gsmdataconnection.getStateAsString();
-        stringbuilder14 = stringbuilder13.append(s16).append(" gprsState=").append(k).append(" sim=");
-        flag10 = mGsmPhone.mSIMRecords.getRecordsLoaded();
-        stringbuilder15 = stringbuilder14.append(flag10).append(" UMTS=");
-        flag11 = mGsmPhone.mSST.isConcurrentVoiceAndData();
-        stringbuilder16 = stringbuilder15.append(flag11).append(" phoneState=");
-        state5 = phone.getState();
-        stringbuilder17 = stringbuilder16.append(state5).append(" isDataAllowed=");
-        flag12 = isDataAllowed();
-        stringbuilder18 = stringbuilder17.append(flag12).append(" dataEnabled=");
-        s17 = mCurrentRequestedApnType;
-        i1 = apnTypeToId(s17);
-        flag13 = isEnabled(i1);
-        stringbuilder19 = stringbuilder18.append(flag13).append(" roaming=");
-        flag14 = phone.getServiceState().getRoaming();
-        stringbuilder20 = stringbuilder19.append(flag14).append(" dataOnRoamingEnable=");
-        flag15 = getDataOnRoamingEnabled();
-        stringbuilder21 = stringbuilder20.append(flag15).append(" ps restricted=");
-        flag16 = mIsPsRestricted;
-        stringbuilder22 = stringbuilder21.append(flag16).append(" desiredPowerState=").append(flag6).append(" selectionMode=").append(s9).append(" handoverState=");
-        state6 = mHandoverTracker.getState();
-        stringbuilder23 = stringbuilder22.append(state6).append(" MasterDataEnabled=");
-        flag17 = mMasterDataEnabled;
-        stringbuilder24 = stringbuilder23.append(flag17).append(" mIsImsEnabled=");
-        flag18 = mIsImsEnabled;
-        stringbuilder25 = stringbuilder24.append(flag18).append(" mIsAdminEnabled=");
-        flag19 = mIsAdminEnabled;
-        s18 = stringbuilder25.append(flag19).toString();
-        log(s18);
-        flag1 = false;
-        if(true) goto _L4; else goto _L3
-_L3:
     }
 
     private void trySetupNextData()
@@ -2687,18 +2511,10 @@ _L3:
 
     public int enableApnType(String s)
     {
-        this;
-        JVM INSTR monitorenter ;
         int i = apnTypeToId(s);
         int j = i;
-        if(j != -1) goto _L2; else goto _L1
-_L1:
-        byte byte0 = 3;
-_L4:
-        this;
-        JVM INSTR monitorexit ;
-        return byte0;
-_L2:
+        if (j == -1)
+            return 3;
         boolean flag;
         StringBuilder stringbuilder = (new StringBuilder()).append("enableApnType(").append(s).append("), isApnTypeActive = ");
         boolean flag1 = isApnTypeActive(s);
@@ -2709,26 +2525,20 @@ _L2:
         if(!isApnTypeAvailable(s))
         {
             log("type not available");
-            byte0 = 2;
-            continue; /* Loop/switch isn't completed */
+            return 2;
         }
         if(isThrottleDefaultReq && "default".equals(s))
         {
             log("enableApnType :isThrottleDefaultReq  true & type default");
-            byte0 = 3;
+            return 3;
             continue; /* Loop/switch isn't completed */
         }
         setEnabled(j, true);
         flag = isApnTypeActive(s);
         if(flag)
-            byte0 = 0;
+            return 0;
         else
-            byte0 = 1;
-        if(true) goto _L4; else goto _L3
-_L3:
-        Exception exception;
-        exception;
-        throw exception;
+            return 1;
     }
 
     public boolean explicitDetach()
@@ -2937,27 +2747,27 @@ label0:
 
     protected String[] getDnsServers(String s)
     {
-        if(s != null) goto _L2; else goto _L1
-_L1:
-        if(mActivePdp == null) goto _L4; else goto _L3
-_L3:
-        String as[] = mActivePdp.getDnsServers();
-_L9:
-        return as;
-_L2:
-        Iterator iterator = pdpList.iterator();
-_L7:
-        if(!iterator.hasNext()) goto _L4; else goto _L5
-_L5:
-        GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        if(!gsmdataconnection.canHandleType(s)) goto _L7; else goto _L6
-_L6:
-        as = gsmdataconnection.getDnsServers();
-        continue; /* Loop/switch isn't completed */
-_L4:
-        as = null;
-        if(true) goto _L9; else goto _L8
-_L8:
+        String as[];
+        if (s == null) {
+            if (mActivePdp != null) {
+                as = mActivePdp.getDnsServers();
+                return as;
+            } else {
+                as = null;
+                return as;
+            }
+        } else {
+            Iterator iterator = pdpList.iterator();
+            while (iterator.hasNext()) {
+                GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+                if (gsmdataconnection.canHandleType(s)) {
+                    as = gsmdataconnection.getDnsServers();
+                    return as;
+                }
+            }
+            as = null;
+            return as;
+        }
     }
 
     public boolean getDormancyCapability()
@@ -3003,88 +2813,81 @@ _L8:
 
     public String getGateway(String s)
     {
-        if(s != null) goto _L2; else goto _L1
-_L1:
-        if(mActivePdp == null) goto _L4; else goto _L3
-_L3:
         String s3;
-        StringBuilder stringbuilder = (new StringBuilder()).append("getGateway ");
-        String s1 = mActivePdp.getGatewayAddress();
-        String s2 = stringbuilder.append(s1).toString();
-        log(s2);
-        s3 = mActivePdp.getGatewayAddress();
-_L9:
-        return s3;
-_L2:
-        Iterator iterator = pdpList.iterator();
-_L7:
-        if(!iterator.hasNext()) goto _L4; else goto _L5
-_L5:
-        GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        if(!gsmdataconnection.canHandleType(s)) goto _L7; else goto _L6
-_L6:
-        s3 = gsmdataconnection.getGatewayAddress();
-        continue; /* Loop/switch isn't completed */
-_L4:
-        s3 = null;
-        if(true) goto _L9; else goto _L8
-_L8:
+        if (s == null) {
+            if (mActivePdp != null) {
+                StringBuilder stringbuilder = (new StringBuilder()).append("getGateway ");
+                String s1 = mActivePdp.getGatewayAddress();
+                String s2 = stringbuilder.append(s1).toString();
+                log(s2);
+                s3 = mActivePdp.getGatewayAddress();
+                return s3;
+            } else {
+                s3 = null;
+                return s3;
+            }
+        } else {
+            Iterator iterator = pdpList.iterator();
+            while (iterator.hasNext()) {
+                GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+                if (gsmdataconnection.canHandleType(s)) {
+                    s3 = gsmdataconnection.getGatewayAddress();
+                    return s3;
+                }
+            }
+            s3 = null;
+            return s3;
+        }
     }
 
     protected String getInterfaceName(String s)
     {
-        if(s != null) goto _L2; else goto _L1
-_L1:
-        if(mActivePdp == null) goto _L4; else goto _L3
-_L3:
-        String s1 = mActivePdp.getInterface();
-_L9:
-        return s1;
-_L2:
-        Iterator iterator = pdpList.iterator();
-_L7:
-        if(!iterator.hasNext()) goto _L4; else goto _L5
-_L5:
-        GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        if(!gsmdataconnection.canHandleType(s)) goto _L7; else goto _L6
-_L6:
-        s1 = gsmdataconnection.getInterface();
-        continue; /* Loop/switch isn't completed */
-_L4:
-        s1 = null;
-        if(true) goto _L9; else goto _L8
-_L8:
+        String s1;
+        if (s == null) {
+            if (mActivePdp != null) {
+                s1 = mActivePdp.getInterface();
+                return s1;
+            } else {
+                s1 = null;
+                return s1;
+            }
+        } else {
+            Iterator iterator = pdpList.iterator();
+            while (iterator.hasNext()) {
+                GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+                if (gsmdataconnection.canHandleType(s)) {
+                    s1 = gsmdataconnection.getInterface();
+                    return s1;
+                }
+            }
+            s1 = null;
+            return s1;
+        }
     }
 
     protected String getIpAddress(String s)
     {
-        if(s != null) goto _L2; else goto _L1
-_L1:
         String s3;
-        if(mActivePdp != null)
-        {
-            StringBuilder stringbuilder = (new StringBuilder()).append("getIpAddress ");
-            String s1 = mActivePdp.getIpAddress();
-            String s2 = stringbuilder.append(s1).toString();
-            log(s2);
-        }
-        s3 = mActivePdp.getIpAddress();
-_L4:
-        return s3;
-_L2:
-        for(Iterator iterator = pdpList.iterator(); iterator.hasNext();)
-        {
-            GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-            if(gsmdataconnection.canHandleType(s))
-            {
-                s3 = gsmdataconnection.getIpAddress();
-                continue; /* Loop/switch isn't completed */
+        if (s == null) {
+            if(mActivePdp != null) {
+                StringBuilder stringbuilder = (new StringBuilder()).append("getIpAddress ");
+                String s1 = mActivePdp.getIpAddress();
+                String s2 = stringbuilder.append(s1).toString();
+                log(s2);
             }
+            s3 = mActivePdp.getIpAddress();
+            return s3;
+        } else {
+            for(Iterator iterator = pdpList.iterator(); iterator.hasNext();) {
+                GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+                if(gsmdataconnection.canHandleType(s)) {
+                    s3 = gsmdataconnection.getIpAddress();
+                    return s3;
+                }
+            }
+            s3 = null;
+            return s3;
         }
-
-        s3 = null;
-        if(true) goto _L4; else goto _L3
-_L3:
     }
 
     public int getIpAddressType(String s)
@@ -3124,26 +2927,19 @@ _L2:
         do
         {
             if(!iterator.hasNext())
-                break MISSING_BLOCK_LABEL_97;
+                break;
             gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
         } while(gsmdataconnection == null || gsmdataconnection.getApn() == null || !gsmdataconnection.getApn().canHandleType(s));
-        if(gsmdataconnection.isActive())
-        {
-            state = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
-        } else
-        {
+        if(gsmdataconnection.isActive()) {
+            return com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
+        } else {
             if(!gsmdataconnection.isActivating())
                 continue; /* Loop/switch isn't completed */
-            state = com.android.internal.telephony.DataConnectionTracker.State.INITING;
+            return com.android.internal.telephony.DataConnectionTracker.State.INITING;
         }
-_L3:
-        return state;
-        if(!gsmdataconnection.isDisconnecting()) goto _L2; else goto _L1
-_L1:
-        state = com.android.internal.telephony.DataConnectionTracker.State.DISCONNECTING;
-          goto _L3
-        state = com.android.internal.telephony.DataConnectionTracker.State.IDLE;
-          goto _L3
+        if (gsmdataconnection.isDisconnecting())
+            return com.android.internal.telephony.DataConnectionTracker.State.DISCONNECTING;
+        return com.android.internal.telephony.DataConnectionTracker.State.IDLE;
     }
 
     public com.android.internal.telephony.DataConnectionTracker.State getState()
@@ -3154,52 +2950,45 @@ _L1:
         flag = false;
         flag1 = false;
         iterator = pdpList.iterator();
-_L3:
         GsmDataConnection gsmdataconnection;
         do
         {
             if(!iterator.hasNext())
-                break MISSING_BLOCK_LABEL_95;
+                break;
             gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
         } while(gsmdataconnection.canHandleType("ims") || gsmdataconnection.canHandleType("admin"));
-        if(!gsmdataconnection.isActive()) goto _L2; else goto _L1
-_L1:
-        com.android.internal.telephony.DataConnectionTracker.State state = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
-_L4:
-        return state;
-_L2:
-        if(gsmdataconnection.isActivating())
-            flag = true;
-        if(gsmdataconnection.isDisconnecting())
-            flag1 = true;
-          goto _L3
-        if(flag && flag1)
-            state = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
-        else
-        if(flag && !flag1)
-            state = com.android.internal.telephony.DataConnectionTracker.State.CONNECTING;
-        else
-        if(!flag && flag1)
-            state = com.android.internal.telephony.DataConnectionTracker.State.DISCONNECTING;
-        else
-        if(!flag && !flag1)
-            state = com.android.internal.telephony.DataConnectionTracker.State.IDLE;
-        else
-            state = this.state;
-          goto _L4
+        if(gsmdataconnection.isActive()) {goto _L2; else goto _L1
+            if(gsmdataconnection.isActivating())
+                flag = true;
+            if(gsmdataconnection.isDisconnecting())
+                flag1 = true;
+              goto _L3
+            if(flag && flag1)
+                return com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
+            else
+            if(flag && !flag1)
+                return com.android.internal.telephony.DataConnectionTracker.State.CONNECTING;
+            else
+            if(!flag && flag1)
+                return com.android.internal.telephony.DataConnectionTracker.State.DISCONNECTING;
+            else
+            if(!flag && !flag1)
+                return com.android.internal.telephony.DataConnectionTracker.State.IDLE;
+            else
+                return this.state;
+        } else {
+            return com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
+        }
     }
 
     protected void handleIpv4Connect(GsmDataConnection gsmdataconnection, String s)
     {
         log("handleIpv4Connect");
-        gsmdataconnection;
-        JVM INSTR monitorenter ;
         if(gsmdataconnection == null)
-            break MISSING_BLOCK_LABEL_119;
+            return;
         mActivePdp = gsmdataconnection;
         ApnSetting apnsetting = gsmdataconnection.getApn();
         mActiveApn = apnsetting;
-_L1:
         String s1 = mActiveApn.types[0];
         resetallApnsaddressInfo(s1);
         String s2 = gsmdataconnection.getApn().types[0];
@@ -3209,23 +2998,12 @@ _L1:
         String s3 = gsmdataconnection.getApn().types[0];
         String s4 = gsmdataconnection.getInterfaceName();
         startInactivityTimer(i, s3, s4, gsmdataconnection);
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
-        if(isOnDemandEnable)
-        {
+        if(isOnDemandEnable) {
             return;
-        } else
-        {
+        } else {
             trySetupAllEnabledServices();
             return;
         }
-        log("ar.result == null: This should not happen");
-          goto _L1
-        Exception exception;
-        exception;
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
-        throw exception;
     }
 
     public void handleMessage(Message message)
@@ -3236,528 +3014,561 @@ _L1:
         GsmMultiDataConnectionTracker gsmmultidataconnectiontracker = this;
         String s1 = s;
         gsmmultidataconnectiontracker.log(s1);
-        if(mGsmPhone.mIsTheCurrentActivePhone) goto _L2; else goto _L1
-_L1:
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker1 = this;
-        String s2 = "Ignore GSM msgs since GSM phone is inactive";
-        gsmmultidataconnectiontracker1.log(s2);
-_L29:
-        return;
-_L2:
-        message.what;
-        JVM INSTR lookupswitch 26: default 288
-    //                   4: 294
-    //                   6: 309
-    //                   7: 367
-    //                   11: 338
-    //                   19: 299
-    //                   26: 304
-    //                   27: 372
-    //                   28: 388
-    //                   29: 393
-    //                   32: 424
-    //                   33: 485
-    //                   42: 398
-    //                   43: 977
-    //                   46: 1164
-    //                   47: 1681
-    //                   48: 1460
-    //                   49: 688
-    //                   53: 1523
-    //                   54: 1649
-    //                   55: 1697
-    //                   56: 1744
-    //                   57: 1665
-    //                   59: 2255
-    //                   61: 2260
-    //                   62: 2328
-    //                   1000: 65;
-           goto _L3 _L4 _L5 _L6 _L7 _L8 _L9 _L10 _L11 _L12 _L13 _L14 _L15 _L16 _L17 _L18 _L19 _L20 _L21 _L22 _L23 _L24 _L25 _L26 _L27 _L28 _L29
-_L3:
-        handleMessage(message);
-        return;
-_L4:
-        onRecordsLoaded();
-        return;
-_L8:
-        onGprsDetached();
-        return;
-_L9:
-        onGprsAttached();
-        return;
-_L5:
-        AsyncResult asyncresult = (AsyncResult)message.obj;
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker2 = this;
-        AsyncResult asyncresult1 = asyncresult;
-        boolean flag = false;
-        gsmmultidataconnectiontracker2.onPdpStateChanged(asyncresult1, flag);
-        return;
-_L7:
-        AsyncResult asyncresult2 = (AsyncResult)message.obj;
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker3 = this;
-        AsyncResult asyncresult3 = asyncresult2;
-        boolean flag1 = true;
-        gsmmultidataconnectiontracker3.onPdpStateChanged(asyncresult3, flag1);
-        return;
-_L6:
-        onPollPdp();
-        return;
-_L10:
-        startNetStatPoll();
-        long l = 0L;
-        sentSinceLastRecv = l;
-        return;
-_L11:
-        doRecovery();
-        return;
-_L12:
-        onApnChanged();
-        return;
-_L15:
-        int i = Log.d("GSM", "[DSAC DEB] EVENT_IPV6_ADDR_STATUS_CHANGED ");
-        AsyncResult asyncresult4 = (AsyncResult)message.obj;
-        onIpv6AddrStatusChanged(asyncresult4);
-        return;
-_L13:
-        StringBuilder stringbuilder1 = (new StringBuilder()).append("[DSAC DEB] EVENT_PS_RESTRICT_ENABLED ");
-        boolean flag2 = mIsPsRestricted;
-        String s3 = stringbuilder1.append(flag2).toString();
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker4 = this;
-        String s4 = s3;
-        gsmmultidataconnectiontracker4.log(s4);
-        stopNetStatPoll();
-        boolean flag3 = true;
-        mIsPsRestricted = flag3;
-        return;
-_L14:
-        StringBuilder stringbuilder2 = (new StringBuilder()).append("[DSAC DEB] EVENT_PS_RESTRICT_DISABLED ");
-        boolean flag4 = mIsPsRestricted;
-        String s5 = stringbuilder2.append(flag4).toString();
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker5 = this;
-        String s6 = s5;
-        gsmmultidataconnectiontracker5.log(s6);
-        boolean flag5 = false;
-        mIsPsRestricted = flag5;
-        com.android.internal.telephony.DataConnectionTracker.State state = this.state;
-        com.android.internal.telephony.DataConnectionTracker.State state1 = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
-        if(state == state1)
-        {
-            startNetStatPoll();
-            long l1 = 0L;
-            sentSinceLastRecv = l1;
+        if (!mGsmPhone.mIsTheCurrentActivePhone) {
+            GsmMultiDataConnectionTracker gsmmultidataconnectiontracker1 = this;
+            String s2 = "Ignore GSM msgs since GSM phone is inactive";
+            gsmmultidataconnectiontracker1.log(s2);
             return;
-        }
-        com.android.internal.telephony.DataConnectionTracker.State state2 = this.state;
-        com.android.internal.telephony.DataConnectionTracker.State state3 = com.android.internal.telephony.DataConnectionTracker.State.FAILED;
-        if(state2 == state3)
-        {
-            GsmMultiDataConnectionTracker gsmmultidataconnectiontracker6 = this;
-            boolean flag6 = false;
-            String s7 = "psRestrictEnabled";
-            gsmmultidataconnectiontracker6.cleanUpConnection(flag6, s7);
-            int j = 0;
-            do
-            {
-                int i1 = mRetryMgr.length;
-                int j1 = j;
-                int k1 = i1;
-                if(j1 >= k1)
-                    break;
-                mRetryMgr[j].resetRetryCount();
-                int i2 = j + 1;
-            } while(true);
-            isThrottleDefaultReq = false;
-            boolean flag7 = false;
-            mReregisterOnReconnectFailure = flag7;
-        }
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker7 = this;
-        String s8 = "psRestrictEnabled";
-        boolean flag8 = gsmmultidataconnectiontracker7.trySetupData(s8);
-        return;
-_L20:
-        String s9;
-        String s14;
-        String s15;
-        int j2 = Log.e("GSM", "stoping  InactivityTimer : EVENT_INACTIVITY_TIMER_EXPIRY");
-        AsyncResult asyncresult5 = (AsyncResult)message.obj;
-        s9 = null;
-        if(asyncresult5.userObj instanceof String)
-            s9 = (String)asyncresult5.userObj;
-        StringBuilder stringbuilder3 = (new StringBuilder()).append("InactivityTimer : disabling ");
-        String s11 = s9;
-        String s12 = stringbuilder3.append(s11).toString();
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker8 = this;
-        String s13 = s12;
-        gsmmultidataconnectiontracker8.log(s13);
-        s14 = "ims";
-        s15 = s9;
-        if(s14.equals(s15)) goto _L31; else goto _L30
-_L30:
-        String s16;
-        String s17;
-        s16 = "default";
-        s17 = s9;
-        if(!s16.equals(s17)) goto _L32; else goto _L31
-_L31:
-        Iterator iterator = pdpList.iterator();
-        do
-        {
-            if(!iterator.hasNext())
-                break;
-            GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-            if(gsmdataconnection.isActive())
-            {
-                GsmDataConnection gsmdataconnection1 = gsmdataconnection;
-                String s18 = s9;
-                if(gsmdataconnection1.canHandleType(s18))
-                {
-                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker9 = this;
-                    byte byte0 = 25;
-                    String s19 = "pdndroppedbyNetwork";
-                    Message message2 = gsmmultidataconnectiontracker9.obtainMessage(byte0, s19);
-                    GsmDataConnection gsmdataconnection2 = gsmdataconnection;
-                    Message message3 = message2;
-                    gsmdataconnection2.disconnect(message3);
-                }
-            }
-        } while(true);
-          goto _L33
-_L32:
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker10 = this;
-        String s20 = s9;
-        int k2 = gsmmultidataconnectiontracker10.apnTypeToId(s20);
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker11 = this;
-        int l2 = k2;
-        int i3 = 0;
-        gsmmultidataconnectiontracker11.onEnableApn(l2, i3);
-_L33:
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker12 = this;
-        String s21 = s9;
-        gsmmultidataconnectiontracker12.stopInactivityTimer(s21);
-        sWakeLockConnect.setReferenceCounted(false);
-        sWakeLockConnect.release();
-        return;
-_L16:
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker13 = this;
-        String s22 = "ims";
-        com.android.internal.telephony.DataConnectionTracker.State state4 = gsmmultidataconnectiontracker13.getRequestedApnState(s22);
-        int j3 = Log.d("GSM", "EVENT_DEATCH_AFTER_IMS_DREG");
-        com.android.internal.telephony.DataConnectionTracker.State state5 = com.android.internal.telephony.DataConnectionTracker.State.DISCONNECTING;
-        com.android.internal.telephony.DataConnectionTracker.State state6 = state4;
-        com.android.internal.telephony.DataConnectionTracker.State state7 = state5;
-        if(state6 == state7)
-            return;
-        mImsSMSInterface.unregisterImsOnImsPdnDetach();
-        if(message.obj != null)
-        {
-            int k3 = Log.d("GSM", " EVENT_DEATCH_AFTER_IMS_DREG :Calling disconnect");
-            Iterator iterator1 = pdpList.iterator();
-            do
-            {
-                GsmDataConnection gsmdataconnection3;
-                GsmDataConnection gsmdataconnection4;
-                String s23;
-                do
-                {
-                    if(!iterator1.hasNext())
+        } else {
+            switch (message.what) {
+                case 4:
+                    onRecordsLoaded();
+                    return;
+                case 6:
+                    AsyncResult asyncresult = (AsyncResult)message.obj;
+                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker2 = this;
+                    AsyncResult asyncresult1 = asyncresult;
+                    boolean flag = false;
+                    gsmmultidataconnectiontracker2.onPdpStateChanged(asyncresult1, flag);
+                    return;
+                case 7:
+                    onPollPdp();
+                    return;
+                case 11:
+                    AsyncResult asyncresult2 = (AsyncResult)message.obj;
+                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker3 = this;
+                    AsyncResult asyncresult3 = asyncresult2;
+                    boolean flag1 = true;
+                    gsmmultidataconnectiontracker3.onPdpStateChanged(asyncresult3, flag1);
+                    return;
+                case 19:
+                    onGprsDetached();
+                    return;
+                case 26:
+                    onGprsAttached();
+                    return;
+                case 27:
+                    startNetStatPoll();
+                    long l = 0L;
+                    sentSinceLastRecv = l;
+                    return;
+                case 28:
+                    doRecovery();
+                    return;
+                case 29:
+                    onApnChanged();
+                    return;
+                case 32:
+                    StringBuilder stringbuilder1 = (new StringBuilder()).append("[DSAC DEB] EVENT_PS_RESTRICT_ENABLED ");
+                    boolean flag2 = mIsPsRestricted;
+                    String s3 = stringbuilder1.append(flag2).toString();
+                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker4 = this;
+                    String s4 = s3;
+                    gsmmultidataconnectiontracker4.log(s4);
+                    stopNetStatPoll();
+                    boolean flag3 = true;
+                    mIsPsRestricted = flag3;
+                    return;
+                case 33:
+                    StringBuilder stringbuilder2 = (new StringBuilder()).append("[DSAC DEB] EVENT_PS_RESTRICT_DISABLED ");
+                    boolean flag4 = mIsPsRestricted;
+                    String s5 = stringbuilder2.append(flag4).toString();
+                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker5 = this;
+                    String s6 = s5;
+                    gsmmultidataconnectiontracker5.log(s6);
+                    boolean flag5 = false;
+                    mIsPsRestricted = flag5;
+                    com.android.internal.telephony.DataConnectionTracker.State state = this.state;
+                    com.android.internal.telephony.DataConnectionTracker.State state1 = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
+                    if(state == state1)
+                    {
+                        startNetStatPoll();
+                        long l1 = 0L;
+                        sentSinceLastRecv = l1;
                         return;
-                    gsmdataconnection3 = (GsmDataConnection)(DataConnection)iterator1.next();
-                    gsmdataconnection4 = gsmdataconnection3;
-                    s23 = "ims";
-                } while(!gsmdataconnection4.canHandleType(s23));
-                Object obj = message.obj;
-                GsmMultiDataConnectionTracker gsmmultidataconnectiontracker14 = this;
-                byte byte1 = 25;
-                Object obj1 = obj;
-                Message message4 = gsmmultidataconnectiontracker14.obtainMessage(byte1, obj1);
-                GsmDataConnection gsmdataconnection5 = gsmdataconnection3;
-                Message message5 = message4;
-                gsmdataconnection5.disconnect(message5);
-            } while(true);
-        } else
-        {
-            int l3 = Log.d("GSM", " EVENT_DEATCH_AFTER_IMS_DREG :Calling explicitDetach");
-            boolean flag9 = explicitDetach();
-            return;
-        }
-_L17:
-        String s10 = (String)message.obj;
-        StringBuilder stringbuilder4 = (new StringBuilder()).append("EVENT_DETACH_REQ Received for ");
-        String s24 = s10;
-        String s25 = stringbuilder4.append(s24).toString();
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker15 = this;
-        String s26 = s25;
-        gsmmultidataconnectiontracker15.log(s26);
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker16 = this;
-        String s27 = s10;
-        if(!gsmmultidataconnectiontracker16.isApnTypeActive(s27))
-            return;
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker17 = this;
-        String s28 = s10;
-        com.android.internal.telephony.DataConnectionTracker.State state8 = gsmmultidataconnectiontracker17.getRequestedApnState(s28);
-        com.android.internal.telephony.DataConnectionTracker.State state9 = com.android.internal.telephony.DataConnectionTracker.State.DISCONNECTING;
-        com.android.internal.telephony.DataConnectionTracker.State state10 = state8;
-        com.android.internal.telephony.DataConnectionTracker.State state11 = state9;
-        if(state10 != state11)
-        {
-            Iterator iterator2 = pdpList.iterator();
-            GsmDataConnection gsmdataconnection6;
-            ApnSetting apnsetting;
-            String s29;
-            do
-            {
-                do
-                {
-                    if(!iterator2.hasNext())
+                    }
+                    com.android.internal.telephony.DataConnectionTracker.State state2 = this.state;
+                    com.android.internal.telephony.DataConnectionTracker.State state3 = com.android.internal.telephony.DataConnectionTracker.State.FAILED;
+                    if(state2 == state3)
+                    {
+                        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker6 = this;
+                        boolean flag6 = false;
+                        String s7 = "psRestrictEnabled";
+                        gsmmultidataconnectiontracker6.cleanUpConnection(flag6, s7);
+                        int j = 0;
+                        do
+                        {
+                            int i1 = mRetryMgr.length;
+                            int j1 = j;
+                            int k1 = i1;
+                            if(j1 >= k1)
+                                break;
+                            mRetryMgr[j].resetRetryCount();
+                            int i2 = j + 1;
+                        } while(true);
+                        isThrottleDefaultReq = false;
+                        boolean flag7 = false;
+                        mReregisterOnReconnectFailure = flag7;
+                    }
+                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker7 = this;
+                    String s8 = "psRestrictEnabled";
+                    boolean flag8 = gsmmultidataconnectiontracker7.trySetupData(s8);
+                    return;
+                case 42:
+                    int i = Log.d("GSM", "[DSAC DEB] EVENT_IPV6_ADDR_STATUS_CHANGED ");
+                    AsyncResult asyncresult4 = (AsyncResult)message.obj;
+                    onIpv6AddrStatusChanged(asyncresult4);
+                    return;
+                case 43:
+                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker13 = this;
+                    String s22 = "ims";
+                    com.android.internal.telephony.DataConnectionTracker.State state4 = gsmmultidataconnectiontracker13.getRequestedApnState(s22);
+                    int j3 = Log.d("GSM", "EVENT_DEATCH_AFTER_IMS_DREG");
+                    com.android.internal.telephony.DataConnectionTracker.State state5 = com.android.internal.telephony.DataConnectionTracker.State.DISCONNECTING;
+                    com.android.internal.telephony.DataConnectionTracker.State state6 = state4;
+                    com.android.internal.telephony.DataConnectionTracker.State state7 = state5;
+                    if(state6 == state7)
                         return;
-                    gsmdataconnection6 = (GsmDataConnection)(DataConnection)iterator2.next();
-                } while(gsmdataconnection6 == null || gsmdataconnection6.getApn() == null);
-                apnsetting = gsmdataconnection6.getApn();
-                s29 = s10;
-            } while(!apnsetting.canHandleType(s29));
-            StringBuilder stringbuilder5 = (new StringBuilder()).append("EVENT_DETACH_REQ Active DefEpsBearer found Disconnecting ..");
-            String s30 = s10;
-            String s31 = stringbuilder5.append(s30).toString();
-            GsmMultiDataConnectionTracker gsmmultidataconnectiontracker18 = this;
-            String s32 = s31;
-            gsmmultidataconnectiontracker18.log(s32);
-            GsmMultiDataConnectionTracker gsmmultidataconnectiontracker19 = this;
-            byte byte2 = 25;
-            Message message6 = gsmmultidataconnectiontracker19.obtainMessage(byte2);
-            int i4 = message.arg1;
-            message6.arg1 = i4;
-            int j4 = message.arg2;
-            message6.arg2 = j4;
-            GsmDataConnection gsmdataconnection7 = gsmdataconnection6;
-            Message message7 = message6;
-            gsmdataconnection7.detach(message7);
-            return;
-        } else
-        {
-            GsmMultiDataConnectionTracker gsmmultidataconnectiontracker20 = this;
-            String s33 = "EVENT_DETACH_REQ State found is DISCONNECTING";
-            gsmmultidataconnectiontracker20.log(s33);
-            return;
-        }
-_L19:
-        int k4 = mGsmPhone.mSST.getCurrentGprsState();
-        String s34 = (String)qOnDemandPdnRequestQueue.poll();
-        if(k4 == 0)
-        {
-            GsmMultiDataConnectionTracker gsmmultidataconnectiontracker21 = this;
-            String s35 = "onDemand-Attach is completed by this time so request will be served automatically";
-            gsmmultidataconnectiontracker21.log(s35);
-            return;
-        } else
-        {
-            GsmMultiDataConnectionTracker gsmmultidataconnectiontracker22 = this;
-            String s36 = "onDemand-Attach is not completed so we need to notify fail to applications";
-            gsmmultidataconnectiontracker22.log(s36);
-            return;
-        }
-_L21:
-        if(mIsWifiConnected)
-            return;
-        if(!mIsScreenOn)
-            return;
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker23 = this;
-        String s37 = "default";
-        if(!gsmmultidataconnectiontracker23.isApnTypeActive(s37))
-        {
-            GsmMultiDataConnectionTracker gsmmultidataconnectiontracker24 = this;
-            String s38 = "*";
-            if(!gsmmultidataconnectiontracker24.isApnTypeActive(s38))
-            {
-                String s39 = mRequestedApnType;
-                GsmMultiDataConnectionTracker gsmmultidataconnectiontracker25 = this;
-                String s40 = s39;
-                int l4 = gsmmultidataconnectiontracker25.apnTypeToId(s40);
-                GsmMultiDataConnectionTracker gsmmultidataconnectiontracker26 = this;
-                int i5 = l4;
-                int j5 = 1;
-                gsmmultidataconnectiontracker26.onEnableApn(i5, j5);
-                return;
-            } else
-            {
-                GsmMultiDataConnectionTracker gsmmultidataconnectiontracker27 = this;
-                String s41 = "APN Request for default Data is not sent because APN is already active";
-                gsmmultidataconnectiontracker27.log(s41);
-                return;
+                    mImsSMSInterface.unregisterImsOnImsPdnDetach();
+                    if(message.obj != null)
+                    {
+                        int k3 = Log.d("GSM", " EVENT_DEATCH_AFTER_IMS_DREG :Calling disconnect");
+                        Iterator iterator1 = pdpList.iterator();
+                        do
+                        {
+                            GsmDataConnection gsmdataconnection3;
+                            GsmDataConnection gsmdataconnection4;
+                            String s23;
+                            do
+                            {
+                                if(!iterator1.hasNext())
+                                    return;
+                                gsmdataconnection3 = (GsmDataConnection)(DataConnection)iterator1.next();
+                                gsmdataconnection4 = gsmdataconnection3;
+                                s23 = "ims";
+                            } while(!gsmdataconnection4.canHandleType(s23));
+                            Object obj = message.obj;
+                            GsmMultiDataConnectionTracker gsmmultidataconnectiontracker14 = this;
+                            byte byte1 = 25;
+                            Object obj1 = obj;
+                            Message message4 = gsmmultidataconnectiontracker14.obtainMessage(byte1, obj1);
+                            GsmDataConnection gsmdataconnection5 = gsmdataconnection3;
+                            Message message5 = message4;
+                            gsmdataconnection5.disconnect(message5);
+                        } while(true);
+                    } else
+                    {
+                        int l3 = Log.d("GSM", " EVENT_DEATCH_AFTER_IMS_DREG :Calling explicitDetach");
+                        boolean flag9 = explicitDetach();
+                        return;
+                    }
+                case 46:
+                    String s10 = (String)message.obj;
+                    StringBuilder stringbuilder4 = (new StringBuilder()).append("EVENT_DETACH_REQ Received for ");
+                    String s24 = s10;
+                    String s25 = stringbuilder4.append(s24).toString();
+                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker15 = this;
+                    String s26 = s25;
+                    gsmmultidataconnectiontracker15.log(s26);
+                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker16 = this;
+                    String s27 = s10;
+                    if(!gsmmultidataconnectiontracker16.isApnTypeActive(s27))
+                        return;
+                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker17 = this;
+                    String s28 = s10;
+                    com.android.internal.telephony.DataConnectionTracker.State state8 = gsmmultidataconnectiontracker17.getRequestedApnState(s28);
+                    com.android.internal.telephony.DataConnectionTracker.State state9 = com.android.internal.telephony.DataConnectionTracker.State.DISCONNECTING;
+                    com.android.internal.telephony.DataConnectionTracker.State state10 = state8;
+                    com.android.internal.telephony.DataConnectionTracker.State state11 = state9;
+                    if(state10 != state11) {
+                        Iterator iterator2 = pdpList.iterator();
+                        GsmDataConnection gsmdataconnection6;
+                        ApnSetting apnsetting;
+                        String s29;
+                        do {
+                            do {
+                                if(!iterator2.hasNext())
+                                    return;
+                                gsmdataconnection6 = (GsmDataConnection)(DataConnection)iterator2.next();
+                            } while(gsmdataconnection6 == null || gsmdataconnection6.getApn() == null);
+                            apnsetting = gsmdataconnection6.getApn();
+                            s29 = s10;
+                        } while(!apnsetting.canHandleType(s29));
+                        StringBuilder stringbuilder5 = (new StringBuilder()).append("EVENT_DETACH_REQ Active DefEpsBearer found Disconnecting ..");
+                        String s30 = s10;
+                        String s31 = stringbuilder5.append(s30).toString();
+                        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker18 = this;
+                        String s32 = s31;
+                        gsmmultidataconnectiontracker18.log(s32);
+                        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker19 = this;
+                        byte byte2 = 25;
+                        Message message6 = gsmmultidataconnectiontracker19.obtainMessage(byte2);
+                        int i4 = message.arg1;
+                        message6.arg1 = i4;
+                        int j4 = message.arg2;
+                        message6.arg2 = j4;
+                        GsmDataConnection gsmdataconnection7 = gsmdataconnection6;
+                        Message message7 = message6;
+                        gsmdataconnection7.detach(message7);
+                        return;
+                    } else {
+                        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker20 = this;
+                        String s33 = "EVENT_DETACH_REQ State found is DISCONNECTING";
+                        gsmmultidataconnectiontracker20.log(s33);
+                        return;
+                    }
+                case 47:
+                    AsyncResult asyncresult6 = (AsyncResult)message.obj;
+                    onNetworkDisconnectReq(asyncresult6);
+                    return;
+                case 48:
+                    int k4 = mGsmPhone.mSST.getCurrentGprsState();
+                    String s34 = (String)qOnDemandPdnRequestQueue.poll();
+                    if(k4 == 0) {
+                        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker21 = this;
+                        String s35 = "onDemand-Attach is completed by this time so request will be served automatically";
+                        gsmmultidataconnectiontracker21.log(s35);
+                        return;
+                    } else {
+                        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker22 = this;
+                        String s36 = "onDemand-Attach is not completed so we need to notify fail to applications";
+                        gsmmultidataconnectiontracker22.log(s36);
+                        return;
+                    }
+                case 49:
+                    String s9;
+                    String s14;
+                    String s15;
+                    int j2 = Log.e("GSM", "stoping  InactivityTimer : EVENT_INACTIVITY_TIMER_EXPIRY");
+                    AsyncResult asyncresult5 = (AsyncResult)message.obj;
+                    s9 = null;
+                    if(asyncresult5.userObj instanceof String)
+                        s9 = (String)asyncresult5.userObj;
+                    StringBuilder stringbuilder3 = (new StringBuilder()).append("InactivityTimer : disabling ");
+                    String s11 = s9;
+                    String s12 = stringbuilder3.append(s11).toString();
+                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker8 = this;
+                    String s13 = s12;
+                    gsmmultidataconnectiontracker8.log(s13);
+                    s14 = "ims";
+                    s15 = s9;
+                    if (!s14.equals(s15)) {
+                        //_L30
+                        String s16;
+                        String s17;
+                        s16 = "default";
+                        s17 = s9;
+                        if (s16.equals(s17)) {
+                            //_L31
+                            Iterator iterator = pdpList.iterator();
+                            do
+                            {
+                                if(!iterator.hasNext())
+                                    break;
+                                GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+                                if(gsmdataconnection.isActive())
+                                {
+                                    GsmDataConnection gsmdataconnection1 = gsmdataconnection;
+                                    String s18 = s9;
+                                    if(gsmdataconnection1.canHandleType(s18))
+                                    {
+                                        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker9 = this;
+                                        byte byte0 = 25;
+                                        String s19 = "pdndroppedbyNetwork";
+                                        Message message2 = gsmmultidataconnectiontracker9.obtainMessage(byte0, s19);
+                                        GsmDataConnection gsmdataconnection2 = gsmdataconnection;
+                                        Message message3 = message2;
+                                        gsmdataconnection2.disconnect(message3);
+                                    }
+                                }
+                            } while(true);
+                            GsmMultiDataConnectionTracker gsmmultidataconnectiontracker12 = this;
+                            String s21 = s9;
+                            gsmmultidataconnectiontracker12.stopInactivityTimer(s21);
+                            sWakeLockConnect.setReferenceCounted(false);
+                            sWakeLockConnect.release();
+                            return;
+                        } else {
+                            //_L32
+                            GsmMultiDataConnectionTracker gsmmultidataconnectiontracker10 = this;
+                            String s20 = s9;
+                            int k2 = gsmmultidataconnectiontracker10.apnTypeToId(s20);
+                            GsmMultiDataConnectionTracker gsmmultidataconnectiontracker11 = this;
+                            int l2 = k2;
+                            int i3 = 0;
+                            gsmmultidataconnectiontracker11.onEnableApn(l2, i3);
+                            GsmMultiDataConnectionTracker gsmmultidataconnectiontracker12 = this;
+                            String s21 = s9;
+                            gsmmultidataconnectiontracker12.stopInactivityTimer(s21);
+                            sWakeLockConnect.setReferenceCounted(false);
+                            sWakeLockConnect.release();
+                            return;
+                        }
+                    } else {
+                        //_L31
+                        Iterator iterator = pdpList.iterator();
+                        do
+                        {
+                            if(!iterator.hasNext())
+                                break;
+                            GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+                            if(gsmdataconnection.isActive())
+                            {
+                                GsmDataConnection gsmdataconnection1 = gsmdataconnection;
+                                String s18 = s9;
+                                if(gsmdataconnection1.canHandleType(s18))
+                                {
+                                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker9 = this;
+                                    byte byte0 = 25;
+                                    String s19 = "pdndroppedbyNetwork";
+                                    Message message2 = gsmmultidataconnectiontracker9.obtainMessage(byte0, s19);
+                                    GsmDataConnection gsmdataconnection2 = gsmdataconnection;
+                                    Message message3 = message2;
+                                    gsmdataconnection2.disconnect(message3);
+                                }
+                            }
+                        } while(true);
+                        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker12 = this;
+                        String s21 = s9;
+                        gsmmultidataconnectiontracker12.stopInactivityTimer(s21);
+                        sWakeLockConnect.setReferenceCounted(false);
+                        sWakeLockConnect.release();
+                        return;
+                    }
+                case 53:
+                    if(mIsWifiConnected)
+                        return;
+                    if(!mIsScreenOn)
+                        return;
+                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker23 = this;
+                    String s37 = "default";
+                    if(!gsmmultidataconnectiontracker23.isApnTypeActive(s37)) {
+                        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker24 = this;
+                        String s38 = "*";
+                        if(!gsmmultidataconnectiontracker24.isApnTypeActive(s38)) {
+                            String s39 = mRequestedApnType;
+                            GsmMultiDataConnectionTracker gsmmultidataconnectiontracker25 = this;
+                            String s40 = s39;
+                            int l4 = gsmmultidataconnectiontracker25.apnTypeToId(s40);
+                            GsmMultiDataConnectionTracker gsmmultidataconnectiontracker26 = this;
+                            int i5 = l4;
+                            int j5 = 1;
+                            gsmmultidataconnectiontracker26.onEnableApn(i5, j5);
+                            return;
+                        } else {
+                            GsmMultiDataConnectionTracker gsmmultidataconnectiontracker27 = this;
+                            String s41 = "APN Request for default Data is not sent because APN is already active";
+                            gsmmultidataconnectiontracker27.log(s41);
+                            return;
+                        }
+                    } else {
+                        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker28 = this;
+                        String s42 = "APN Request for default Data is not sent because APN is already active";
+                        gsmmultidataconnectiontracker28.log(s42);
+                        return;
+                    }
+                case 54:
+                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker29 = this;
+                    String s43 = " sendPsAttachInfo EVENT_ATTACH_INFO_RECEIVED";
+                    gsmmultidataconnectiontracker29.log(s43);
+                    return;
+                case 55:
+                    int k5 = Log.d("GSM", "gmsmULTI::handleMessage() case: EVENT_HANDOVER_INITIATE_START");
+                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker31 = this;
+                    String s45 = "[Handover]**L2C phase 2 : pass ho params to handovertracker";
+                    gsmmultidataconnectiontracker31.log(s45);
+                    HandoverTracker handovertracker = mHandoverTracker;
+                    ArrayList arraylist = getApnListForHandover();
+                    boolean flag10 = handovertracker.startHandoverFromLte(arraylist);
+                    return;
+                case 56:
+                    Iterator iterator3;
+                    int l5;
+                    String s48;
+                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker32 = this;
+                    String s46 = "[Handover] **C2L phase 4 : DCT is receiving params and start triggering";
+                    gsmmultidataconnectiontracker32.log(s46);
+                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker33 = this;
+                    String s47 = "EVENT_HANDOVER_PARAMS_RECEIVED";
+                    gsmmultidataconnectiontracker33.log(s47);
+                    ArrayList arraylist1 = mHandoverTracker.getFields();
+                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker34 = this;
+                    ArrayList arraylist2 = arraylist1;
+                    gsmmultidataconnectiontracker34.putApnListForHandover(arraylist2);
+                    l5 = 0;
+                    s48 = "ims";
+                    clearAllPendingApnRequest();
+                    if(allApns == null)
+                        return;
+                    iterator3 = allApns.iterator();
+                    //_L36:
+                    ApnSetting apnsetting1;
+                    String s49;
+                    String s50;
+                    String s51;
+                    String s52;
+                    int i6;
+                    int j6;
+                    String s53;
+                    String s54;
+                    while (iterator3.hasNext()) {
+                        if(!iterator3.hasNext())
+                            return;
+                        apnsetting1 = (ApnSetting)iterator3.next();
+                        s49 = apnsetting1.apn;
+                        s50 = apnsetting1.types[0];
+                        s51 = apnsetting1.user;
+                        s52 = apnsetting1.password;
+                        i6 = apnsetting1.authType;
+                        j6 = apnsetting1.ipType;
+                        s53 = apnsetting1.ipv4;
+                        s54 = apnsetting1.ipv6;
+                        ApnSetting apnsetting2 = apnsetting1;
+                        if (s53 == null || s54 == null) {
+                            //_L34
+                            j6 = 3;
+                            l5 = 0;
+                            //_L37:
+                            ApnSetting apnsetting3 = apnsetting1;
+                            String s55 = s48;
+                            if(apnsetting3.canHandleType(s55))
+                            {
+                                String s56 = (new StringBuilder()).append("Ims pdn values apn ").append(s49).append(" user ").append(s51).toString();
+                                int k6 = Log.i("GSM", s56);
+                                int l6;
+                                if(l5 == 0)
+                                    l6 = Log.i("GSM", "IPtype changed to IPV4V6 since initial IMS");
+                                CommandsInterface commandsinterface = phone.mCM;
+                                String s57 = Integer.toString(1);
+                                String s58 = Integer.toString(0);
+                                String s59 = Integer.toString(i6);
+                                String s60 = Integer.toString(j6);
+                                String s61 = Integer.toString(1);
+                                String s62 = Integer.toString(l5);
+                                GsmMultiDataConnectionTracker gsmmultidataconnectiontracker35 = this;
+                                byte byte3 = 31;
+                                Message message8 = gsmmultidataconnectiontracker35.obtainMessage(byte3);
+                                commandsinterface.setupPsAttach(s57, s58, s49, s51, s52, s59, s60, s61, s62, s53, s54, s50, message8);
+                            } else {
+                                int i7 = j6;
+                                byte byte4 = 3;
+                                if(i7 != byte4) {
+                                    int j7 = Log.i("GSM", "adding handover requests to pending list");
+                                    String s63 = apnsetting1.types[0];
+                                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker36 = this;
+                                    String s64 = s63;
+                                    gsmmultidataconnectiontracker36.addPendingApnRequest(s64);
+                                } else {
+                                    StringBuilder stringbuilder6 = (new StringBuilder()).append("ignoring handover requests ");
+                                    String s65 = apnsetting1.apn;
+                                    String s66 = stringbuilder6.append(s65).toString();
+                                    int k7 = Log.i("GSM", s66);
+                                }
+                            }
+                        } else {
+                            //_L35
+                            if(s53 != null && s54 != null)
+                            {
+                                j6 = 2;
+                                l5 = 1;
+                            } else
+                            if(s53 != null && s54 == null)
+                            {
+                                j6 = 0;
+                                l5 = 1;
+                            } else
+                            if(s53 == null && s54 != null)
+                            {
+                                j6 = 1;
+                                l5 = 1;
+                            }
+                            ApnSetting apnsetting3 = apnsetting1;
+                            String s55 = s48;
+                            if(apnsetting3.canHandleType(s55)) {
+                                String s56 = (new StringBuilder()).append("Ims pdn values apn ").append(s49).append(" user ").append(s51).toString();
+                                int k6 = Log.i("GSM", s56);
+                                int l6;
+                                if(l5 == 0)
+                                    l6 = Log.i("GSM", "IPtype changed to IPV4V6 since initial IMS");
+                                CommandsInterface commandsinterface = phone.mCM;
+                                String s57 = Integer.toString(1);
+                                String s58 = Integer.toString(0);
+                                String s59 = Integer.toString(i6);
+                                String s60 = Integer.toString(j6);
+                                String s61 = Integer.toString(1);
+                                String s62 = Integer.toString(l5);
+                                GsmMultiDataConnectionTracker gsmmultidataconnectiontracker35 = this;
+                                byte byte3 = 31;
+                                Message message8 = gsmmultidataconnectiontracker35.obtainMessage(byte3);
+                                commandsinterface.setupPsAttach(s57, s58, s49, s51, s52, s59, s60, s61, s62, s53, s54, s50, message8);
+                            } else {
+                                int i7 = j6;
+                                byte byte4 = 3;
+                                if(i7 != byte4) {
+                                    int j7 = Log.i("GSM", "adding handover requests to pending list");
+                                    String s63 = apnsetting1.types[0];
+                                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker36 = this;
+                                    String s64 = s63;
+                                    gsmmultidataconnectiontracker36.addPendingApnRequest(s64);
+                                } else {
+                                    StringBuilder stringbuilder6 = (new StringBuilder()).append("ignoring handover requests ");
+                                    String s65 = apnsetting1.apn;
+                                    String s66 = stringbuilder6.append(s65).toString();
+                                    int k7 = Log.i("GSM", s66);
+                                }
+                            }
+                        }
+                    }
+                    return;
+                case 57:
+                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker30 = this;
+                    String s44 = " setUpDedicatedBearer EVENT_SETUP_DEDICATED_BEARER_DONE";
+                    gsmmultidataconnectiontracker30.log(s44);
+                    return;
+                case 59:
+                    trySetupNextData();
+                    return;
+                case 61:
+                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker37 = this;
+                    String s67 = "[Handover] ** Resume Timeout or Handover Fail";
+                    gsmmultidataconnectiontracker37.log(s67);
+                    int k = 0;
+                    do {
+                        int l7 = mRetryMgr.length;
+                        int i8 = k;
+                        int j8 = l7;
+                        if(i8 < j8) {
+                            mRetryMgr[k].resetRetryCount();
+                            k++;
+                        } else {
+                            isThrottleDefaultReq = false;
+                            trySetupAllEnabledServices();
+                            return;
+                        }
+                    } while(true);
+                case 62:
+                    String s68 = android.provider.Settings.System.getString(phone.getContext().getContentResolver(), "mode_type");
+                    String s69 = s68;
+                    String s70 = "LTE";
+                    if(!s69.equals(s70))
+                    {
+                        String s71 = s68;
+                        String s72 = "GLOBAL";
+                        if(!s71.equals(s72))
+                            return;
+                    }
+                    GsmMultiDataConnectionTracker gsmmultidataconnectiontracker38 = this;
+                    String s73 = "selectioin mdoe is LTE or GLOBAL. sendPsAttachInfo()";
+                    gsmmultidataconnectiontracker38.log(s73);
+                    sendPsAttachInfo();
+                    return;
+                case 1000:
+                    return;
+                default:
+                    handleMessage(message);
+                    return;
             }
-        } else
-        {
-            GsmMultiDataConnectionTracker gsmmultidataconnectiontracker28 = this;
-            String s42 = "APN Request for default Data is not sent because APN is already active";
-            gsmmultidataconnectiontracker28.log(s42);
-            return;
         }
-_L22:
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker29 = this;
-        String s43 = " sendPsAttachInfo EVENT_ATTACH_INFO_RECEIVED";
-        gsmmultidataconnectiontracker29.log(s43);
-        return;
-_L25:
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker30 = this;
-        String s44 = " setUpDedicatedBearer EVENT_SETUP_DEDICATED_BEARER_DONE";
-        gsmmultidataconnectiontracker30.log(s44);
-        return;
-_L18:
-        AsyncResult asyncresult6 = (AsyncResult)message.obj;
-        onNetworkDisconnectReq(asyncresult6);
-        return;
-_L23:
-        int k5 = Log.d("GSM", "gmsmULTI::handleMessage() case: EVENT_HANDOVER_INITIATE_START");
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker31 = this;
-        String s45 = "[Handover]**L2C phase 2 : pass ho params to handovertracker";
-        gsmmultidataconnectiontracker31.log(s45);
-        HandoverTracker handovertracker = mHandoverTracker;
-        ArrayList arraylist = getApnListForHandover();
-        boolean flag10 = handovertracker.startHandoverFromLte(arraylist);
-        return;
-_L24:
-        Iterator iterator3;
-        int l5;
-        String s48;
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker32 = this;
-        String s46 = "[Handover] **C2L phase 4 : DCT is receiving params and start triggering";
-        gsmmultidataconnectiontracker32.log(s46);
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker33 = this;
-        String s47 = "EVENT_HANDOVER_PARAMS_RECEIVED";
-        gsmmultidataconnectiontracker33.log(s47);
-        ArrayList arraylist1 = mHandoverTracker.getFields();
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker34 = this;
-        ArrayList arraylist2 = arraylist1;
-        gsmmultidataconnectiontracker34.putApnListForHandover(arraylist2);
-        l5 = 0;
-        s48 = "ims";
-        clearAllPendingApnRequest();
-        if(allApns == null)
-            return;
-        iterator3 = allApns.iterator();
-_L36:
-        ApnSetting apnsetting1;
-        String s49;
-        String s50;
-        String s51;
-        String s52;
-        int i6;
-        int j6;
-        String s53;
-        String s54;
-        if(!iterator3.hasNext())
-            return;
-        apnsetting1 = (ApnSetting)iterator3.next();
-        s49 = apnsetting1.apn;
-        s50 = apnsetting1.types[0];
-        s51 = apnsetting1.user;
-        s52 = apnsetting1.password;
-        i6 = apnsetting1.authType;
-        j6 = apnsetting1.ipType;
-        s53 = apnsetting1.ipv4;
-        s54 = apnsetting1.ipv6;
-        ApnSetting apnsetting2 = apnsetting1;
-        if(s53 != null || s54 != null) goto _L35; else goto _L34
-_L34:
-        j6 = 3;
-        l5 = 0;
-_L37:
-        ApnSetting apnsetting3 = apnsetting1;
-        String s55 = s48;
-        if(apnsetting3.canHandleType(s55))
-        {
-            String s56 = (new StringBuilder()).append("Ims pdn values apn ").append(s49).append(" user ").append(s51).toString();
-            int k6 = Log.i("GSM", s56);
-            int l6;
-            if(l5 == 0)
-                l6 = Log.i("GSM", "IPtype changed to IPV4V6 since initial IMS");
-            CommandsInterface commandsinterface = phone.mCM;
-            String s57 = Integer.toString(1);
-            String s58 = Integer.toString(0);
-            String s59 = Integer.toString(i6);
-            String s60 = Integer.toString(j6);
-            String s61 = Integer.toString(1);
-            String s62 = Integer.toString(l5);
-            GsmMultiDataConnectionTracker gsmmultidataconnectiontracker35 = this;
-            byte byte3 = 31;
-            Message message8 = gsmmultidataconnectiontracker35.obtainMessage(byte3);
-            commandsinterface.setupPsAttach(s57, s58, s49, s51, s52, s59, s60, s61, s62, s53, s54, s50, message8);
-        } else
-        {
-            int i7 = j6;
-            byte byte4 = 3;
-            if(i7 != byte4)
-            {
-                int j7 = Log.i("GSM", "adding handover requests to pending list");
-                String s63 = apnsetting1.types[0];
-                GsmMultiDataConnectionTracker gsmmultidataconnectiontracker36 = this;
-                String s64 = s63;
-                gsmmultidataconnectiontracker36.addPendingApnRequest(s64);
-            } else
-            {
-                StringBuilder stringbuilder6 = (new StringBuilder()).append("ignoring handover requests ");
-                String s65 = apnsetting1.apn;
-                String s66 = stringbuilder6.append(s65).toString();
-                int k7 = Log.i("GSM", s66);
-            }
-        }
-        if(true) goto _L36; else goto _L35
-_L35:
-        if(s53 != null && s54 != null)
-        {
-            j6 = 2;
-            l5 = 1;
-        } else
-        if(s53 != null && s54 == null)
-        {
-            j6 = 0;
-            l5 = 1;
-        } else
-        if(s53 == null && s54 != null)
-        {
-            j6 = 1;
-            l5 = 1;
-        }
-          goto _L37
-_L26:
-        trySetupNextData();
-        return;
-_L27:
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker37 = this;
-        String s67 = "[Handover] ** Resume Timeout or Handover Fail";
-        gsmmultidataconnectiontracker37.log(s67);
-        int k = 0;
-        do
-        {
-            int l7 = mRetryMgr.length;
-            int i8 = k;
-            int j8 = l7;
-            if(i8 < j8)
-            {
-                mRetryMgr[k].resetRetryCount();
-                k++;
-            } else
-            {
-                isThrottleDefaultReq = false;
-                trySetupAllEnabledServices();
-                return;
-            }
-        } while(true);
-_L28:
-        String s68 = android.provider.Settings.System.getString(phone.getContext().getContentResolver(), "mode_type");
-        String s69 = s68;
-        String s70 = "LTE";
-        if(!s69.equals(s70))
-        {
-            String s71 = s68;
-            String s72 = "GLOBAL";
-            if(!s71.equals(s72))
-                return;
-        }
-        GsmMultiDataConnectionTracker gsmmultidataconnectiontracker38 = this;
-        String s73 = "selectioin mdoe is LTE or GLOBAL. sendPsAttachInfo()";
-        gsmmultidataconnectiontracker38.log(s73);
-        sendPsAttachInfo();
-        return;
     }
 
     public void imsDeregistrationOnDetach(int i, int j)
@@ -3782,82 +3593,55 @@ _L28:
     public boolean isAllDataConnectionInactive()
     {
         Iterator iterator = pdpList.iterator();
-_L4:
-        if(!iterator.hasNext()) goto _L2; else goto _L1
-_L1:
-        if(((GsmDataConnection)(DataConnection)iterator.next()).isInactive()) goto _L4; else goto _L3
-_L3:
-        boolean flag = false;
-_L6:
-        return flag;
-_L2:
-        flag = true;
-        if(true) goto _L6; else goto _L5
-_L5:
+        while (iterator.hasNext()) {
+            if (!((GsmDataConnection)(DataConnection)iterator.next()).isInactive())
+                return false;
+        }
+        return true;
     }
 
     public boolean isAnyApnTypeActive()
     {
         Iterator iterator = pdpList.iterator();
-_L4:
-        if(!iterator.hasNext()) goto _L2; else goto _L1
-_L1:
-        if(!((GsmDataConnection)(DataConnection)iterator.next()).isActive()) goto _L4; else goto _L3
-_L3:
-        boolean flag = true;
-_L6:
-        return flag;
-_L2:
-        flag = false;
-        if(true) goto _L6; else goto _L5
-_L5:
+        while (iterator.hasNext()) {
+            if (((GsmDataConnection)(DataConnection)iterator.next()).isActive())
+                return true;
+        }
+        return false;
     }
 
     public boolean isApnTypeActive(String s)
     {
         Iterator iterator = pdpList.iterator();
-_L4:
-        if(!iterator.hasNext()) goto _L2; else goto _L1
-_L1:
-        GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        if(!gsmdataconnection.canHandleType(s) || !gsmdataconnection.isActive()) goto _L4; else goto _L3
-_L3:
-        boolean flag = true;
-_L6:
-        return flag;
-_L2:
-        flag = false;
-        if(true) goto _L6; else goto _L5
-_L5:
+        while (iterator.hasNext()) {
+            GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+            if (gsmdataconnection.canHandleType(s) || gsmdataconnection.isActive())
+                return true;
+        }
+        return false;
     }
 
     protected boolean isApnTypeAvailable(String s)
     {
-        if(!s.equals("dun")) goto _L2; else goto _L1
-_L1:
-        boolean flag;
-        if(fetchDunApn() != null)
-            flag = true;
-        else
-            flag = false;
-_L4:
-        return flag;
-_L2:
+        if (s.equals("dun")) {
+            if (fetchDunApn() != null)
+                return true;
+            else
+                return false;
+        } else {
 label0:
-        {
-            if(allApns == null)
-                break label0;
-            Iterator iterator = allApns.iterator();
-            do
-                if(!iterator.hasNext())
+            {
+                if(allApns == null)
                     break label0;
-            while(!((ApnSetting)iterator.next()).canHandleType(s));
-            flag = true;
-            continue; /* Loop/switch isn't completed */
+                Iterator iterator = allApns.iterator();
+                do
+                    if(!iterator.hasNext())
+                        break label0;
+                while(!((ApnSetting)iterator.next()).canHandleType(s));
+                return = true;
+            }
+            return = false;
         }
-        flag = false;
-        if(true) goto _L4; else goto _L3
-_L3:
     }
 
     public boolean isDataConnectionAsDesired()
@@ -4091,45 +3875,52 @@ _L3:
             log(s6);
             Object obj = waitingApns.remove(0);
         }
-        if(!waitingApns.isEmpty()) goto _L2; else goto _L1
-_L1:
-        if(mActiveApn == null) goto _L4; else goto _L3
-_L3:
-        if(!mActiveApn.canHandleType("default") || isOnDemandEnable) goto _L6; else goto _L5
-_L5:
-        log("onDataSetupComplete : Start delayed retry for INTERNET");
-        startDelayedRetry(failcause, s);
-_L4:
-        if(mActivePdp != null)
-            mActivePdp.resetSynchronously();
-        Message message1 = obtainMessage(59);
-        boolean flag2 = sendMessage(message1);
-        return;
-_L6:
-        if(mActiveApn.canHandleType("ims"))
-        {
-            com.android.internal.telephony.DataConnection.FailCause failcause1 = com.android.internal.telephony.DataConnection.FailCause.NETWORK_FAILURE;
-            if(failcause == failcause1)
-            {
-                imsDeregistrationOnDisconnect("pdndroppedbyNetwork");
-                continue; /* Loop/switch isn't completed */
+        if (waitingApns.isEmpty()) {
+            if (mActiveApn != null) {
+                if (mActiveApn.canHandleType("default") || !isOnDemandEnable) {
+                    log("onDataSetupComplete : Start delayed retry for INTERNET");
+                    startDelayedRetry(failcause, s);
+                    //_L4:
+                    if(mActivePdp != null)
+                        mActivePdp.resetSynchronously();
+                    Message message1 = obtainMessage(59);
+                    boolean flag2 = sendMessage(message1);
+                    return;
+                } else {
+                    if(mActiveApn.canHandleType("ims")) {
+                        com.android.internal.telephony.DataConnection.FailCause failcause1 = com.android.internal.telephony.DataConnection.FailCause.NETWORK_FAILURE;
+                        if(failcause == failcause1) {
+                            imsDeregistrationOnDisconnect("pdndroppedbyNetwork");
+                            continue; /* Loop/switch isn't completed */
+                        }
+                    }
+                    if(!isOnDemandEnable)
+                        startDelayedRetry(failcause, s);
+                    else
+                    if(!mActiveApn.canHandleType("ims") && isOnDemandEnable) {
+                        com.android.internal.telephony.DataConnectionTracker.State state = com.android.internal.telephony.DataConnectionTracker.State.FAILED;
+                        setState(state);
+                    }
+                    if(mActivePdp != null)
+                        mActivePdp.resetSynchronously();
+                    Message message1 = obtainMessage(59);
+                    boolean flag2 = sendMessage(message1);
+                    return;
+                }
+            } else {
+                if(mActivePdp != null)
+                    mActivePdp.resetSynchronously();
+                Message message1 = obtainMessage(59);
+                boolean flag2 = sendMessage(message1);
+                return;
             }
+        } else {
+            com.android.internal.telephony.DataConnectionTracker.State state1 = com.android.internal.telephony.DataConnectionTracker.State.SCANNING;
+            setState(state1);
+            Message message2 = obtainMessage(5, s);
+            boolean flag3 = sendMessageDelayed(message2, 5000L);
+            return;
         }
-        if(!isOnDemandEnable)
-            startDelayedRetry(failcause, s);
-        else
-        if(!mActiveApn.canHandleType("ims") && isOnDemandEnable)
-        {
-            com.android.internal.telephony.DataConnectionTracker.State state = com.android.internal.telephony.DataConnectionTracker.State.FAILED;
-            setState(state);
-        }
-        if(true) goto _L4; else goto _L2
-_L2:
-        com.android.internal.telephony.DataConnectionTracker.State state1 = com.android.internal.telephony.DataConnectionTracker.State.SCANNING;
-        setState(state1);
-        Message message2 = obtainMessage(5, s);
-        boolean flag3 = sendMessageDelayed(message2, 5000L);
-        return;
     }
 
     protected void onDisconnectDone(AsyncResult asyncresult)
@@ -4245,100 +4036,78 @@ _L2:
         String s3 = stringbuilder2.append(flag1).toString();
         log(s3);
         s4 = apnIdToType(i);
-        if(j != 1) goto _L2; else goto _L1
-_L1:
-        if(dataEnabled[i] == null)
-        {
-            dataEnabled[i] = true;
-            int l = enabledCount + 1;
-            enabledCount = l;
+        if (j == 1) {
+            if(dataEnabled[i] == null) {
+                dataEnabled[i] = true;
+                int l = enabledCount + 1;
+                enabledCount = l;
+            }
+            if(!isApnTypeActive(s4)) {
+                mRequestedApnType = s4;
+                onEnableNewApn();
+            }
+            return;
+        } else {
+            if(dataEnabled[i] == null)
+                return;
+            //_L3:
+            int k1;
+            Iterator iterator;
+            dataEnabled[i] = false;
+            int i1 = enabledCount - 1;
+            enabledCount = i1;
+            StringBuilder stringbuilder3 = (new StringBuilder()).append("enabledCount to be checked is ");
+            int j1 = enabledCount;
+            String s5 = stringbuilder3.append(j1).toString();
+            log(s5);
+            String s6 = apnIdToType(i);
+            removeFromPendingRequestedApns(s6);
+            k1 = 0;
+            iterator = pdpList.iterator();
+            while (iterator.hasNext()) {
+                GsmDataConnection gsmdataconnection;
+                boolean flag3;
+                int l1;
+                gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
+                String s7 = apnIdToType(i);
+                boolean flag2 = gsmdataconnection.canHandleType(s7);
+                StringBuilder stringbuilder4 = (new StringBuilder()).append("idx ").append(k1).append(": ");
+                String s8 = gsmdataconnection.getStateAsString();
+                StringBuilder stringbuilder5 = stringbuilder4.append(s8).append(", apn(");
+                ApnSetting apnsetting = gsmdataconnection.getApn();
+                String s9 = stringbuilder5.append(apnsetting).append("), ").append("canHandle(").append(flag2).append(")").toString();
+                log(s9);
+                if(gsmdataconnection.isInactive() || !flag2)
+                    return;
+                flag3 = false;
+                for (l1 = 0; l1 < 8; l1++) {
+                    if (i != l1) {
+                        String s10 = apnIdToType(l1);
+                        if(gsmdataconnection.canHandleType(s10) || dataEnabled[l1] != null) {
+                            log("Apn used by other connection");
+                            flag3 = true;
+                        }
+                        if (!flag3) {
+                            if (!gsmdataconnection.isDisconnecting()) {
+                                String s11 = (new StringBuilder()).append("Disconnect pdp(").append(k1).append(")").toString();
+                                log(s11);
+                                mRequestedApnType = s4;
+                                if(gsmdataconnection.canHandleType("ims") || !"apnDisabled".equals(s)) {//goto _L18; else goto _L17
+                                    byte byte0 = 25;
+                                    Message message1 = obtainMessage(byte0, "apnDisabled");
+                                    gsmdataconnection.disconnect(message1);
+                                } else {
+                                    Message message = obtainMessage(25, "nonImsAddressConfFail");
+                                    gsmdataconnection.disconnect(message);
+                                }
+                            } else {
+                                log("Already in disconnecting state");
+                            }
+                        }
+                    }
+                }
+            }
         }
-        if(!isApnTypeActive(s4))
-        {
-            mRequestedApnType = s4;
-            onEnableNewApn();
-        }
-_L4:
-        this;
-        JVM INSTR monitorexit ;
-        return;
-_L2:
-        if(dataEnabled[i] == null) goto _L4; else goto _L3
-_L3:
-        int k1;
-        Iterator iterator;
-        dataEnabled[i] = false;
-        int i1 = enabledCount - 1;
-        enabledCount = i1;
-        StringBuilder stringbuilder3 = (new StringBuilder()).append("enabledCount to be checked is ");
-        int j1 = enabledCount;
-        String s5 = stringbuilder3.append(j1).toString();
-        log(s5);
-        String s6 = apnIdToType(i);
-        removeFromPendingRequestedApns(s6);
-        k1 = 0;
-        iterator = pdpList.iterator();
-_L15:
-        if(!iterator.hasNext()) goto _L4; else goto _L5
-_L5:
-        GsmDataConnection gsmdataconnection;
-        boolean flag3;
-        int l1;
-        gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
-        String s7 = apnIdToType(i);
-        boolean flag2 = gsmdataconnection.canHandleType(s7);
-        StringBuilder stringbuilder4 = (new StringBuilder()).append("idx ").append(k1).append(": ");
-        String s8 = gsmdataconnection.getStateAsString();
-        StringBuilder stringbuilder5 = stringbuilder4.append(s8).append(", apn(");
-        ApnSetting apnsetting = gsmdataconnection.getApn();
-        String s9 = stringbuilder5.append(apnsetting).append("), ").append("canHandle(").append(flag2).append(")").toString();
-        log(s9);
-        if(gsmdataconnection.isInactive() || !flag2)
-            break MISSING_BLOCK_LABEL_653;
-        flag3 = false;
-        l1 = 0;
-_L16:
-        if(l1 >= 8) goto _L7; else goto _L6
-_L6:
-        if(i == l1) goto _L9; else goto _L8
-_L8:
-        String s10 = apnIdToType(l1);
-        if(!gsmdataconnection.canHandleType(s10) || dataEnabled[l1] == null) goto _L9; else goto _L10
-_L10:
-        log("Apn used by other connection");
-        flag3 = true;
-_L7:
-        if(flag3) goto _L12; else goto _L11
-_L11:
-        if(!gsmdataconnection.isDisconnecting()) goto _L14; else goto _L13
-_L13:
-        log("Already in disconnecting state");
-_L12:
-        k1++;
-          goto _L15
-_L9:
-        l1++;
-          goto _L16
-_L14:
-        String s11 = (new StringBuilder()).append("Disconnect pdp(").append(k1).append(")").toString();
-        log(s11);
-        mRequestedApnType = s4;
-        if(gsmdataconnection.canHandleType("ims") || !"apnDisabled".equals(s)) goto _L18; else goto _L17
-_L17:
-        Message message = obtainMessage(25, "nonImsAddressConfFail");
-        gsmdataconnection.disconnect(message);
-          goto _L12
-        Exception exception;
-        exception;
-        throw exception;
-_L18:
-        byte byte0 = 25;
-        Message message1 = obtainMessage(byte0, "apnDisabled");
-        gsmdataconnection.disconnect(message1);
-          goto _L12
-        String s12 = (new StringBuilder()).append("idx ").append(k1).append(" pass!!").toString();
-        log(s12);
-          goto _L12
     }
 
     protected void onEnableNewApn()
