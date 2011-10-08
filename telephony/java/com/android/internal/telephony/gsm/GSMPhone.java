@@ -100,7 +100,7 @@ public class GSMPhone extends PhoneBase {
     GsmCallTracker mCT;
     GsmServiceStateTracker mSST;
     GsmSMSDispatcher mSMS;
-    SIMRecords mSIMRecords;
+    public SIMRecords mSIMRecords;
     SimCard mSimCard;
     StkService mStkService;
     ArrayList <GsmMmiCode> mPendingMMIs = new ArrayList<GsmMmiCode>();
@@ -129,6 +129,7 @@ public class GSMPhone extends PhoneBase {
         this(context,ci,notifier, HandoverTracker.defaultHandoverTracker(), false);
     }
 
+    public
     GSMPhone (Context context, CommandsInterface ci, PhoneNotifier notifier, boolean unitTestMode) {
         this(context,ci,notifier, HandoverTracker.defaultHandoverTracker(), unitTestMode);
     }
@@ -140,6 +141,11 @@ public class GSMPhone extends PhoneBase {
 
     public void getMpsr(Message msg) {
         mCM.getMpsr(msg);
+    }
+
+    public
+    GSMPhone (Context context, CommandsInterface ci, PhoneNotifier notifier, HandoverTracker handovertracker) {
+        this(context, ci, notifier, handovertracker, false);
     }
 
     public
@@ -299,6 +305,14 @@ public class GSMPhone extends PhoneBase {
     public String[] getIsimIMPU()
     {
         return mSIMRecords.isimIMPU;
+    }
+
+    public void setMpsr(int i, Message msg) {
+        mCM.setMpsr(i, msg);
+    }
+
+    public void setUpDedicatedBearer(String s) {
+        mDataConnection.setUpDedicatedBearer(s);
     }
     /**
      * END DROID Charge Hack

@@ -1504,4 +1504,12 @@ public final class SimulatedCommands extends BaseCommands
     public void getGsmBroadcastConfig(Message response) {
         unimplemented(response);
     }
+
+    public void suspendDataChannels(int i, Message response) {
+        unimplemented(response);
+    }
+    public void suspendDataChannels(Message response) {
+        unimplemented(response);
+    }
+
 }

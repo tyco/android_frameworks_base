@@ -709,7 +709,7 @@ public final class GsmMultiDataConnectionTracker extends DataConnectionTracker
             apnsetting = new ApnSetting(k2, s7, s9, s11, s13, s15, s17, s19, s21, s23, s25, j8, s28, l1, i1, as);
             i9 = i1;
             j9 = 1;
-            if(i9 == j9) { goto _L4; else goto _L3
+            if(i9 == j9) {
                 String as1[] = as;
                 int k9 = as1.length;
                 int j10 = 0;
@@ -1104,7 +1104,7 @@ label0:
                         if (!iterator.hasNext())
                             break label0;
                         apnsetting = (ApnSetting)iterator.next();
-                    } while (!apnsetting.apn.equals(s))
+                    } while (!apnsetting.apn.equals(s));
                     as = apnsetting.types;
                     return as;
                 }
@@ -1245,7 +1245,7 @@ label0:
                             return;
                         }
                     }
-                } while (cursor.moveToNext())
+                } while (cursor.moveToNext());
             } else {
                 cursor.close();
                 if(sqlitedatabase1 != null)
@@ -1423,8 +1423,6 @@ label0:
         resetallApnsaddressInfo(s5);
         if(gsmdataconnection.isipv4configured == 1)
             flag = true;
-        gsmdataconnection;
-        JVM INSTR monitorexit ;
         notifyDefaultData("ipv6addressconfigured");
         if(isOnDemandEnable)
             return;
@@ -1632,7 +1630,7 @@ label0:
         j = 0;
         k = arraylist.size();
         do {
-            flag = false
+            flag = false;
             Iterator iterator = pdpList.iterator();
             do
             {
@@ -1667,7 +1665,7 @@ label0:
             } else {
                 j++;
             }
-        } while (j < k)
+        } while (j < k);
         return true;
     }
 
@@ -2146,10 +2144,6 @@ label1:
         filewriter.write(s1);
         filewriter.close();
         return;
-        Exception exception;
-        exception;
-        filewriter.close();
-        throw exception;
     }
 
     private void trySetupAllEnabledServices()
@@ -2921,7 +2915,6 @@ label0:
     protected com.android.internal.telephony.DataConnectionTracker.State getRequestedApnState(String s)
     {
         Iterator iterator = pdpList.iterator();
-_L2:
         GsmDataConnection gsmdataconnection;
         com.android.internal.telephony.DataConnectionTracker.State state;
         do
@@ -2957,12 +2950,11 @@ _L2:
                 break;
             gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
         } while(gsmdataconnection.canHandleType("ims") || gsmdataconnection.canHandleType("admin"));
-        if(gsmdataconnection.isActive()) {goto _L2; else goto _L1
+        if(gsmdataconnection.isActive()) {
             if(gsmdataconnection.isActivating())
                 flag = true;
             if(gsmdataconnection.isDisconnecting())
                 flag1 = true;
-              goto _L3
             if(flag && flag1)
                 return com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
             else
@@ -3638,9 +3630,9 @@ label0:
                     if(!iterator.hasNext())
                         break label0;
                 while(!((ApnSetting)iterator.next()).canHandleType(s));
-                return = true;
+                return true;
             }
-            return = false;
+            return false;
         }
     }
 
@@ -4004,15 +3996,8 @@ label0:
 
     protected void onEnableApn(int i, int j)
     {
-        this;
-        JVM INSTR monitorenter ;
         onEnableApn(i, j, "apnDisabled");
-        this;
-        JVM INSTR monitorexit ;
         return;
-        Exception exception;
-        exception;
-        throw exception;
     }
 
     /**
@@ -4021,8 +4006,6 @@ label0:
 
     protected void onEnableApn(int i, int j, String s)
     {
-        this;
-        JVM INSTR monitorenter ;
         String s4;
         String s1 = (new StringBuilder()).append("EVENT_APN_ENABLE_REQUEST ").append(i).append(", ").append(j).append(",reason : ").append(s).toString();
         log(s1);

@@ -91,6 +91,8 @@ public class SipPhone extends SipPhoneBase {
     }
     public void getMpsr(Message msg) {
     }
+    public void setMpsr(int i, Message msg) {
+    }
     public String[] getIsimIMPU() {
         String[] s = new String[3];
         s[0] = "";
@@ -103,6 +105,8 @@ public class SipPhone extends SipPhoneBase {
     }
     public String getIsimDomain() {
         return "";
+    }
+    public void setUpDedicatedBearer(String s) {
     }
 
     public boolean canTake(Object incomingCall) {

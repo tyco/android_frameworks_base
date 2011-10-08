@@ -1048,4 +1048,21 @@ public abstract class PhoneBase extends Handler implements Phone {
         Log.e(LOG_TAG, "Error! " + name + "() in PhoneBase should not be " +
                 "called, GSMPhone inactive.");
     }
+
+    /**
+     * Droid Charge Hacks
+     */
+    public boolean setVPNPassthroughEnable(boolean flag) {
+        return mDataConnection.setVPNPassthroughEnable(flag);
+    }
+    public void setDataProfile(int i, Message response) {
+        Log.e(LOG_TAG, "Error! This function should not be " +
+                "called, inactive CDMAPhone.");
+    }
+    public boolean setDataConnected(boolean flag) {
+        return mDataConnection.setDataConnected(flag);
+    }
+    public void setAutoConnectEnable(boolean flag) {
+        mDataConnection.setAutoConnectEnable(flag);
+    }
 }

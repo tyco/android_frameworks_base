@@ -2072,7 +2072,7 @@ label0:
                     return s1;
                 }
             } else {
-                Iterator iterator pdpList.iterator();
+                Iterator iterator = pdpList.iterator();
                 while (iterator.hasNext()) {
                     GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
                     if (gsmdataconnection.canHandleType(s)) {
@@ -2099,7 +2099,7 @@ label0:
                 }
                 return s1;
             } else {
-                Iterator iterator pdpList.iterator();
+                Iterator iterator = pdpList.iterator();
                 while (iterator.hasNext()) {
                     GsmDataConnection gsmdataconnection = (GsmDataConnection)(DataConnection)iterator.next();
                     if (gsmdataconnection.canHandleType(s)) {
@@ -2597,7 +2597,7 @@ label0:
             if (allApns != null) {
                 Iterator iterator = allApns.iterator();
                 while (iterator.hasNext()) {
-                    if (((ApnSetting)iterator.next().canHandleType(s))
+                    if ((ApnSetting)iterator.next().canHandleType(s))
                         return true;
                 }
                 return false;
@@ -3162,8 +3162,6 @@ label0:
 
     protected void onEnableApn(int i, int j)
     {
-        this;
-        JVM INSTR monitorenter ;
         String s = (new StringBuilder()).append("EVENT_APN_ENABLE_REQUEST ").append(i).append(", ").append(j).toString();
         log(s);
         StringBuilder stringbuilder = (new StringBuilder()).append(" dataEnabled = ");
@@ -3584,8 +3582,6 @@ label3:
     protected void onIpv6AddrStatusChangedIpv6Only(AsyncResult asyncresult, GsmDataConnection gsmdataconnection)
     {
         log("onIpv6AddrStatusChangedIpv6Only");
-        gsmdataconnection;
-        JVM INSTR monitorenter ;
         if(gsmdataconnection == null) {
             int i = Log.d("eCDMA", "Current bearer is null");
             return;
@@ -4019,7 +4015,6 @@ label2:
                         break; /* Loop/switch isn't completed */
                     int i3 = Log.d("eCDMA", "[eCDMADataConnectionTracker] attach called ");
                     gsmdataconnection.connect(message, apnsetting, 3, true);
-                    if(true) goto _L8; else goto _L7
                     flag = false;
                     return flag; /* Loop/switch isn't completed */
                 }
@@ -4232,7 +4227,7 @@ label2:
             s2 = mCurrentRequestedApnType;
             s3 = stringbuilder1.append(s2).append(")").toString();
             log(s3);
-            if(phone.getSimulatedRadioControl() != null) {goto _L4; else goto _L3
+            if(phone.getSimulatedRadioControl() != null) {
                 state = com.android.internal.telephony.DataConnectionTracker.State.CONNECTED;
                 setState(state);
                 phone.notifyDataConnection(s);

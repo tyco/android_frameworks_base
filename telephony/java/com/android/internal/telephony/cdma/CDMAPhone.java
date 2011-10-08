@@ -150,6 +150,11 @@ public class CDMAPhone extends PhoneBase {
     }
 
     public CDMAPhone(Context context, CommandsInterface ci, PhoneNotifier notifier,
+            HandoverTracker handovertracker) {
+        this(context, ci, notifier, handovertracker, false);
+    }
+
+    public CDMAPhone(Context context, CommandsInterface ci, PhoneNotifier notifier,
             HandoverTracker handovertracker, boolean unitTestMode) {
         super(notifier, context, ci, unitTestMode);
 
@@ -1486,4 +1491,5 @@ public class CDMAPhone extends PhoneBase {
     public String getIsimIMPI() {
         return "";
     }
+
 }

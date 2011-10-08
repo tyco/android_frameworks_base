@@ -372,4 +372,8 @@ class SipCommandInterface extends BaseCommands implements CommandsInterface {
 
     public void exitEmergencyCallbackMode(Message response) {
     }
+
+    public void suspendDataChannels(int i, Message msg) {}
+    public void suspendDataChannels(Message msg) {}
+
 }

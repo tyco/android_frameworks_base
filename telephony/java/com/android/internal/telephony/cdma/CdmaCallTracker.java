@@ -1041,6 +1041,7 @@ public final class CdmaCallTracker extends CallTracker {
             if (Phone.DEBUG_PHONE) log("disableDataCallInEmergencyCall");
             mIsInEmergencyCall = true;
             phone.disableDataConnectivity();
+            ((PhoneBase)PhoneFactory.getGsmPhone()).mCM.suspendDataChannels(1, null);
         }
     }
 

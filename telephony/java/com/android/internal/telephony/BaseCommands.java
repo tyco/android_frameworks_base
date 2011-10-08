@@ -84,6 +84,11 @@ public abstract class BaseCommands implements CommandsInterface {
     protected Registrant mRestrictedStateRegistrant;
     protected Registrant mGsmBroadcastSmsRegistrant;
 
+    /**
+     * Droid Charge
+     */
+    protected Registrant mCpCrashRegistrant;
+
     // Network Mode received from PhoneFactory
     protected int mNetworkMode;
     // CDMA subscription received from PhoneFactory
@@ -133,6 +138,17 @@ public abstract class BaseCommands implements CommandsInterface {
         synchronized (mStateMonitor) {
             mOnRegistrants.remove(h);
         }
+    }
+
+    /**
+     * Fron DROID Charge
+     */
+    public void setOnCpCrash(Handler h, int i, Object obj) {
+        Registrant registerant = new Registrant(h, i, obj);
+        mCpCrashRegistrant = registerant;
+    }
+    public void unSetOnOnCpCrash(Handler h) {
+        mCpCrashRegistrant.clear();
     }
 
 

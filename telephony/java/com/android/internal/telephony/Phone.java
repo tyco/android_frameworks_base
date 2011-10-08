@@ -312,6 +312,13 @@ public interface Phone {
     public abstract String[] getIsimIMPU();
     public abstract void getMpsr(Message msg);
     public abstract void requestIsimAuthentication(byte abyte[], Message msg);
+    public abstract void setMpsr(int i, Message msg);
+    public abstract boolean setVPNPassthroughEnable(boolean flag);
+    public abstract void suspendDataChannels(Message response);
+    public abstract void setUpDedicatedBearer(String s);
+    public abstract void setDataProfile(int i, Message response);
+    public abstract boolean setDataConnected(boolean flag);
+    public abstract void setAutoConnectEnable(boolean flag);
 
     /**
      * Get the current ServiceState. Use

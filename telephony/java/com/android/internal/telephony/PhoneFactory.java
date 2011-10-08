@@ -41,6 +41,7 @@ public class PhoneFactory {
     static private Phone mMultiModePhoneProxy;
     static private Phone sGsmProxyPhone;
     static private Phone sCdmaProxyPhone;
+    static private HandoverTracker sHandoverTracker;
     //static private CommandsInterface sCommandsInterface = null;
     static private CommandsInterface[] sCommandsInterfaces = null;
     static
@@ -212,7 +213,7 @@ public class PhoneFactory {
     public static Phone getCdmaPhone() {
         synchronized(PhoneProxy.lockForRadioTechnologyChange) {
             if (sCdmaProxyPhone == null)
-                sCdmaProxyPhone = new CDMAPhone(sCommandsInterface, sCommandsInterface[1], sPhoneNotifier);
+                sCdmaProxyPhone = new CDMAPhone(sContext, sCommandsInterfaces[1], sPhoneNotifier);
             return sCdmaProxyPhone;
         }
     }

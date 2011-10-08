@@ -703,6 +703,30 @@ public class PhoneProxy extends Handler implements Phone {
             return;
         }
     }
+    public void suspendDataChannels(Message msg) {
+        mCommandsInterface.suspendDataChannels(msg);
+    }
+    public boolean setVPNPassthroughEnable(boolean flag) {
+        return mActivePhone.setVPNPassthroughEnable(flag);
+    }
+    public void setUpDedicatedBearer(String s) {
+        mActivePhone.setUpDedicatedBearer(s);
+    }
+    public void suspendDataChannels(Message response) {
+        mCommandsInterface.suspendDataChannels(response);
+    }
+    public void setUpDedicatedBearer(String s) {
+        mActivePhone.setUpDedicatedBearer(s);
+    }
+    public void setDataProfile(int i, Message response) {
+        mActivePhone.setDataProfile(i, response);
+    }
+    public boolean setDataConnected(boolean flag) {
+        return mActivePhone.setDataConnected(flag);
+    }
+    public void setAutoConnectEnable(boolean flag) {
+        mActivePhone.setAutoConnectEnable(flag);
+    }
 
         
     public void requestIsimAuthentication(byte[] abyte, Message msg) {

@@ -170,6 +170,7 @@ public abstract class DataConnectionTracker extends Handler {
     protected State state = State.IDLE;
     protected Handler mDataConnectionTracker = null;
 
+    protected android.content.SharedPreferences.Editor editor;
 
     protected long txPkts, rxPkts, sentSinceLastRecv;
     protected int netStatPollPeriod;
@@ -195,6 +196,21 @@ public abstract class DataConnectionTracker extends Handler {
         super();
         this.phone = phone;
     }
+
+    public boolean IsDataOnRoamingApply() {
+        if (android.provider.Settings.Secure.getInt(phone.getContext().getContentResolver(), "data_roam_access_apply", 0) == 1)
+            return true;
+        else
+            return false;
+    }
+
+    public boolean IsGlobalDataRoamingNotification() {
+        if (android.provider.Settings.Secure.getInt(phone.getContext().getContentResolver(), "data_roam_access_notify", 1) == 1)
+            return true;
+        else
+            return false;
+    }
+
 
     public abstract void dispose();
 
@@ -576,6 +592,28 @@ public abstract class DataConnectionTracker extends Handler {
                 onCleanUpConnection(true, Phone.REASON_DATA_DISABLED);
            }
         }
+    }
+    public boolean setVPNPassthroughEnable(boolean flag) {
+        android.content.SharedPreferences.Editor editor1 = editor.pubBoolean("mifi_vpn_passthrough_key", flag);
+        boolean flag1 = editor.commit();
+        Log.d(LOG_TAG, "setVPNPassthroughEnable=" + flag1);
+        return flag1;
+    }
+    protected boolean setDataConnected(boolean flag) {
+        if (isApnTypeActive("default") != flag) {
+            if (flag) {
+                mRetryMgr.resetRetryCount();
+                onTrySetupData("mifiConnectData");
+            } else {
+                onCleanUpConnection(true, "mifiDisconnectData");
+            }
+        }
+        return true;
+    }
+    public void setAutoConnectEnable(boolean flag) {
+        editor.putBoolean("mifi_auto_connect_enable_key", flag);
+        editor.commit();
+        Log.d(LOG_TAG, "setAutoConnectEnable=" + flag);
     }
 
 

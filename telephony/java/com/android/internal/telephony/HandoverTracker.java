@@ -153,21 +153,12 @@ public final class HandoverTracker extends Handler
 
     public static HandoverTracker defaultHandoverTracker()
     {
-        com/android/internal/telephony/HandoverTracker;
-        JVM INSTR monitorenter ;
         if(!sMadeDefault)
         {
             sDefaultHandoverTracker = new HandoverTracker(null, null);
             sMadeDefault = true;
         }
-        com/android/internal/telephony/HandoverTracker;
-        JVM INSTR monitorexit ;
         return sDefaultHandoverTracker;
-        Exception exception;
-        exception;
-        com/android/internal/telephony/HandoverTracker;
-        JVM INSTR monitorexit ;
-        throw exception;
     }
 
     private void log(String s)
