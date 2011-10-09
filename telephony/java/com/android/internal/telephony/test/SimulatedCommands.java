@@ -1517,5 +1517,8 @@ public final class SimulatedCommands extends BaseCommands
     public void resumeDataChannels(Message response) {
         unimplemented(response);
     }
+    public void processLTEHandover() {
+        Log.w(LOG_TAG, "Handover not implemented in SimulatedCommands");
+    }
 
 }

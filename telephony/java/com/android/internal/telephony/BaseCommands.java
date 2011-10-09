@@ -83,11 +83,22 @@ public abstract class BaseCommands implements CommandsInterface {
     protected Registrant mRingRegistrant;
     protected Registrant mRestrictedStateRegistrant;
     protected Registrant mGsmBroadcastSmsRegistrant;
+    protected Registrant mProcessHandOverRegistrant;
 
     /**
      * Droid Charge
      */
     protected Registrant mCpCrashRegistrant;
+    public void processLTEHandover() {
+        if (mProcessHandOverRegistrant != null) {
+            Log.d(LOG_TAG, "notifying LTE to process handover");
+            mProcessHandOverRegistrant.notifyRegistrant();
+            return;
+        } else {
+            Log.d(LOG_TAG, "mProcessHandOverRegistrant null");
+            return;
+        }
+    }
 
     // Network Mode received from PhoneFactory
     protected int mNetworkMode;
