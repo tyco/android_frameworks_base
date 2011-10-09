@@ -69,14 +69,6 @@ public class MultiModePhoneProxy extends PhoneProxy
                     return;
                 }
             }
-
-            final MultiModePhoneProxy this$0;
-
-            
-            {
-                this$0 = MultiModePhoneProxy.this;
-                super();
-            }
         };
         mHandler = handler;
         BroadcastReceiver broadcastreceiver = new BroadcastReceiver() {
@@ -97,14 +89,6 @@ public class MultiModePhoneProxy extends PhoneProxy
                     refreshRild(intent1);
                     return;
                 }
-            }
-
-            final MultiModePhoneProxy this$0;
-
-            
-            {
-                this$0 = MultiModePhoneProxy.this;
-                super();
             }
         };
         mIntentReceiver = broadcastreceiver;
@@ -150,14 +134,6 @@ public class MultiModePhoneProxy extends PhoneProxy
                 String s1 = stringbuilder.append(l).append(" / ").append(s).toString();
                 int i1 = Log.d("MultiModePhoneProxy", s1);
                 SystemProperties.set("gsm.network.type", s);
-            }
-
-            final MultiModePhoneProxy this$0;
-
-            
-            {
-                this$0 = MultiModePhoneProxy.this;
-                super();
             }
         };
         mPhoneStateListener = phonestatelistener;
@@ -235,7 +211,7 @@ public class MultiModePhoneProxy extends PhoneProxy
                 setActivePhone(mActivePhone);
             default:
                 loge("Not supported Network Mode");
-                setActivePhone(phone);
+                setActivePhone(mActivePhone);
         }
         return i;
     }
@@ -316,9 +292,13 @@ public class MultiModePhoneProxy extends PhoneProxy
         int i1 = oldBatteryPlugStatus;
         boolean flag;
         ByteArrayOutputStream bytearrayoutputstream;
+        ByteArrayOutputStream bytearrayoutputstream1;
         byte byte0;
+        byte byte1;
         CommandsInterface commandsinterface;
+        CommandsInterface commandsinterface1;
         byte abyte0[];
+        byte abyte1[];
         if(i != i1)
             flag = true;
         else
@@ -359,7 +339,7 @@ public class MultiModePhoneProxy extends PhoneProxy
                     return;
                 bytearrayoutputstream1 = new ByteArrayOutputStream();
                 dataoutputstream = new DataOutputStream(bytearrayoutputstream1);
-                l1 = Log.d("MultiModePhoneProxy", "Battery becomes to normal level.");
+                Log.d("MultiModePhoneProxy", "Battery becomes to normal level.");
                 byte1 = 23;
                 dataoutputstream.writeByte(byte1);
                 dataoutputstream.writeByte(2);
@@ -376,10 +356,10 @@ public class MultiModePhoneProxy extends PhoneProxy
                 return;
             } else {
                 //L4
+                int j1;
                 j1 = 0;
                 dataoutputstream.writeByte(j1);
                 oldBatteryPlugStatus = i;
-                int j1;
                 IOException ioexception;
                 int k1;
                 Exception exception;
@@ -391,7 +371,7 @@ public class MultiModePhoneProxy extends PhoneProxy
                     return;
                 bytearrayoutputstream1 = new ByteArrayOutputStream();
                 dataoutputstream = new DataOutputStream(bytearrayoutputstream1);
-                l1 = Log.d("MultiModePhoneProxy", "Battery becomes to normal level.");
+                Log.d("MultiModePhoneProxy", "Battery becomes to normal level.");
                 byte1 = 23;
                 dataoutputstream.writeByte(byte1);
                 dataoutputstream.writeByte(2);
@@ -422,7 +402,7 @@ public class MultiModePhoneProxy extends PhoneProxy
                 return;
             bytearrayoutputstream1 = new ByteArrayOutputStream();
             dataoutputstream = new DataOutputStream(bytearrayoutputstream1);
-            l1 = Log.d("MultiModePhoneProxy", "Battery becomes to normal level.");
+            Log.d("MultiModePhoneProxy", "Battery becomes to normal level.");
             byte1 = 23;
             dataoutputstream.writeByte(byte1);
             dataoutputstream.writeByte(2);

@@ -703,6 +703,9 @@ public class PhoneProxy extends Handler implements Phone {
             return;
         }
     }
+    protected void setActivePhone(Phone phone) {
+        mActivePhone = phone;
+    }
     public void suspendDataChannels(Message msg) {
         mCommandsInterface.suspendDataChannels(msg);
     }
