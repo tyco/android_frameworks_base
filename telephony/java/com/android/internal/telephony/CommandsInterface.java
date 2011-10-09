@@ -981,6 +981,8 @@ public interface CommandsInterface {
     public void unSetOnOnCpCrash(Handler h);
     public abstract void suspendDataChannels(int i, Message message);
     public abstract void suspendDataChannels(Message message);
+    public abstract void resumeDataChannels(int i, Message message);
+    public abstract void resumeDataChannels(Message message);
 
     /**
      * parameters equivilient to 27.007 AT+CRSM command

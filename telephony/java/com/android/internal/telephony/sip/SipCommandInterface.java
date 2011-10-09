@@ -375,5 +375,7 @@ class SipCommandInterface extends BaseCommands implements CommandsInterface {
 
     public void suspendDataChannels(int i, Message msg) {}
     public void suspendDataChannels(Message msg) {}
+    public void resumeDataChannels(int i, Message msg) {}
+    public void resumeDataChannels(Message msg) {}
 
 }

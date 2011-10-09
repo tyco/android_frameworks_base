@@ -1034,4 +1034,6 @@ public final class CdmaDataConnectionTracker extends DataConnectionTracker {
     protected void log(String s) {
         Log.d(LOG_TAG, "[CdmaDataConnectionTracker] " + s);
     }
+    public void onHOCleanupHOAPN() {
+    }
 }

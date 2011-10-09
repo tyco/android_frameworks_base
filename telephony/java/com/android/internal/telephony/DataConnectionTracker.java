@@ -615,6 +615,17 @@ public abstract class DataConnectionTracker extends Handler {
         editor.commit();
         Log.d(LOG_TAG, "setAutoConnectEnable=" + flag);
     }
-
-
+    public void resetTraficCounter() {
+        Log.d(LOG_TAG, "resetTraficCounter()");
+        long l = System.currentTimeMillis();
+        editor.putLong("mifi_diagnostics_start_time_key", l);
+        editor.putLong("mifi_diagnostics_total_connnection_time_key", 0L);
+        editor.putLong("mifi_diagnostics_data_received_key", 0L);
+        editor.putLong("mifi_diagnostics_data_transmitted_key", 0L);
+        editor.commit();
+    }
+    protected boolean isDataConnected() {
+        return isApnTypeActive("default");
+    }
+    public abstract void onHOCleanupHOAPN();
 }

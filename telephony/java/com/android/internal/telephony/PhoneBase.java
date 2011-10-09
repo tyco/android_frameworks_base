@@ -1065,4 +1065,16 @@ public abstract class PhoneBase extends Handler implements Phone {
     public void setAutoConnectEnable(boolean flag) {
         mDataConnection.setAutoConnectEnable(flag);
     }
+    public void suspendDataChannels(Message response) {
+        mCM.suspendDataChannels(methods);
+    }
+    public void resumeDataChannels(Message response) {
+        mCM.resumeDataChannels(response);
+    }
+    public void resetTraficCounter() {
+        mDataConnection.resetTraficCounter();
+    }
+    public boolean isDataConnected() {
+        return mDataConnection.isDataConnected();
+    }
 }

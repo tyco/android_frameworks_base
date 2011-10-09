@@ -1511,5 +1511,11 @@ public final class SimulatedCommands extends BaseCommands
     public void suspendDataChannels(Message response) {
         unimplemented(response);
     }
+    public void resumeDataChannels(int i, Message response) {
+        unimplemented(response);
+    }
+    public void resumeDataChannels(Message response) {
+        unimplemented(response);
+    }
 
 }

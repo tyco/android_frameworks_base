@@ -706,6 +706,9 @@ public class PhoneProxy extends Handler implements Phone {
     public void suspendDataChannels(Message msg) {
         mCommandsInterface.suspendDataChannels(msg);
     }
+    public void resumeDataChannels(Message msg) {
+        mCommandsInterface.resumeDataChannels(msg);
+    }
     public boolean setVPNPassthroughEnable(boolean flag) {
         return mActivePhone.setVPNPassthroughEnable(flag);
     }
@@ -726,6 +729,15 @@ public class PhoneProxy extends Handler implements Phone {
     }
     public void setAutoConnectEnable(boolean flag) {
         mActivePhone.setAutoConnectEnable(flag);
+    }
+    public void sendPsAttachInfo() {
+        mActivePhone.sendPsAttachInfo();
+    }
+    public void resetTraficCounter() {
+        mActivePhone.resetTraficCounter();
+    }
+    public boolean isDataConnected() {
+        return mActivePhone.isDataConnected();
     }
 
         

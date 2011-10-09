@@ -1541,4 +1541,6 @@ public final class GsmDataConnectionTracker extends DataConnectionTracker {
     protected void log(String s) {
         Log.d(LOG_TAG, "[GsmDataConnectionTracker] " + s);
     }
+    public void onHOCleanupHOAPN() {
+    }
 }

@@ -319,6 +319,10 @@ public interface Phone {
     public abstract void setDataProfile(int i, Message response);
     public abstract boolean setDataConnected(boolean flag);
     public abstract void setAutoConnectEnable(boolean flag);
+    public abstract void sendPsAttachInfo();
+    public abstract void resumeDataChannels(Message response);
+    public abstract void resetTraficCounter();
+    public abstract boolean isDataConnected();
 
     /**
      * Get the current ServiceState. Use

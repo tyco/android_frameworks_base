@@ -338,6 +338,7 @@ final class GsmServiceStateTracker extends ServiceStateTracker {
     }
 
     public void handleMessage (Message msg) {
+        // DROID Charge: need to add EVENT_HANDOVER_* messages.
         AsyncResult ar;
         int[] ints;
         String[] strings;

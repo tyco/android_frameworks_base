@@ -102,6 +102,7 @@ public class CDMAPhone extends PhoneBase {
     CdmaServiceStateTracker mSST;
     RuimRecords mRuimRecords;
     RuimCard mRuimCard;
+    public HandoverTracker mHOT;
     ArrayList <CdmaMmiCode> mPendingMmis = new ArrayList<CdmaMmiCode>();
     RuimPhoneBookInterfaceManager mRuimPhoneBookInterfaceManager;
     RuimSmsInterfaceManager mRuimSmsInterfaceManager;
@@ -968,6 +969,7 @@ public class CDMAPhone extends PhoneBase {
             sendEmergencyCallbackModeChange();
             // Re-initiate data connection
             mDataConnection.setDataEnabled(true);
+            ((PhoneBase)PhoneFactory.getGsmPhone()).mCM.resumeDataChannels(1, null);
         }
     }
 

@@ -101,6 +101,7 @@ public class GSMPhone extends PhoneBase {
     GsmServiceStateTracker mSST;
     GsmSMSDispatcher mSMS;
     public SIMRecords mSIMRecords;
+    public HandoverTracker mHOT;
     SimCard mSimCard;
     StkService mStkService;
     ArrayList <GsmMmiCode> mPendingMMIs = new ArrayList<GsmMmiCode>();
@@ -164,6 +165,7 @@ public class GSMPhone extends PhoneBase {
         mSIMRecords = new SIMRecords(this);
         mDataConnection = new GsmDataConnectionTracker (this);
         mSimCard = new SimCard(this);
+        mHOT = handovertracker;
         if (!unitTestMode) {
             mSimPhoneBookIntManager = new SimPhoneBookInterfaceManager(this);
             mSimSmsIntManager = new SimSmsInterfaceManager(this, mSMS);
@@ -313,6 +315,10 @@ public class GSMPhone extends PhoneBase {
 
     public void setUpDedicatedBearer(String s) {
         mDataConnection.setUpDedicatedBearer(s);
+    }
+
+    public void sendPsAttachInfo() {
+        mDataConnection.sendPsAttachInfo();
     }
     /**
      * END DROID Charge Hack

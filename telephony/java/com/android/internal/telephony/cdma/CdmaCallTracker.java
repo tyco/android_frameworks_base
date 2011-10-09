@@ -1018,6 +1018,17 @@ public final class CdmaCallTracker extends CallTracker {
                throw new RuntimeException("unexpected event not handled");
             }
         }
+        if (!mIsInEmergencyCall)
+            return;
+        mIsInEmergencyCall = false;
+        String s1 = SystemProperties.get("ril.cdma.inecmmode", "false");
+        if (s1.compareTo("false") != 0) {
+            return;
+        } else {
+            phone.mDataConnection.setDataEnabled(true);
+            ((PhoneBase)PhoneFactory.getGsmPhone()).mCM.resumeDataChannels(1, null);
+            return;
+        }
     }
 
     /**

@@ -3646,6 +3646,16 @@ public class RIL extends BaseCommands implements CommandsInterface {
         send(rr);
     }
 
+    public void resumeDataChannels(int i, Message response) {
+        RILRequest rr = RILRequest.obtain(RIL_REQUEST_RESUME_DATA_CHANNELS, response);
+        rr.mp.writeInt(1);
+        rr.mp.writeInt(i);
+        if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest));
+        send(rr);
+    }
+    public void resumeDataChannels(Message response) {
+        resumeDataChannels(0, response);
+    }
     public void suspendDataChannels(int i, Message response) {
         RILRequest rr = RILRequest.obtain(RIL_REQUEST_SUSPEND_DATA_CHANNELS, response);
         rr.mp.writeInt(1);

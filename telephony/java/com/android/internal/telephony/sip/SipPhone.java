@@ -108,6 +108,8 @@ public class SipPhone extends SipPhoneBase {
     }
     public void setUpDedicatedBearer(String s) {
     }
+    public void sendPsAttachInfo() {
+    }
 
     public boolean canTake(Object incomingCall) {
         synchronized (SipPhone.class) {
