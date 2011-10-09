@@ -742,6 +742,12 @@ public class PhoneProxy extends Handler implements Phone {
     public boolean isDataConnected() {
         return mActivePhone.isDataConnected();
     }
+    public boolean getVPNPassthroughEnable() {
+        return mActivePhone.getVPNPassthroughEnable();
+    }
+    /**
+     * End DROID Charge Hacks
+     */
 
         
     public void requestIsimAuthentication(byte[] abyte, Message msg) {

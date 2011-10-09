@@ -1077,4 +1077,7 @@ public abstract class PhoneBase extends Handler implements Phone {
     public boolean isDataConnected() {
         return mDataConnection.isDataConnected();
     }
+    public boolean getVPNPassthroughEnable() {
+        return mDataConnection.getVPNPassthroughEnable();
+    }
 }

@@ -628,4 +628,9 @@ public abstract class DataConnectionTracker extends Handler {
         return isApnTypeActive("default");
     }
     public abstract void onHOCleanupHOAPN();
+    public boolean getVPNPassthroughEnable() {
+        boolean flag = sp.getBoolean("mifi_vpn_passthrough_enable_key", false);
+        Log.d(LOG_TAG, "getVPNPassthroughEnable=" + flag);
+        return flag;
+    }
 }

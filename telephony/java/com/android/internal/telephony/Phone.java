@@ -323,6 +323,7 @@ public interface Phone {
     public abstract void resumeDataChannels(Message response);
     public abstract void resetTraficCounter();
     public abstract boolean isDataConnected();
+    public abstract boolean getVPNPassthroughEnable();
 
     /**
      * Get the current ServiceState. Use
