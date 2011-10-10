@@ -95,6 +95,13 @@ public abstract class DataConnection extends HierarchicalStateMachine {
     protected static Object mCountLock = new Object();
     protected static int mCount;
 
+    public int ipaddresstype;
+    public String ipv6Address;
+    public String ipv6dnsServers[];
+    public String ipv6gatewayAddress;
+    public int isipv4configured;
+    public int isipv6configured;
+
     /**
      * Class returned by onSetupConnectionCompleted.
      */

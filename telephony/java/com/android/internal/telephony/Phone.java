@@ -324,6 +324,14 @@ public interface Phone {
     public abstract void resetTraficCounter();
     public abstract boolean isDataConnected();
     public abstract boolean getVPNPassthroughEnable();
+    public abstract long getTotalConnectionTime();
+    public abstract long getTraficRxBytes();
+    public abstract long getTraficStartedTime();
+    public abstract long getTraficTotalRxBytes();
+    public abstract long getTraficTotalTxBytes();
+    public abstract long getTraficTxBytes();
+    public abstract long getTraficStartTime();
+    public abstract long getTraficConnectedTime();
 
     /**
      * Get the current ServiceState. Use

@@ -1080,4 +1080,28 @@ public abstract class PhoneBase extends Handler implements Phone {
     public boolean getVPNPassthroughEnable() {
         return mDataConnection.getVPNPassthroughEnable();
     }
+    public long getTotalConnectionTime() {
+        return mDataConnection.getTotalConnectionTime();
+    }
+    public long getTraficRxBytes() {
+        return mDataConnection.getTraficRxBytes();
+    }
+    public long getTraficStartedTime() {
+        return mDataConnection.getTraficStartedTime();
+    }
+    public long getTraficTotalRxBytes() {
+        return mDataConnection.getTraficTotalRxBytes();
+    }
+    public long getTraficTotalTxBytes() {
+        return mDataConnection.getTraficTotalTxBytes();
+    }
+    public long getTraficTxBytes() {
+        return mDataConnection.getTraficTxBytes();
+    }
+    public long getTraficStartTime() {
+        return mDataConnection.getTraficStartedTime();
+    }
+    public long getTraficConnectedTime() {
+        return mDataConnection.getTotalConnectionTime();
+    }
 }

@@ -24,6 +24,10 @@ public class ApnSetting {
 
     static final String V2_FORMAT_REGEX = "^\\[ApnSettingV2\\]\\s*";
 
+    public int inactivityValue;
+    public int ipType;
+    public String ipv4;
+    public String ipv6;
     String carrier;
     String apn;
     String proxy;

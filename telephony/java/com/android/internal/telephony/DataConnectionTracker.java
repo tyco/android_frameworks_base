@@ -17,6 +17,7 @@
 package com.android.internal.telephony;
 
 import android.app.PendingIntent;
+import android.content.SharedPreferences;
 import android.os.AsyncResult;
 import android.os.Handler;
 import android.os.Message;
@@ -171,11 +172,19 @@ public abstract class DataConnectionTracker extends Handler {
     protected Handler mDataConnectionTracker = null;
 
     protected android.content.SharedPreferences.Editor editor;
+    protected SharedPreferences sp;
 
     protected long txPkts, rxPkts, sentSinceLastRecv;
     protected int netStatPollPeriod;
     protected int mNoRecvPollCount = 0;
     protected boolean netStatPollEnabled = false;
+
+    protected long mifi_diagnostics_Data_Received;
+    protected long mifi_diagnostics_Data_Transmitted;
+    protected long mifi_diagnostics_Total_connection_time;
+    protected long mifi_home_Received;
+    protected long mifi_home_Transmitted;
+    protected long mifi_home_polltime;
 
     /** Manage the behavior of data retry after failure */
     protected RetryManager mRetryMgr = new RetryManager();
@@ -632,5 +641,34 @@ public abstract class DataConnectionTracker extends Handler {
         boolean flag = sp.getBoolean("mifi_vpn_passthrough_enable_key", false);
         Log.d(LOG_TAG, "getVPNPassthroughEnable=" + flag);
         return flag;
+    }
+    public long getTotalConnectionTime() {
+        long l = sp.getLong("mifi_diagnostics_total_connnection_time_key", 0L);
+        Log.d(LOG_TAG, "getTotalConnectionTime(" + l + ")");
+        return l;
+    }
+    public long getTraficRxBytes() {
+        long l = mifi_home_Received;
+        Log.d(LOG_TAG, "getTraficRxBytes(" + l + ")");
+        return l;
+    }
+    public long getTraficStartedTime() {
+        long l = sp.getLong("mifi_diagnostics_start_time_key", 0L);
+        Log.d(LOG_TAG, "getTraficStartedTime(" + l + ")");
+        return l;
+    }
+    public long getTraficTotalRxBytes() {
+        long l = sp.getLong("mifi_diagnostics_data_received_key", 0L);
+        Log.d(LOG_TAG, "getTraficTotalRxBytes(" + l + ")");
+        return l;
+    }
+    public long getTraficTotalTxBytes() {
+        long l = sp.getLong("mifi_diagnostics_data_transmitted_key", 0L);
+        Log.d(LOG_TAG, "getTraficTotalTxBytes(" + l + ")");
+        return l;
+    }
+    public long getTraficTxBytes() {
+        Log.d(LOG_TAG, "getTraficTxBytes(" + mifi_home_Transmitted + ")");
+        return mifi_home_Transmitted;
     }
 }

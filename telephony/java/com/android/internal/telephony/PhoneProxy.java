@@ -745,6 +745,30 @@ public class PhoneProxy extends Handler implements Phone {
     public boolean getVPNPassthroughEnable() {
         return mActivePhone.getVPNPassthroughEnable();
     }
+    public long getTotalConnectionTime() {
+        return mActivePhone.getTotalConnectionTime();
+    }
+    public long getTraficRxBytes() {
+        return mActivePhone.getTraficRxBytes();
+    }
+    public long getTraficStartedTime() {
+        return mActivePhone.getTraficStartedTime();
+    }
+    public long getTraficTotalRxBytes() {
+        return mActivePhone.getTraficTotalRxBytes();
+    }
+    public long getTraficTotalTxBytes() {
+        return mActivePhone.getTraficTotalTxBytes();
+    }
+    public long getTraficTxBytes() {
+        return mActivePhone.getTraficTxBytes();
+    }
+    public long getTraficStartTime() {
+        return mActivePhone.getTraficStartTime();
+    }
+    public long getTraficConnectedTime() {
+        return mActivePhone.getTraficConnectedTime();
+    }
     /**
      * End DROID Charge Hacks
      */
