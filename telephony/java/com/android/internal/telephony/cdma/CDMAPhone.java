@@ -1499,4 +1499,11 @@ public class CDMAPhone extends PhoneBase {
     public int getIpAddressType(String s) {
         return mDataConnection.getIpAddressType(s);
     }
+    public void getDataProfile(Message response) {
+        mCM.getCdmaDataProfile(response);
+    }
+    public boolean explicitDetach(int i, int j) {
+        Log.d(LOG_TAG, "@@@@@ Detach Called");
+        return mDataConnection.explicitDetach(i, j);
+    }
 }

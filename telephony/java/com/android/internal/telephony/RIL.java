@@ -3685,6 +3685,11 @@ public class RIL extends BaseCommands implements CommandsInterface {
     public void suspendDataChannels(Message response) {
         suspendDataChannels(0, response);
     }
+    public void getCdmaDataProfile(Message response) {
+        //int RIL_REQUEST_CDMA_GET_DATAPROFILE = 10025;
+        RILRequest rr = RILRequest.obtain(RIL_REQUEST_CDMA_GET_DATAPROFILE, response);
+        send(rr);
+    }
 
 
     /**

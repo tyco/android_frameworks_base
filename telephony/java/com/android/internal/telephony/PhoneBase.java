@@ -1107,4 +1107,13 @@ public abstract class PhoneBase extends Handler implements Phone {
     public String getNetMask(String s) {
         return mDataConnection.getNetMask(s);
     }
+    public void getDataProfile(Message response) {
+        Log.e(LOG_TAG, "Error! This function should never be executed, inactive CDMAPhone.");
+    }
+    public boolean getAutoConnectEnable() {
+        return mDataConnection.getAutoConnectEnable();
+    }
+    public long getDataConnectedTime() {
+        return mDataConnection.getDataConnectedTime(null);
+    }
 }

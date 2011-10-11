@@ -671,4 +671,14 @@ public abstract class DataConnectionTracker extends Handler {
         Log.d(LOG_TAG, "getTraficTxBytes(" + mifi_home_Transmitted + ")");
         return mifi_home_Transmitted;
     }
+    public boolean getAutoConnectEnable() {
+        boolean flag = sp.getBoolean("mifi_auto_connect_enable_key", true);
+        Log.d(LOG_TAG, "getAutoConnectEnable=" + flag);
+        return flag;
+    }
+    public abstract long getDataConnectedTime(String s);
+    public boolean explicitDetach(int i, int j) {
+        onCleanUpConnection(true, "pdpDropped");
+        return true;
+    }
 }

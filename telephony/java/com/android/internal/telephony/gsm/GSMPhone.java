@@ -326,6 +326,9 @@ public class GSMPhone extends PhoneBase {
     public int getIpAddressType(String s) {
         return mDataConnection.getIpAddressType(s);
     }
+    public boolean explicitDetach(int i, int j) {
+        return mDataConnection.explicitDetach(i, j);
+    }
     /**
      * END DROID Charge Hack
      */

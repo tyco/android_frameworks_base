@@ -335,6 +335,10 @@ public interface Phone {
     public abstract boolean getSMSavailable();
     public abstract String getNetMask(String s);
     public abstract int getIpAddressType(String s);
+    public abstract void getDataProfile(Message response);
+    public abstract boolean getAutoConnectEnable();
+    public abstract long getDataConnectedTime();
+    public abstract boolean explicitDetach(int i, int j);
 
     /**
      * Get the current ServiceState. Use

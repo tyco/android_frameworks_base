@@ -1042,4 +1042,10 @@ public final class CdmaDataConnectionTracker extends DataConnectionTracker {
         else
             return 1;
     }
+    protected long getDataConnectedTime(String s) {
+        if (mActiveDataConnection != null)
+            return mActiveDataConnection.getConnectionTime();
+        else
+            return 65535L;
+    }
 }

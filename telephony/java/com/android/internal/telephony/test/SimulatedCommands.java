@@ -1022,6 +1022,9 @@ public final class SimulatedCommands extends BaseCommands
         return false;
     }
 
+    public void getCdmaDataProfile(Message result) {
+    }
+
     public void setRadioPower(boolean on, Message result) {
         if(on) {
             if (isSimLocked()) {

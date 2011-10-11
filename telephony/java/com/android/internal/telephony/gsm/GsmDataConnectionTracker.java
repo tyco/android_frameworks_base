@@ -1550,4 +1550,10 @@ public final class GsmDataConnectionTracker extends DataConnectionTracker {
     }
     public void onHOCleanupHOAPN() {
     }
+    protected long getDataConnectedTime(String s) {
+        if (mActivePdp != null && (s == null || mActiveApn != null && mActiveApn.canHandleType(s)))
+            return mActivePdp.getConnectionTime();
+        else
+            return 65535L;
+    }
 }

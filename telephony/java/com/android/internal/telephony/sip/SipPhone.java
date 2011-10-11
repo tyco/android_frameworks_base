@@ -116,6 +116,9 @@ public class SipPhone extends SipPhoneBase {
     public int getIpAddressType(String s) {
         return 0;
     }
+    public boolean explicitDetach(int i, int j) {
+        return false;
+    }
 
     public boolean canTake(Object incomingCall) {
         synchronized (SipPhone.class) {

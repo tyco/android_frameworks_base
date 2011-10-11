@@ -778,6 +778,18 @@ public class PhoneProxy extends Handler implements Phone {
     public int getIpAddressType(String s) {
         return mActivePhone.getIpAddressType(s);
     }
+    public void getDataProfile(Message response) {
+        mActivePhone.getDataProfile(response);
+    }
+    public boolean getAutoConnectEnable() {
+        return mActivePhone.getAutoConnectEnable();
+    }
+    public long getDataConnectedTime() {
+        return mActivePhone.getDataConnectedTime();
+    }
+    public boolean explicitDetach(int i, int j) {
+        return mActivePhone.explicitDetach(i, j);
+    }
     /**
      * End DROID Charge Hacks
      */
