@@ -320,6 +320,12 @@ public class GSMPhone extends PhoneBase {
     public void sendPsAttachInfo() {
         mDataConnection.sendPsAttachInfo();
     }
+    public boolean getSMSavailable() {
+        return mSIMRecords.isAvailableSMS;
+    }
+    public int getIpAddressType(String s) {
+        return mDataConnection.getIpAddressType(s);
+    }
     /**
      * END DROID Charge Hack
      */

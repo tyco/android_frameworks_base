@@ -110,6 +110,12 @@ public class SipPhone extends SipPhoneBase {
     }
     public void sendPsAttachInfo() {
     }
+    public boolean getSMSavailable() {
+        return false;
+    }
+    public int getIpAddressType(String s) {
+        return 0;
+    }
 
     public boolean canTake(Object incomingCall) {
         synchronized (SipPhone.class) {

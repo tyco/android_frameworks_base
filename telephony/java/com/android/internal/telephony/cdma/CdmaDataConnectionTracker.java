@@ -1036,4 +1036,10 @@ public final class CdmaDataConnectionTracker extends DataConnectionTracker {
     }
     public void onHOCleanupHOAPN() {
     }
+    public int getIpAddressType(String s) {
+        if (mActiveDataConnection != null)
+            return mActiveDataConnection.ipaddresstype;
+        else
+            return 1;
+    }
 }

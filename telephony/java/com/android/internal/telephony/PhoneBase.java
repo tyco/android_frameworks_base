@@ -1104,4 +1104,7 @@ public abstract class PhoneBase extends Handler implements Phone {
     public long getTraficConnectedTime() {
         return mDataConnection.getTotalConnectionTime();
     }
+    public String getNetMask(String s) {
+        return mDataConnection.getNetMask(s);
+    }
 }

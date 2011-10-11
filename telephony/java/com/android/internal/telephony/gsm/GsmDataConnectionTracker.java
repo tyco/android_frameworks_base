@@ -317,6 +317,13 @@ public final class GsmDataConnectionTracker extends DataConnectionTracker {
         }
     }
 
+    public int getIpAddressType(String s) {
+        if (mActivePdp != null && (s == null || mActiveApn != null && mActiveApn.canHandleType(s)))
+            return mActivePdp.ipaddresstype;
+        else
+            return 1;
+    }
+
     public String[] getActiveApnTypes() {
         String[] result;
         if (mActiveApn != null) {

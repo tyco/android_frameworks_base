@@ -769,6 +769,15 @@ public class PhoneProxy extends Handler implements Phone {
     public long getTraficConnectedTime() {
         return mActivePhone.getTraficConnectedTime();
     }
+    public boolean getSMSavailable() {
+        return mActivePhone.getSMSavailable();
+    }
+    public String getNetMask(String s) {
+        return mActivePhone.getNetMask(s);
+    }
+    public int getIpAddressType(String s) {
+        return mActivePhone.getIpAddressType(s);
+    }
     /**
      * End DROID Charge Hacks
      */

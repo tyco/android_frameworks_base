@@ -332,6 +332,9 @@ public interface Phone {
     public abstract long getTraficTxBytes();
     public abstract long getTraficStartTime();
     public abstract long getTraficConnectedTime();
+    public abstract boolean getSMSavailable();
+    public abstract String getNetMask(String s);
+    public abstract int getIpAddressType(String s);
 
     /**
      * Get the current ServiceState. Use

@@ -1493,5 +1493,10 @@ public class CDMAPhone extends PhoneBase {
     public String getIsimIMPI() {
         return "";
     }
-
+    public boolean getSMSavailable() {
+        return true;
+    }
+    public int getIpAddressType(String s) {
+        return mDataConnection.getIpAddressType(s);
+    }
 }

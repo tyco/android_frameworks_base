@@ -99,6 +99,7 @@ public abstract class DataConnection extends HierarchicalStateMachine {
     public String ipv6Address;
     public String ipv6dnsServers[];
     public String ipv6gatewayAddress;
+    public String netMask;
     public int isipv4configured;
     public int isipv6configured;
 
@@ -387,6 +388,7 @@ public abstract class DataConnection extends HierarchicalStateMachine {
         interfaceName = null;
         ipAddress = null;
         gatewayAddress = null;
+        netMask = null;
         dnsServers[0] = null;
         dnsServers[1] = null;
     }
@@ -442,6 +444,7 @@ public abstract class DataConnection extends HierarchicalStateMachine {
                         ipAddress = response[2];
                         gatewayAddress = SystemProperties.get(prefix + "gw");
                     }
+                    netMask = "255.255.255.0";
                     dnsServers[0] = SystemProperties.get(prefix + "dns1");
                     dnsServers[1] = SystemProperties.get(prefix + "dns2");
                     if (DBG) {
@@ -950,5 +953,9 @@ public abstract class DataConnection extends HierarchicalStateMachine {
      */
     public FailCause getLastFailCause() {
         return lastFailCause;
+    }
+
+    public String getNetMask() {
+        return netMask;
     }
 }
