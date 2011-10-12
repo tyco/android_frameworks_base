@@ -353,4 +353,13 @@ public class SimSmsInterfaceManager extends IccSmsInterfaceManager {
     protected void log(String msg) {
         Log.d(LOG_TAG, "[SimSmsInterfaceManager] " + msg);
     }
+    public boolean updateSmsServiceCenterOnSimEf(byte abyte0[]) {
+        mSuccess = false;
+        Message message = mHandler.obtainMessage(2);
+        CommandsInterface commandsinterface = mPhone.mCM;
+        String s1 = IccUtils.bytesToHexString(abyte0);
+        commandsinterface.setSmscAddress(s1, message);
+        mLock.wait();
+        return mSuccess;
+    }
 }

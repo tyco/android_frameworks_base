@@ -200,7 +200,7 @@ public class IMSICCSmsInterfaceManager extends IccSmsInterfaceManager
             cursor = contentresolver.query(uri, as, s1, null, null);
             if (cursor == null) {
                 res = null;
-                retur res;
+                return res;
             }
             if (cursor.getCount() > 0) {
                 res = cursor.getString(1);
@@ -208,7 +208,7 @@ public class IMSICCSmsInterfaceManager extends IccSmsInterfaceManager
                 return res;
             }
             res = null;
-            retur res;
+            return res;
         }
     }
 

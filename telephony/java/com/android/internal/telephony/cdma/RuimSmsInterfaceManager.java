@@ -219,5 +219,8 @@ public class RuimSmsInterfaceManager extends IccSmsInterfaceManager {
     protected void log(String msg) {
         Log.d(LOG_TAG, "[RuimSmsInterfaceManager] " + msg);
     }
+    public boolean updateSmsServiceCenterOnSimEf(byte abyte0[]) {
+        return false;
+    }
 }
 
