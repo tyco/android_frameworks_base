@@ -3690,7 +3690,21 @@ public class RIL extends BaseCommands implements CommandsInterface {
         RILRequest rr = RILRequest.obtain(RIL_REQUEST_CDMA_GET_DATAPROFILE, response);
         send(rr);
     }
-
+    public void setupDedicatedBearer(String s, String s1, String s2,
+            String s3, String s4, String s5, String s6, Message result) {
+        //int RIL_REQUEST_SETUP_DEDICATED_BEARER = 10040;
+        RILRequest rr = RILRequest.obtain(RIL_REQUEST_SETUP_DEDICATED_BEARER, result);
+        rr.mp.writeInt(7);
+        rr.mp.writeString(s);
+        rr.mp.writeString(s1);
+        rr.mp.writeString(s2);
+        rr.mp.writeString(s3);
+        rr.mp.writeString(s4);
+        rr.mp.writeString(s5);
+        rr.mp.writeString(s6);
+        if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest));
+        send(rr);
+    }
 
     /**
      * {@inheritDoc}

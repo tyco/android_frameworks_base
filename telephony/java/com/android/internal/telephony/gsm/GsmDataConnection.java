@@ -233,4 +233,13 @@ public class GsmDataConnection extends DataConnection {
 
         return Patterns.IP_ADDRESS.matcher(apn.mmsProxy).matches();
     }
+    /**
+     * @depreciated Method canHandleType is depreciated
+     */
+    public boolean canHandleType(String s) {
+        if (apn != null)
+            return apn.canHandleType(s);
+        else
+            return false;
+    }
 }

@@ -695,4 +695,8 @@ public abstract class IccCard {
     private void log(String msg) {
         Log.d(mLogTag, "[IccCard] " + msg);
     }
+    public void setDualPhones(PhoneBase phonebase1, PhoneBase phonebase2) {
+        mLtePhone = phonebase1;
+        mCdmaPhone = phonebase2;
+    }
 }

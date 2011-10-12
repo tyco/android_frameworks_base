@@ -958,4 +958,28 @@ public abstract class DataConnection extends HierarchicalStateMachine {
     public String getNetMask() {
         return netMask;
     }
+    public boolean isDisconnecting() {
+        HierarchicalState hierarchicalstate = getCurrentState();
+        DcDisconnectingState dcdisconnectingstate = mDisconnectingState;
+        if (hierarchicalstate == dcdisconnectingstate)
+            return true;
+        else
+            return false;
+    }
+    public class DisconnectResult {
+        public ApnSetting getApn() {
+            return apn;
+        }
+        public Object getConnection() {
+            return connection;
+        }
+        private ApnSetting apn;
+        private Object connection;
+
+        public DisconnectResult(ApnSetting apnsetting, Object obj) {
+            super();
+            apn = apnsetting;
+            connection = obj;
+        }
+    }
 }

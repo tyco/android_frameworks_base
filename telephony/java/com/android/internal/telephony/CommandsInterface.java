@@ -985,6 +985,8 @@ public interface CommandsInterface {
     public abstract void resumeDataChannels(Message message);
     public abstract void processLTEHandover();
     public abstract void getCdmaDataProfile(Message message);
+    public abstract void setupDedicatedBearer(String s, String s1, String s2,
+            String s3, String s4, String s5, String s6, Message result);
 
     /**
      * parameters equivilient to 27.007 AT+CRSM command

@@ -1506,4 +1506,7 @@ public class CDMAPhone extends PhoneBase {
         Log.d(LOG_TAG, "@@@@@ Detach Called");
         return mDataConnection.explicitDetach(i, j);
     }
+    public int getDataRegistrationState() {
+        return mSST.getCurrentCdmaDataConnectionState();
+    }
 }

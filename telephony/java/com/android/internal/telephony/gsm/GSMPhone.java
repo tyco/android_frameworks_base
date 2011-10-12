@@ -114,6 +114,7 @@ public class GSMPhone extends PhoneBase {
 
     /** List of Registrants to receive Supplementary Service Notifications. */
     RegistrantList mSsnRegistrants = new RegistrantList();
+    RegistrantList eHRPDFailResumeLTERegistrants = new RegistrantList();
 
     Thread debugPortThread;
     ServerSocket debugSocket;
@@ -328,6 +329,20 @@ public class GSMPhone extends PhoneBase {
     }
     public boolean explicitDetach(int i, int j) {
         return mDataConnection.explicitDetach(i, j);
+    }
+    public void registerForeHRPDHOfailResumeLTE(Handler handler, int i, Object obj) {
+        Registrant registrant = new Registrant(handler, i, obj);
+        eHRPDFailResumeLTERegistrants.add(registrant);
+    }
+    public void cleaneHRPDHOAPNInfo() {
+        Log.d(LOG_TAG, "[cleaneHRPDHOAPNInfo]: GSMPhone Notifying to MMPhoneProxy for cleaning up of eHRPD HO APN info");
+        eHRPDFailResumeLTERegistrants.notifyRegistrants();
+    }
+    public void unregisterForeHRPDHOfailResumeLTE(Handler handler) {
+        eHRPDFailResumeLTERegistrants.remove(handler);
+    }
+    public int getDataRegistrationState() {
+        return mSST.getCurrentGprsState();
     }
     /**
      * END DROID Charge Hack

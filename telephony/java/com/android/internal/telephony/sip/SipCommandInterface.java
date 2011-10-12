@@ -342,6 +342,10 @@ class SipCommandInterface extends BaseCommands implements CommandsInterface {
     public void getCdmaDataProfile(Message response) {
     }
 
+    public void setupDedicatedBearer(String s, String s1, String s2,
+            String s3, String s4, String s5, String s6, Message result) {
+    }
+
     public void setPhoneType(int phoneType) { //Set by CDMAPhone and GSMPhone constructor
     }
 

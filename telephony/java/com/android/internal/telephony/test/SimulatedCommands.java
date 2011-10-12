@@ -1024,6 +1024,10 @@ public final class SimulatedCommands extends BaseCommands
 
     public void getCdmaDataProfile(Message result) {
     }
+    public void setupDedicatedBearer(String s, String s1, String s2,
+            String s3, String s4, String s5, String s6, Message result) {
+        unimplemented(result);
+    }
 
     public void setRadioPower(boolean on, Message result) {
         if(on) {

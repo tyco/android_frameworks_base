@@ -167,7 +167,7 @@ public class MultiModePhoneProxy extends PhoneProxy
         telephonymanager.listen(phonestatelistener1, 65);
         meCDMAPhone.mDataConnection.registerForHandoverInitiated(this, 30, null);
         mLTEPhone.registerForeHRPDHOfailResumeLTE(this, 31, null);
-        meCDMAPhone.registerForLTEHOfailResumeeHRPD(this, 32, null);
+        //meCDMAPhone.registerForLTEHOfailResumeeHRPD(this, 32, null);
         SIMRecords simrecords = mLTEPhone.mSIMRecords;
         DataConnectionTracker dataconnectiontracker = meCDMAPhone.mDataConnection;
         SIMRecords simrecords1 = mLTEPhone.mSIMRecords;

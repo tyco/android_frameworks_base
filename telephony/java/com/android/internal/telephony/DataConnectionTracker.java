@@ -122,6 +122,8 @@ public abstract class DataConnectionTracker extends Handler {
     protected boolean[] dataEnabled = new boolean[APN_NUM_TYPES];
     protected int enabledCount = 0;
 
+    Registrant mHandoverInitiatedRegistrant;
+
     /* Currently requested APN type */
     protected String mRequestedApnType = Phone.APN_TYPE_DEFAULT;
 
@@ -680,5 +682,15 @@ public abstract class DataConnectionTracker extends Handler {
     public boolean explicitDetach(int i, int j) {
         onCleanUpConnection(true, "pdpDropped");
         return true;
+    }
+    public void registerForHandoverInitiated(Handler handler, int i, Object obj) {
+        Registrant registrant = new Registrant(handler, i, obj);
+        mHandoverInitiatedRegistrant = registrant;
+    }
+    public void handoverInitiated() {
+        mHandoverInitiatedRegistrant.notifyRegistrant();
+    }
+    public void unregisterForHandoverInitiated() {
+        mHandoverInitiatedRegistrant.clear();
     }
 }
